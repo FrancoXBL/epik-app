@@ -1,0 +1,1 @@
+export const listBurgersExport = ["Lancelot", "Arturica", "Camelot", "Epika", "Percebal", "Morgana", "Tom", "Ginebra"]

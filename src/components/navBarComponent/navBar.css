@@ -1,0 +1,8 @@
+.navBar {
+    display: flex;
+    border: 1px solid black;
+    max-width: 1200px;
+    min-width: 700px;
+    height: 40px;
+    border-radius: 10px;
+}

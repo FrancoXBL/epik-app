@@ -1,0 +1,6 @@
+.burgerCard {
+    display: flex;
+    height: 20px;
+    width: 50px;
+    margin: 1px solid red;
+}
