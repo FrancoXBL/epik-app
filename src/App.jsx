@@ -7,10 +7,14 @@ function App() {
   return (
     <>
       <NavBar />
-      <InfoClient />
-      <WindowBurgerComponent />
-      <AderesosComponent />
-      <TicketComponent />
+      <div className="wrapper">
+        <InfoClient />
+        <div className="flex">
+          <WindowBurgerComponent />
+          <AderesosComponent />
+        </div>
+        <TicketComponent />
+      </div>
     </>
   );
 }
