@@ -1,9 +1,8 @@
-export function TicketFooter({totalMount}){
-
-    return (
-        <div className="ticketFooter">
-            <span className="totalTitle">Total:</span>
-            <span className="totalMount">{totalMount}</span>
-        </div>
-    )
+export function TicketFooter({ totalMount }) {
+  return (
+    <div>
+      <span>Total:</span>
+      <span>{totalMount}</span>
+    </div>
+  );
 }
