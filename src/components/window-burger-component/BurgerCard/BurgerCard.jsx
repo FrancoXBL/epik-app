@@ -5,7 +5,9 @@ import {
   PiNumberCircleTwoBold,
   PiNumberCircleThreeBold,
 } from "react-icons/pi";
-export function BurgerCard({ burger, listVariants }) {
+
+export function BurgerCard({ burger }) {
+
   const buttoncss =
     "ml-1 bg-bg-100 w-10 h-10 rounded-md bg-primary-200 text-bg-200 hover:bg-primary-100";
   const buttonCssIcon = "w-full text-2xl";
@@ -13,13 +15,13 @@ export function BurgerCard({ burger, listVariants }) {
   return (
     <div className="flex py-1 border-b border-b-bg-100">
       <div className="flex-1 leading-10 h-10">
-        <p>{burger}</p>
+        <p>{burger.name}</p>
       </div>
       <div className="flex-1 flex justify-end ml-8">
-        {listVariants.map((variant) => {
+        {burger.specs.map((variant, index) => {
           return (
             <button className={`${buttoncss}`}>
-              <variant.icon className={buttonCssIcon}></variant.icon>
+              <variant.icon key={index} className={buttonCssIcon}></variant.icon>
             </button>
           );
         })}

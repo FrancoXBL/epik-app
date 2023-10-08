@@ -1,13 +1,10 @@
 import { createContext, useState } from "react";
-import { listBurgersExport, listVariantsExport } from "../data/listBurgers";
-import { listExtrasExport, listAggreggates } from "../data/listExtras";
+import { items } from "../data/itemsList";
 
 export const AppContext = createContext();
 
 export function AppContextProvider(props) {
-  const [listExtras, setListExtras] = useState(listExtrasExport);
-  const [listBurgers, setListBurgers] = useState(listBurgersExport);
-  const [listVariants, setListVariants] = useState(listVariantsExport);
+  const [listItems, setListItems] = useState(items)
   const [total, setTotal] = useState(0);
   const [client, setClient] = useState({
     name: "Cliente",
@@ -21,12 +18,9 @@ export function AppContextProvider(props) {
       value={{
         total,
         client,
-        listBurgers,
-        listExtras,
-        listAggreggates,
+        listItems,
         listTicketBurguer,
         listTicketAggreggates,
-        listVariants,
       }}
     >
       {props.children}
