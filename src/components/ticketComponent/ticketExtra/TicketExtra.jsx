@@ -15,7 +15,7 @@ export function TicketExtra({ listTicketExtras }){
         <>
         <hr />
         {listTicketExtras.map((extra) => (
-            <p>{extra.name} - ${extra.price}</p>
+            <p>{extra.name} - {extra.serving} - ${extra.price}</p>
         ))}
         </>
     )

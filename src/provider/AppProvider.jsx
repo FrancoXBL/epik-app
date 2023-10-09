@@ -21,6 +21,8 @@ export function AppContextProvider(props) {
         listItems,
         listTicketBurguer,
         listTicketAggreggates,
+        setListTicketBurger,
+        setListTicketAggreggates
       }}
     >
       {props.children}

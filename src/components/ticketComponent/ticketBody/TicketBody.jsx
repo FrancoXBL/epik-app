@@ -14,7 +14,7 @@ export function TicketBody({ listTicketBurgers }) {
       <hr />
       {listTicketBurgers.map((burguer) => (
         <p>
-          <span>{burguer.name}</span> <span>{burguer.quantity}</span> - $
+          <span>{burguer.name}</span> <span>{burguer.serving}</span> - $
           <span>{burguer.price}</span>
         </p>
       ))}

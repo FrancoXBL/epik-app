@@ -11,8 +11,8 @@ export function TicketComponent() {
   return (
     <div className="font-mono">
       <TiketHeader clientHeader={client} />
-      <TicketBody listTicketBurgers={[{name:"Epika", quantity:"2", price:"2400"}]} />
-      <TicketExtra listTicketExtras={[{name:"Cheddar", price:"200"}]} />
+      <TicketBody listTicketBurgers={listTicketBurguer} />
+      <TicketExtra listTicketExtras={listTicketAggreggates} />
       <TicketFooter totalMount={total} />
       <TicketSaludo />
     </div>
