@@ -2,30 +2,40 @@ import { useContext } from "react";
 import { AppContext } from "../../../provider/AppProvider";
 
 export function ExtrasCard({ extraItem }) {
-
-  const {listTicketAggreggates, setListTicketAggreggates } = useContext(AppContext)
+  const {
+    listTicketAggreggates,
+    setListTicketAggreggates,
+    total,
+    setTotal,
+    sumarTotal,
+  } = useContext(AppContext);
 
   function createExtraTicket(name, serving, price) {
-    return { name, serving, price }
+    return { name, serving, price };
   }
 
-  function agregarExtraTicket(item){
-    return [...listTicketAggreggates, item]
+  function agregarExtraTicket(item) {
+    return [...listTicketAggreggates, item];
   }
 
   return (
     <button
-    onClick={() => {
-      const sendItem = createExtraTicket(
-        extraItem.name,
-        extraItem.specs[0].serving, 
-        extraItem.specs[0].price);
-      const newArray = agregarExtraTicket(sendItem)
-      setListTicketAggreggates(newArray)
-    }}
-     className="p-4 bg-primary-200 text-bg-200 m-2 rounded-md hover:bg-primary-100">
-      {extraItem.name} - {extraItem.specs[0].serving} - <span>
-        ${extraItem.specs[0].price}</span>
+      onClick={() => {
+        const sendItem = createExtraTicket(
+          extraItem.name,
+          extraItem.specs[0].serving,
+          extraItem.specs[0].price
+        );
+        const newArray = agregarExtraTicket(sendItem);
+        setListTicketAggreggates(newArray);
+
+        const newTotal = sumarTotal(total, parseInt(extraItem.specs[0].price));
+        setTotal(newTotal);
+      }}
+      className="p-4 bg-primary-200 text-bg-200 m-2 rounded-md hover:bg-primary-100"
+    >
+      {extraItem.name} - {extraItem.specs[0].serving} -{" "}
+      <span>${extraItem.specs[0].price}</span>
     </button>
   );
 }

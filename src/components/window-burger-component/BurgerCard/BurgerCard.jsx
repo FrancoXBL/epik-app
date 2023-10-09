@@ -8,20 +8,25 @@ import {
   PiNumberCircleThreeBold,
 } from "react-icons/pi";
 
-
-
 export function BurgerCard({ burger }) {
-  const buttoncss ="ml-1 bg-bg-100 w-10 h-10 rounded-md bg-primary-200 text-bg-200 hover:bg-primary-100";
+  const buttoncss =
+    "ml-1 bg-bg-100 w-10 h-10 rounded-md bg-primary-200 text-bg-200 hover:bg-primary-100";
   const buttonCssIcon = "w-full text-2xl";
 
-  const { listTicketBurguer ,setListTicketBurger } = useContext(AppContext)
+  const {
+    listTicketBurguer,
+    setListTicketBurger,
+    total,
+    setTotal,
+    sumarTotal,
+  } = useContext(AppContext);
 
   function createBurgerTicket(name, serving, price) {
-    return { name, serving, price }
+    return { name, serving, price };
   }
 
-  function agregarBurgerTicket(item){
-    return [...listTicketBurguer, item]
+  function agregarBurgerTicket(item) {
+    return [...listTicketBurguer, item];
   }
   return (
     <div className="flex py-1 border-b border-b-bg-100">
@@ -35,10 +40,15 @@ export function BurgerCard({ burger }) {
               onClick={() => {
                 const sendItem = createBurgerTicket(
                   burger.name,
-                  variant.serving, 
-                  variant.price);
-                const newArray = agregarBurgerTicket(sendItem)
-                setListTicketBurger(newArray)
+                  variant.serving,
+                  variant.price
+                );
+                const newArray = agregarBurgerTicket(sendItem);
+
+                setListTicketBurger(newArray);
+
+                const newTotal = sumarTotal(total, parseInt(variant.price));
+                setTotal(newTotal);
               }}
               className={`${buttoncss}`}
             >

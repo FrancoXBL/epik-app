@@ -3,7 +3,12 @@ import { items } from "../data/itemsList";
 
 export const AppContext = createContext();
 
+
 export function AppContextProvider(props) {
+  const sumarTotal = (total, montoNuevo) => {
+    const newTotal = total + montoNuevo
+    return newTotal
+  }
   const [listItems, setListItems] = useState(items)
   const [total, setTotal] = useState(0);
   const [client, setClient] = useState({
@@ -22,7 +27,9 @@ export function AppContextProvider(props) {
         listTicketBurguer,
         listTicketAggreggates,
         setListTicketBurger,
-        setListTicketAggreggates
+        setListTicketAggreggates,
+        sumarTotal,
+        setTotal
       }}
     >
       {props.children}
