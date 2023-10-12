@@ -1,15 +1,20 @@
 import { createContext, useState } from "react";
 import { items } from "../data/itemsList";
 
+
 export const AppContext = createContext();
 
-
 export function AppContextProvider(props) {
-  const sumarTotal = (total, montoNuevo) => {
-    const newTotal = total + montoNuevo
-    return newTotal
-  }
-  const [listItems, setListItems] = useState(items)
+  const calcularTotal = (list) => {
+    let total = 0
+
+    list.map((item) => {
+      total += parseInt(item.price)
+    })
+    
+    return total
+  };
+  const [listItems, setListItems] = useState(items);
   const [total, setTotal] = useState(0);
   const [client, setClient] = useState({
     name: "Cliente",
@@ -17,6 +22,13 @@ export function AppContextProvider(props) {
   });
   const [listTicketBurguer, setListTicketBurger] = useState([]);
   const [listTicketAggreggates, setListTicketAggreggates] = useState([]);
+
+  const reOrderId = (list) => {
+    
+    const newList = list.map((item, index) => ({...item, id: index + 1}));
+
+    return newList;
+  };
 
   return (
     <AppContext.Provider
@@ -28,8 +40,9 @@ export function AppContextProvider(props) {
         listTicketAggreggates,
         setListTicketBurger,
         setListTicketAggreggates,
-        sumarTotal,
-        setTotal
+        calcularTotal,
+        setTotal,
+        reOrderId,
       }}
     >
       {props.children}

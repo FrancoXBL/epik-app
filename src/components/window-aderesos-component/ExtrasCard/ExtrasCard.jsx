@@ -5,9 +5,6 @@ export function ExtrasCard({ extraItem }) {
   const {
     listTicketAggreggates,
     setListTicketAggreggates,
-    total,
-    setTotal,
-    sumarTotal,
   } = useContext(AppContext);
 
   function createExtraTicket(name, serving, price) {
@@ -15,8 +12,10 @@ export function ExtrasCard({ extraItem }) {
   }
 
   function agregarExtraTicket(item) {
-    return [...listTicketAggreggates, item];
+    const addIdItem = { ...item, id: listTicketAggreggates.length + 1 };
+    return [...listTicketAggreggates, addIdItem];
   }
+  
 
   return (
     <button
@@ -28,9 +27,6 @@ export function ExtrasCard({ extraItem }) {
         );
         const newArray = agregarExtraTicket(sendItem);
         setListTicketAggreggates(newArray);
-
-        const newTotal = sumarTotal(total, parseInt(extraItem.specs[0].price));
-        setTotal(newTotal);
       }}
       className="p-4 bg-primary-200 text-bg-200 m-2 rounded-md hover:bg-primary-100"
     >
