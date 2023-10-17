@@ -1,37 +1,40 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useReducer } from "react";
 import { items } from "../data/itemsList";
+
+const initialState = {
+  listItems: items,
+  total: 0,
+  client: {
+    name: "Cliente",
+    address: { street: "Calle", number: "Altura" },
+  },
+  listTicketBurguer: [],
+  listTicketAggreggates: [],
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "SET_LIST_ITEMS":
+      return { ...state, listItems: action.payload };
+    case "SET_CLIENT":
+      return { ...state, client: action.payload };
+    case "SET_LIST_TICKET_BURGER":
+      return { ...state, listTicketBurguer: action.payload };
+    case "SET_LIST_TICKET_AGGREGATES":
+      return { ...state, listTicketAggreggates: action.payload };
+    case "SET_LIST_TICKET_BURGER":
+      return { ...state, listTicketBurguer: action.payload };
+    default:
+      throw new Error();
+  }
+}
 
 export const AppContext = createContext();
 
-
 export function AppContextProvider(props) {
-  const sumarTotal = (total, montoNuevo) => {
-    const newTotal = total + montoNuevo
-    return newTotal
-  }
-  const [listItems, setListItems] = useState(items)
-  const [total, setTotal] = useState(0);
-  const [client, setClient] = useState({
-    name: "Cliente",
-    address: { street: "Calle", number: "Altura" },
-  });
-  const [listTicketBurguer, setListTicketBurger] = useState([]);
-  const [listTicketAggreggates, setListTicketAggreggates] = useState([]);
-
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <AppContext.Provider
-      value={{
-        total,
-        client,
-        listItems,
-        listTicketBurguer,
-        listTicketAggreggates,
-        setListTicketBurger,
-        setListTicketAggreggates,
-        sumarTotal,
-        setTotal
-      }}
-    >
+    <AppContext.Provider value={{ ...state, dispatch }}>
       {props.children}
     </AppContext.Provider>
   );

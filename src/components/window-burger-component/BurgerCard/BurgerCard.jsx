@@ -28,6 +28,20 @@ export function BurgerCard({ burger }) {
   function agregarBurgerTicket(item) {
     return [...listTicketBurguer, item];
   }
+
+  const handleClick = () => {
+    const sendItem = createBurgerTicket(
+      burger.name,
+      variant.serving,
+      variant.price
+    );
+    
+    dispatch({type: "SET_LIST_TICKET_BURGER", payload: sendItem})
+ 
+
+    const newTotal = sumarTotal(total, parseInt(variant.price));
+    setTotal(newTotal);
+  };
   return (
     <div className="flex py-1 border-b border-b-bg-100">
       <div className="flex-1 leading-10 h-10">
@@ -36,22 +50,7 @@ export function BurgerCard({ burger }) {
       <div className="flex-1 flex justify-end ml-8">
         {burger.specs.map((variant, index) => {
           return (
-            <button
-              onClick={() => {
-                const sendItem = createBurgerTicket(
-                  burger.name,
-                  variant.serving,
-                  variant.price
-                );
-                const newArray = agregarBurgerTicket(sendItem);
-
-                setListTicketBurger(newArray);
-
-                const newTotal = sumarTotal(total, parseInt(variant.price));
-                setTotal(newTotal);
-              }}
-              className={`${buttoncss}`}
-            >
+            <button onClick={handleClick} className={`${buttoncss}`}>
               <variant.icon
                 key={index}
                 className={buttonCssIcon}
