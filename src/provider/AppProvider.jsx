@@ -35,6 +35,7 @@ export function AppContextProvider(props) {
       value={{
         total,
         client,
+        setClient,
         listItems,
         listTicketBurguer,
         listTicketAggreggates,

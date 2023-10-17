@@ -1,12 +1,11 @@
 export function TiketHeader({ clientHeader }) {
   return (
     <div>
-      <p >--- 🍔 TICKET VENTA 🍔 ---</p>
+      <p className="text-center"> 🍔 TICKET VENTA 🍔 </p>
       <hr />
-      <span className="font-inherit">Cliente:{clientHeader.name}</span>
-      <hr />
-      <span className="">
-        Direccion: {clientHeader.address.street} {clientHeader.address.number}
+      <span className="capitalize block font-inherit">Cliente: {clientHeader.name} 👑</span>
+      <span className="capitalize block">
+        Direccion: {clientHeader.address.street} {clientHeader.address.number} 🏰
       </span>
     </div>
   );

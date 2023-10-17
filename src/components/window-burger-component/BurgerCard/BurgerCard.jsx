@@ -26,7 +26,7 @@ export function BurgerCard({ burger }) {
   };
 
   function createBurgerTicket(name, serving, price) {
-    return { name, serving, price };
+      return { name, serving, price, extra:0 }
   }
 
   function agregarBurgerTicket(item) {
@@ -37,7 +37,7 @@ export function BurgerCard({ burger }) {
   return (
     <div className="flex py-1 border-b border-b-bg-100">
       <div className="flex-1 leading-10 h-10">
-        <p>{burger.name}</p>
+        <p className="capitalize">{burger.name}</p>
       </div>
       <div className="flex-1 flex justify-end ml-8">
         {burger.specs.map((variant, index) => {
