@@ -3,7 +3,7 @@ import { TicketFooter } from "./ticketFooter/TicketFooter";
 import { TicketSaludo } from "./ticketSaludo/TicketSaludo";
 import { TicketBody } from "./ticketBody/TicketBody";
 import { TicketExtra } from "./ticketExtra/TicketExtra";
-import { useContext } from "react";
+import { useContext, } from "react";
 import { AppContext } from "../../provider/AppProvider";
 
 export function TicketComponent() {
@@ -13,7 +13,7 @@ export function TicketComponent() {
       <TiketHeader clientHeader={client} />
       <TicketBody listTicketBurgers={listTicketBurguer} />
       <TicketExtra listTicketExtras={listTicketAggreggates} />
-      <TicketFooter totalMount={total} />
+      <TicketFooter totalMount={[listTicketAggreggates, listTicketBurguer]} />
       <TicketSaludo />
     </div>
   );
