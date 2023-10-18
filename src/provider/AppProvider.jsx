@@ -16,17 +16,8 @@ const initialState = {
 };
 
 function reducer(state, action) {
-  switch (action.type) {
-    case SET_LIST_ITEMS:
-    case SET_CLIENT:
-    case ADD_LISTITEM_TICKET_BURGER:
-    case SET_LIST_TICKET_AGGREGATES:
-    case DELETE_BURGER:
       return updateState(action.type, state, action.payload);
-    default:
-      throw new Error();
   }
-}
 
 
 export const AppContext = createContext();

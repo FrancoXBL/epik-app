@@ -3,7 +3,9 @@ import { useContext } from "react";
 import { DELETE_BURGER } from "../../../provider/actions";
 
 export function TicketBody({ listTicketBurgers }) {
+
   const { dispatch } = useContext(AppContext);
+
   function handleClickAdd(burger) {
     // const newList = listTicketBurgers.map((item) => {
     //   if (item.id == burger.id) {
