@@ -3,18 +3,19 @@ import { TicketFooter } from "./ticketFooter/TicketFooter";
 import { TicketSaludo } from "./ticketSaludo/TicketSaludo";
 import { TicketBody } from "./ticketBody/TicketBody";
 import { TicketExtra } from "./ticketExtra/TicketExtra";
-import { useContext, } from "react";
+import { useContext } from "react";
 import { AppContext } from "../../provider/AppProvider";
 
 export function TicketComponent() {
-  const { client, total, listTicketBurguer, listTicketAggreggates } = useContext(AppContext);
+  const { ticket } = useContext(AppContext);
+  console.log("TicketComponent", ticket);
   return (
     <div className="font-mono">
-      <TiketHeader clientHeader={client} />
-      <TicketBody listTicketBurgers={listTicketBurguer} />
-      <TicketExtra listTicketExtras={listTicketAggreggates} />
-      <TicketFooter totalMount={[listTicketAggreggates, listTicketBurguer]} />
-      <TicketSaludo />
+      <TiketHeader clientHeader={ticket.client} />
+      <TicketBody listTicketBurgers={ticket.listBurguer} />
+      {/* <TicketExtra listTicketExtras={listTicketAggreggates} />
+      <TicketFooter totalMount={[listTicketAggreggates, listTicketBurguer]} /> */}
+      {/* <TicketSaludo /> */}
     </div>
   );
 }

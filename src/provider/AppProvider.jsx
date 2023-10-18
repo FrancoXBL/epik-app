@@ -1,33 +1,33 @@
-import { createContext, useState, useReducer } from "react";
+import { createContext, useReducer } from "react";
 import { items } from "../data/itemsList";
+import { updateState, SET_CLIENT, SET_LIST_ITEMS, SET_LIST_TICKET_AGGREGATES, ADD_LISTITEM_TICKET_BURGER, DELETE_BURGER} from "./actions";
 
 const initialState = {
   listItems: items,
-  total: 0,
-  client: {
-    name: "Cliente",
-    address: { street: "Calle", number: "Altura" },
+  ticket: {
+    total: 0,
+    client: {
+      name: "Cliente",
+      address: { street: "Calle", number: "Altura" },
+    },
+    listBurguer: [],
+    listAggreggates: [],
   },
-  listTicketBurguer: [],
-  listTicketAggreggates: [],
 };
 
 function reducer(state, action) {
   switch (action.type) {
-    case "SET_LIST_ITEMS":
-      return { ...state, listItems: action.payload };
-    case "SET_CLIENT":
-      return { ...state, client: action.payload };
-    case "SET_LIST_TICKET_BURGER":
-      return { ...state, listTicketBurguer: action.payload };
-    case "SET_LIST_TICKET_AGGREGATES":
-      return { ...state, listTicketAggreggates: action.payload };
-    case "SET_LIST_TICKET_BURGER":
-      return { ...state, listTicketBurguer: action.payload };
+    case SET_LIST_ITEMS:
+    case SET_CLIENT:
+    case ADD_LISTITEM_TICKET_BURGER:
+    case SET_LIST_TICKET_AGGREGATES:
+    case DELETE_BURGER:
+      return updateState(action.type, state, action.payload);
     default:
       throw new Error();
   }
 }
+
 
 export const AppContext = createContext();
 
