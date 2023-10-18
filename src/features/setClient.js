@@ -1,3 +1,7 @@
-export default function setClient(state, action) {
-  return { ...state, client: action.payload };
+export default function setClient(state, payload) {
+  let { ticket } = state 
+
+  ticket.client = payload
+
+  return {...state, ticket} 
 }

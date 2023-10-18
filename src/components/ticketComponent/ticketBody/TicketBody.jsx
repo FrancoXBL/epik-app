@@ -4,10 +4,18 @@ import { DELETE_BURGER, INCREASE_ITEM_EXTRA } from "../../../provider/actions";
 
 export function TicketBody({ listTicketBurgers }) {
   const { dispatch } = useContext(AppContext);
-  function handleClickAdd(id) {
-    dispatch({ type: INCREASE_ITEM_EXTRA, payload: id });
-  }
 
+  function handleClickAdd(burger) {
+    // const newList = listTicketBurgers.map((item) => {
+    //   if (item.id == burger.id) {
+    //     const newPrice = parseInt(item.price) + carneExtraValue;
+    //     const newPriceString = newPrice.toString();
+    //     return { ...item, price: newPriceString, extra: item.extra + 1 };
+    //   }
+    //   return item;
+    // });
+    // setListTicketBurger(newList);
+  }
   function handleDelete(id) {
     dispatch({ type: DELETE_BURGER, payload: id });
   }
