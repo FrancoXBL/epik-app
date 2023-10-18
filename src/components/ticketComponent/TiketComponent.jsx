@@ -8,14 +8,13 @@ import { AppContext } from "../../provider/AppProvider";
 
 export function TicketComponent() {
   const { ticket } = useContext(AppContext);
-  console.log("TicketComponent", ticket);
   return (
     <div className="font-mono">
       <TiketHeader clientHeader={ticket.client} />
       <TicketBody listTicketBurgers={ticket.listBurguer} />
-      {/* <TicketExtra listTicketExtras={listTicketAggreggates} />
-      <TicketFooter totalMount={[listTicketAggreggates, listTicketBurguer]} /> */}
-      {/* <TicketSaludo /> */}
+      <TicketExtra listTicketExtras={ticket.listAggreggates} />
+      <TicketFooter />
+      <TicketSaludo />
     </div>
   );
 }

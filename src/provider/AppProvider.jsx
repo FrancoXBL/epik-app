@@ -1,6 +1,13 @@
 import { createContext, useReducer } from "react";
 import { items } from "../data/itemsList";
-import { updateState, SET_CLIENT, SET_LIST_ITEMS, SET_LIST_TICKET_AGGREGATES, ADD_LISTITEM_TICKET_BURGER, DELETE_BURGER} from "./actions";
+import {
+  updateState,
+  SET_CLIENT,
+  SET_LIST_ITEMS,
+  SET_LIST_TICKET_AGGREGATES,
+  ADD_LISTITEM_TICKET_BURGER,
+  DELETE_BURGER,
+} from "./actions";
 
 const initialState = {
   listItems: items,
@@ -16,18 +23,8 @@ const initialState = {
 };
 
 function reducer(state, action) {
-  switch (action.type) {
-    case SET_LIST_ITEMS:
-    case SET_CLIENT:
-    case ADD_LISTITEM_TICKET_BURGER:
-    case SET_LIST_TICKET_AGGREGATES:
-    case DELETE_BURGER:
-      return updateState(action.type, state, action.payload);
-    default:
-      throw new Error();
-  }
+  return updateState(action.type, state, action.payload);
 }
-
 
 export const AppContext = createContext();
 
