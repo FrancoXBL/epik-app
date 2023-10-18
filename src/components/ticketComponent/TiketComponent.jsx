@@ -11,7 +11,7 @@ export function TicketComponent() {
   console.log("TICKET COMPONENT A ENVIAR", ticket);
   return (
     <div className="font-mono">
-      <TiketHeader clientHeader={ticket.client} />
+      <TiketHeader />
       <TicketBody listTicketBurgers={ticket.listBurguer} />
       <TicketExtra listTicketExtras={ticket.listAggreggates} />
       <TicketFooter />

@@ -1,5 +1,5 @@
 import "./infoClientComponent.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { SET_CLIENT } from "../../provider/actions";
 import { AppContext } from "../../provider/AppProvider";
 
@@ -31,9 +31,10 @@ export function InfoClient() {
 
     dispatch({ type: SET_CLIENT, payload: newClientInfo });
   }
+  
 
   const labelCss = "h-8";
-  const inputCss = "h-8 rounded-md";
+  const inputCss = "h-8 rounded-md text-text-100 bg-bg-300";
   const containerCss = "flex gap-2";
   const flexCol = "flex w-45 flex-col";
   return (
