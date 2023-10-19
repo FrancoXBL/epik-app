@@ -1,34 +1,40 @@
 import "./infoClientComponent.css";
+import { useContext, useEffect } from "react";
+import { SET_CLIENT } from "../../provider/actions";
 import { AppContext } from "../../provider/AppProvider";
-import { useContext } from "react";
 
 export function InfoClient() {
+  const { ticket, dispatch } = useContext(AppContext);
 
-  const { client, setClient } = useContext(AppContext)
+  function changeClientData(data, change) {
+    if (change == "name") {
+      var newClientInfo = { ...ticket.client, name: data.target.value };
+    }
+    if (change == "street") {
+      var newClientInfo = {
+        ...ticket.client,
+        address: {
+          street: data.target.value,
+          number: ticket.client.address.number,
+        },
+      };
+    }
+    if (change == "number") {
+      var newClientInfo = {
+        ...ticket.client,
+        address: {
+          number: data.target.value,
+          street: ticket.client.address.street,
+        },
+      };
+    }
 
-  function changeName(data){
-    const newClientInfo = {...client, name: data.target.value}
-    setClient(newClientInfo)
+    dispatch({ type: SET_CLIENT, payload: newClientInfo });
   }
-
-  function changeAddress(data, client){
-    const newClientInfo = {...client, address:{street: data.target.value, number: client.address.number}}
-
-    console.log(newClientInfo)
-    setClient(newClientInfo)
-  }
-  function changeAddressNumber(data, client){
-    const newClientInfo = {...client, address:{number: data.target.value, street: client.address.street}}
-
-    console.log(newClientInfo)
-    setClient(newClientInfo)
-  }
-
-
-  const name = "Nombre Cliente";
+  
 
   const labelCss = "h-8";
-  const inputCss = "h-8 rounded-md";
+  const inputCss = "h-8 rounded-md bg-text-100 text-bg-300";
   const containerCss = "flex gap-2";
   const flexCol = "flex w-45 flex-col";
   return (
@@ -38,9 +44,10 @@ export function InfoClient() {
           <label className={`${labelCss} `} htmlFor="clientnombre">
             Nombre Cliente
           </label>
-          <input onChange={(event) => {
-            changeName(event)
-          }}
+          <input
+            onChange={(event) => {
+              changeClientData(event, "name");
+            }}
             className={`${inputCss}`}
             name="clientnombre"
             type="text"
@@ -51,9 +58,10 @@ export function InfoClient() {
           <label className={`${labelCss}`} htmlFor="direccion">
             Direccion
           </label>
-          <input onChange={(event) => {
-            changeAddress(event, client)
-          }}
+          <input
+            onChange={(event) => {
+              changeClientData(event, "street");
+            }}
             className={`${inputCss}`}
             name="direccion"
             type="text"
@@ -64,9 +72,10 @@ export function InfoClient() {
           <label className={`${labelCss}`} htmlFor="altura">
             Altura
           </label>
-          <input onChange={(event) => {
-            changeAddressNumber(event, client)
-          }}
+          <input
+            onChange={(event) => {
+              changeClientData(event, "number");
+            }}
             className={`${inputCss}`}
             name="altura"
             type="text"

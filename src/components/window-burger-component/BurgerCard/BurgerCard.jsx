@@ -3,6 +3,7 @@ import { AppContext } from "../../../provider/AppProvider";
 import { v4 as uuidv4 } from "uuid";
 import { ADD_LISTITEM_TICKET_BURGER } from "../../../provider/actions";
 import "./BurgerCard.css";
+
 export function BurgerCard({ burger }) {
   const { dispatch } = useContext(AppContext);
 
