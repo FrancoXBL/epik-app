@@ -15,7 +15,7 @@ export function TicketComponent() {
       <TicketBody listTicketBurgers={ticket.listBurguer} />
       <TicketExtra listTicketExtras={ticket.listAggreggates} />
       <TicketFooter />
-      <TicketSaludo />
+      <TicketSaludo  />
     </div>
   );
 }
