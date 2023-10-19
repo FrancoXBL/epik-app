@@ -34,7 +34,7 @@ export function InfoClient() {
   
 
   const labelCss = "h-8";
-  const inputCss = "h-8 rounded-md text-text-100 bg-bg-300";
+  const inputCss = "h-8 rounded-md bg-text-100 text-bg-300";
   const containerCss = "flex gap-2";
   const flexCol = "flex w-45 flex-col";
   return (

@@ -14,8 +14,8 @@ const initialState = {
   ticket: {
     total: 0,
     client: {
-      name: "Cliente",
-      address: { street: "Calle", number: "Altura" },
+      name: "",
+      address: { street: "", number: "" },
     },
     listBurguer: [],
     listAggreggates: [],
