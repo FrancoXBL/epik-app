@@ -9,7 +9,7 @@ export function TiketHeader() {
   const isNameBlinking = useBlinkEffect([client.name]);
   const isAddressBlinking = useBlinkEffect([
     client.address.street,
-    client.address.number,
+    client.address.number, 
   ]);
 
   return (
