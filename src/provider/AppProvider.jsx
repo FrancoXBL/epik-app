@@ -7,6 +7,7 @@ import {
   SET_LIST_TICKET_AGGREGATES,
   ADD_LISTITEM_TICKET_BURGER,
   DELETE_BURGER,
+  SET_TOTAL
 } from "./actions";
 
 const initialState = {

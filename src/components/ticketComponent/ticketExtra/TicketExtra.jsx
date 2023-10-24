@@ -1,23 +1,18 @@
 import { useContext } from "react";
 import { AppContext } from "../../../provider/AppProvider";
+import { DELETE_AGGREGGATE, SET_TOTAL } from "../../../provider/actions";
 
-export function TicketExtra({ listTicketExtras }) {
-  const { setListTicketAggreggates, reOrderId } = useContext(AppContext);
+export function TicketExtra() {
+  const { ticket, dispatch } = useContext(AppContext);
 
-  function handleClick(extra) {
-    console.log(listTicketExtras);
-    const newList = listTicketExtras.filter((item) => {
-      if (item.id !== extra.id) {
-        return item;
-      }
-    });
+  console.log("/////// ticket desde ticket extra ->", ticket )
 
-    console.log(newList);
-    const setNewList = reOrderId(newList);
-    setListTicketAggreggates(setNewList);
-  }
+  function handleClick(id) {
+       dispatch({type: DELETE_AGGREGGATE, payload: id})
+       dispatch({type: SET_TOTAL, payload: undefined})
+    };
 
-  if (listTicketExtras.length === 0) {
+  if (ticket.listAggreggates.length === 0) {
     return (
       <>
         <hr />
@@ -29,12 +24,12 @@ export function TicketExtra({ listTicketExtras }) {
   return (
     <>
       <hr />
-      {listTicketExtras.map((extra) => (
+      {ticket.listAggreggates.map((extra) => (
         <div>
           <span className="capitalize">
             {extra.name} - {extra.serving} - ${extra.price}
           </span>{" "}
-          <button onClick={() => handleClick(extra)}>❌</button>
+          <button onClick={() => handleClick(extra.id)}>❌</button>
         </div>
       ))}
     </>
