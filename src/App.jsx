@@ -3,6 +3,7 @@ import { AderesosComponent } from "./components/window-aderesos-component/Aderes
 import { InfoClient } from "./components/infoClientComponent/InfoClientComponent";
 import { NavBar } from "./components/navBarComponent/NavBar";
 import { TicketComponent } from "./components/ticketComponent/tiketComponent";
+import { EndSaleButton } from "./components/endSaleComponent/EndSaleButtom";
 function App() {
   return (
     <div
@@ -12,6 +13,7 @@ function App() {
       <NavBar />
       <div className="wrapper ">
         <InfoClient />
+          <EndSaleButton />
         <div className="flex gap-4 my-4">
           <WindowBurgerComponent />
           <AderesosComponent />

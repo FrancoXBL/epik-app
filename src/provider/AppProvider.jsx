@@ -21,6 +21,8 @@ const initialState = {
     listBurguer: [],
     listAggreggates: [],
   },
+  listDailySales: [],
+  listDailyItemSale: [],
 };
 
 function reducer(state, action) {
