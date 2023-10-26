@@ -21,7 +21,6 @@ const initialState = {
     listBurguer: [],
     listAggreggates: [],
   },
-  listDailySales: [],
   listDailyItemSale: [],
 };
 

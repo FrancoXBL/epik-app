@@ -4,6 +4,7 @@ import { InfoClient } from "./components/infoClientComponent/InfoClientComponent
 import { NavBar } from "./components/navBarComponent/NavBar";
 import { TicketComponent } from "./components/ticketComponent/tiketComponent";
 import { EndSaleButton } from "./components/endSaleComponent/EndSaleButtom";
+import WindowSalesComponent from "./components/window-sales-component/windowSalesComponent";
 function App() {
   return (
     <div
@@ -18,6 +19,7 @@ function App() {
           <WindowBurgerComponent />
           <AderesosComponent />
           <TicketComponent />
+          <WindowSalesComponent />
         </div>
       </div>
     </div>
