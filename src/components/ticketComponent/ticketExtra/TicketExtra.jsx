@@ -5,8 +5,6 @@ import { DELETE_AGGREGGATE, SET_TOTAL } from "../../../provider/actions";
 export function TicketExtra() {
   const { ticket, dispatch } = useContext(AppContext);
 
-  console.log("/////// ticket desde ticket extra ->", ticket )
-
   function handleClick(id) {
        dispatch({type: DELETE_AGGREGGATE, payload: id})
        dispatch({type: SET_TOTAL, payload: undefined})

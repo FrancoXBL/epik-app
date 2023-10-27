@@ -1,6 +1,5 @@
 export function SaleCard({ saleItem }) {
   console.log(saleItem);
-
   return (
     <div>
       {saleItem.list.map((item) => (

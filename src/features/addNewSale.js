@@ -4,7 +4,6 @@ export default function addNewSale(state) {
   if (ticket.listBurguer.length === 0 && ticket.listAggreggates.length === 0) {
     alert("asd");
   } else {
-
     const addItemDailyItemSale = [];
 
     ticket.listBurguer.map((item) => {
@@ -25,11 +24,17 @@ export default function addNewSale(state) {
       addItemDailyItemSale.push(sendItem);
     });
 
-    listDailyItemSale.push({list:addItemDailyItemSale, amount: ticket.total, payMethod: "Efectivo"});
+    listDailyItemSale.push({
+      list: addItemDailyItemSale,
+      amount: ticket.total,
+      payMethod: "Efectivo",
+      client: ticket.client,
+    });
 
     ticket.total = 0;
     ticket.listBurguer = [];
     ticket.listAggreggates = [];
+    ticket.client = { name: "", address: { street: "", number: "" } };
   }
 
   return { ...state, listDailyItemSale, ticket };

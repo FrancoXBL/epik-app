@@ -8,6 +8,7 @@ export const DELETE_AGGREGGATE = "DELETE_AGGREGGATE";
 export const INCREASE_ITEM_EXTRA = "INCREASE_ITEM_EXTRA";
 export const SET_TOTAL = "SET_TOTAL";
 export const ADD_NEW_SALE = "ADD_NEW_SALE"
+export const VEGGIE_BURGER = "VEGGIE_BURGER"
 
 
 import deleteBurger from "../features/deleteBurger.js";
@@ -20,6 +21,7 @@ import setListTicketAggregates from "../features/addListItemTicketBurguer.js";
 import increaseItemExtra from "../features/increaseItemExtra.js";
 import setTotal from "../features/setTotal.js";
 import addNewSale from "../features/addNewSale.js";
+import veggieBurger from "../features/veggieBurger.js"
 
 const actions = {
   SET_TOTAL: setTotal,
@@ -32,6 +34,7 @@ const actions = {
   DELETE_AGGREGGATE: deleteAggreggate,              
   INCREASE_ITEM_EXTRA: increaseItemExtra,
   ADD_NEW_SALE: addNewSale,
+  VEGGIE_BURGER: veggieBurger
 };
 
 export function updateState(actionType, state, payload) {

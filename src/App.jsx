@@ -19,8 +19,8 @@ function App() {
           <WindowBurgerComponent />
           <AderesosComponent />
           <TicketComponent />
-          <WindowSalesComponent />
         </div>
+          <WindowSalesComponent />
       </div>
     </div>
   );
