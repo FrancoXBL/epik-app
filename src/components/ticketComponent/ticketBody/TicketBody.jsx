@@ -18,6 +18,14 @@ export function TicketBody({ listTicketBurgers }) {
     dispatch({ type: VEGGIE_BURGER, payload: id });
   }
 
+  function isVeggie(condition){
+    if(condition){
+      return " V"
+    }
+    return ""
+  }
+
+
   if (listTicketBurgers.length === 0) {
     return (
       <>
@@ -41,7 +49,7 @@ export function TicketBody({ listTicketBurgers }) {
             🥦
           </button>
           <span>
-            {`${burguer.name}, ${burguer.serving}. Medallon Extra x${burguer.extra}`}
+            {`${burguer.name}, ${burguer.serving}${isVeggie(burguer.veggie)}. Medallon Extra x${burguer.extra}`}
             <button onClick={() => handleClickAdd(burguer.id)}>➕</button>
           </span>
           <span>{` ...$${burguer.price}`}</span>

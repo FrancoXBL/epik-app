@@ -3,4 +3,3 @@ export default function addListItemTicketAggreggates(state, payload) {
     ticket.listAggreggates.push(payload);
     return { ...state, ticket };
   }
-  
