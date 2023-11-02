@@ -11,7 +11,5 @@ export function EndSaleButton() {
         dispatch({type:ADD_NEW_SALE, payload:undefined})
     }
 
-    
-    
     return <button className={`${botonCapo}`} onClick={() => {handleClick()}}>Holasoy endsale</button>
 }

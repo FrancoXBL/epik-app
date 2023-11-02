@@ -28,12 +28,15 @@ export default function addNewSale(state) {
       addItemDailyItemSale.push(sendItem);
     });
 
+    console.log("HOLAAAAAAAAA ASDASDASD ",listDailyItemSale)
+
     listDailyItemSale.push({
       list: addItemDailyItemSale,
       amount: ticket.total,
       payMethod: "Efectivo",
       client: ticket.client,
     });
+
 
     ticket.total = 0;
     ticket.listBurguer = [];
