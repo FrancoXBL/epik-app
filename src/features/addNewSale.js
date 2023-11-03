@@ -1,4 +1,4 @@
-export default function addNewSale(state) {
+export default function addNewSale(state, payMethod) {
   let { ticket, listDailyItemSale } = state;
 
   if (ticket.listBurguer.length === 0 && ticket.listAggreggates.length === 0) {
@@ -8,7 +8,6 @@ export default function addNewSale(state) {
 
     ticket.listBurguer.map((item) => {
 
-      // console.log(item)
       const sendItem = {
         name: item.name,
         serving: item.serving,
@@ -28,12 +27,11 @@ export default function addNewSale(state) {
       addItemDailyItemSale.push(sendItem);
     });
 
-    // console.log("HOLAAAAAAAAA ASDASDASD ",listDailyItemSale)
 
     listDailyItemSale.push({
       list: addItemDailyItemSale,
       amount: ticket.total,
-      payMethod: "Efectivo",
+      payMethod: payMethod,
       client: ticket.client,
     });
 
