@@ -8,7 +8,7 @@ export default function addNewSale(state) {
 
     ticket.listBurguer.map((item) => {
 
-      console.log(item)
+      // console.log(item)
       const sendItem = {
         name: item.name,
         serving: item.serving,
@@ -28,7 +28,7 @@ export default function addNewSale(state) {
       addItemDailyItemSale.push(sendItem);
     });
 
-    console.log("HOLAAAAAAAAA ASDASDASD ",listDailyItemSale)
+    // console.log("HOLAAAAAAAAA ASDASDASD ",listDailyItemSale)
 
     listDailyItemSale.push({
       list: addItemDailyItemSale,

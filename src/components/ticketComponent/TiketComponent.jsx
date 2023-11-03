@@ -8,7 +8,7 @@ import { AppContext } from "../../provider/AppProvider";
 
 export function TicketComponent() {
   const { ticket } = useContext(AppContext);
-  console.log("TICKET COMPONENT A ENVIAR", ticket);
+  // console.log("TICKET COMPONENT A ENVIAR", ticket);
   return (
     <div className="font-mono">
       <TiketHeader />

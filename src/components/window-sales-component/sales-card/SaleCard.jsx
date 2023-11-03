@@ -1,5 +1,5 @@
 export function SaleCard({ saleItem }) {
-  console.log(saleItem);
+  // console.log(saleItem);
 
   function isVeggie(condition){
     if(condition){

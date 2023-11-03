@@ -13,11 +13,11 @@ export function NavBar() {
           </div>
           <div className="flex  gap-4">
             <NavBarButton
-              onClick={() => console.log("Historial de ventas clicked")}
+              url="historial-ventas"
               text="Historial de ventas"
             />
             <NavBarButton
-              onClick={() => console.log("Administracion clicked")}
+     
               text="Administracion"
             />
           </div>
