@@ -11,7 +11,7 @@ export default function Home() {
       style={{ height: "100vh" }}
       className="bg-bg-100 h-full text-text-100 font-sans"
     >
-      <NavBar />
+      <NavBar button1={{route: "/historial-ventas", text:"Historial Ventas"}} button2={{route: "/admin", text:"Administracion"}}></NavBar>
       <div className="wrapper ">
         <InfoClient />
         <EndSaleButton />
