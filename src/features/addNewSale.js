@@ -1,10 +1,12 @@
-export default function addNewSale(state, payMethod) {
+export default function addNewSale(state, {payMethod, delivery}) {
   let { ticket, listDailyItemSale } = state;
 
   if (ticket.listBurguer.length === 0 && ticket.listAggreggates.length === 0) {
     alert("asd");
   } else {
     const addItemDailyItemSale = [];
+
+    console.log(delivery)
 
     ticket.listBurguer.map((item) => {
 
@@ -33,7 +35,10 @@ export default function addNewSale(state, payMethod) {
       amount: ticket.total,
       payMethod: payMethod,
       client: ticket.client,
+      cadete: delivery
     });
+
+    console.log(listDailyItemSale)
 
 
     ticket.total = 0;
