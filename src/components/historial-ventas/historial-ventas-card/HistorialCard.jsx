@@ -1,6 +1,15 @@
+import { useContext } from "react";
+import { AppContext } from "../../../provider/AppProvider";
+import { DELETE_SALE } from "../../../provider/actions";
+
 export function HistorialCard({ saleCard  }) {
 
-  console.log("Sale card item ->", saleCard)
+  const { dispatch } = useContext(AppContext)
+
+  const handleDeleteClick = (id) => {
+    dispatch({type: DELETE_SALE, payload: id})
+  }
+
 
   function isVeggie(condition){
     if(condition){
@@ -31,7 +40,7 @@ export function HistorialCard({ saleCard  }) {
       <span>{saleCard.payMethod}</span>
       <span>{saleCard.amount}</span>
       <button>✏️</button>
-      <button>❌</button>
+      <button onClick={() => handleDeleteClick(saleCard.id)}>❌</button>
     </div>
   );
 }

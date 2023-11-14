@@ -11,15 +11,13 @@ export default function HistorialVentas() {
 
     const { listDailyItemSale } = useContext(AppContext)
     
-    const [gastos, setGastos] = useState(0)
-    const [listVentas, setListVentas] = useState(listDailyItemSale)
 
     return (
         <>
         <NavBar button1={{route: "/", text:"Home"}} button2={{route: "/admin", text:"Administracion"}}></NavBar>
         <HistorialVentasFilter />
-        {listVentas.map((item) => <HistorialCard saleCard={item} />)}
-        <HistorialVentasAddGastos gastos={gastos}/>
+        {listDailyItemSale.map((item) => <HistorialCard saleCard={item} />)}
+        <HistorialVentasAddGastos/>
         <HistorialVentasBalance />
 
         </>

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../../provider/AppProvider";
 import { ADD_NEW_SALE } from "../../provider/actions";
+import { v4 as uuidv4, validate } from "uuid";
 
 export function EndSaleButton() {
   const botonCapo =
@@ -12,7 +13,7 @@ export function EndSaleButton() {
   const [cadete, setCadete] = useState("");
 
   const handleClick = () => {
-    dispatch({ type: ADD_NEW_SALE, payload: {payMethod, delivery: cadete} });
+    dispatch({ type: ADD_NEW_SALE, payload: {payMethod, delivery: cadete, id:uuidv4()} });
   };
 
   return (
