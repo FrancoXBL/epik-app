@@ -14,13 +14,12 @@ function App() {
       <NavBar />
       <div className="wrapper ">
         <InfoClient />
-          <EndSaleButton />
-        <div className="flex gap-4 my-4">
+        <div className="flex items-start gap-4 my-4">
           <WindowBurgerComponent />
           <AderesosComponent />
           <TicketComponent />
         </div>
-          <WindowSalesComponent />
+        <WindowSalesComponent />
       </div>
     </div>
   );
