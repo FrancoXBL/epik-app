@@ -46,33 +46,36 @@ export function TicketBody({ listTicketBurgers }) {
   return (
     <div>
       <hr />
-      {listTicketBurgers.map((burguer) => (
-        <p key={burguer.id}>
-          <button
-            className="RiDeleteBack2Fill"
-            onClick={() => {
-              handleVeggie(burguer.id);
-            }}
-          >
-            🥦
-          </button>
-          <span>
-            {`${burguer.name}, ${burguer.serving}${isVeggie(
-              burguer.veggie
-            )}. Medallon Extra x${burguer.extra}`}
-            <button onClick={() => handleClickAdd(burguer.id)}>➕</button>
-          </span>
-          <span>{` ...$${burguer.price}`}</span>
-          <button
-            className="RiDeleteBack2Fill"
-            onClick={() => {
-              handleDelete(burguer.id);
-            }}
-          >
-            ❌
-          </button>
-        </p>
-      ))}
+      {listTicketBurgers.map((burguer) => {
+        console.log(burguer);
+        return (
+          <p className="pb-1" key={burguer.id}>
+            <button
+              className="RiDeleteBack2Fill"
+              onClick={() => {
+                handleVeggie(burguer.id);
+              }}
+            >
+              🥦
+            </button>
+            <span>
+              {`${burguer.name}, ${burguer.serving}${isVeggie(
+                burguer.veggie
+              )}. Medallon Extra x${burguer.extra}`}
+              <button onClick={() => handleClickAdd(burguer.id)}>➕</button>
+            </span>
+            <span>{` ...$${burguer.price}`}</span>
+            <button
+              className="RiDeleteBack2Fill"
+              onClick={() => {
+                handleDelete(burguer.id);
+              }}
+            >
+              ❌
+            </button>
+          </p>
+        );
+      })}
     </div>
   );
 }
