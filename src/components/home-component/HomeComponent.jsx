@@ -2,8 +2,7 @@ import { WindowBurgerComponent } from "../window-burger-component/WindowComponen
 import { AderesosComponent } from "../window-aderesos-component/AderesosSelect/WindowAderesosComponent";
 import { InfoClient } from "../infoClientComponent/InfoClientComponent";
 import { NavBar } from "../navBarComponent/NavBar";
-import { TicketComponent } from "../ticketComponent/tiketComponent";
-import { EndSaleButton } from "../endSaleComponent/EndSaleButtom";
+import { TicketComponent } from "../ticketComponent/TicketComponent";
 import WindowSalesComponent from "../window-sales-component/windowSalesComponent";
 export default function Home() {
   return (
@@ -14,7 +13,6 @@ export default function Home() {
       <NavBar button1={{route: "/historial-ventas", text:"Historial Ventas"}} button2={{route: "/admin", text:"Administracion"}}></NavBar>
       <div className="wrapper ">
         <InfoClient />
-        <EndSaleButton />
         <div className="flex gap-4 my-4">
           <WindowBurgerComponent />
           <AderesosComponent />

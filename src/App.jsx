@@ -1,6 +1,7 @@
 
 import Home from "./components/home-component/HomeComponent"
 import { Toaster } from "react-hot-toast";
+import { toastConfig } from "./data/toastData";
 import HistorialVentas from "./components/historial-ventas/HistorialVentas";
 import AdmComponent from "./components/administration-component/AdmComponent";
 import { Route, Routes } from "react-router-dom";
