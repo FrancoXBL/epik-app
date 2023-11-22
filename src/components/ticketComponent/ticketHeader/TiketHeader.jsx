@@ -2,6 +2,10 @@ import "./tiketHeader.css";
 import { useState, useEffect, useContext } from "react";
 import { AppContext } from "../../../provider/AppProvider";
 import { useBlinkEffect } from "../../../hooks/useBlinkEffect";
+
+/**
+ * Show the header of the ticket with the user data
+ */ 
 export function TiketHeader() {
   const {
     ticket: { client },

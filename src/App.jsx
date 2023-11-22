@@ -3,7 +3,8 @@ import { AderesosComponent } from "./components/window-aderesos-component/Aderes
 import { InfoClient } from "./components/infoClientComponent/InfoClientComponent";
 import { NavBar } from "./components/navBarComponent/NavBar";
 import { TicketComponent } from "./components/ticketComponent/tiketComponent";
-import { EndSaleButton } from "./components/endSaleComponent/EndSaleButtom";
+import { Toaster } from "react-hot-toast";
+import { toastConfig } from './data/toastData.js';
 import WindowSalesComponent from "./components/window-sales-component/windowSalesComponent";
 function App() {
   return (
@@ -14,14 +15,17 @@ function App() {
       <NavBar />
       <div className="wrapper ">
         <InfoClient />
-          <EndSaleButton />
-        <div className="flex gap-4 my-4">
+        <div className="flex items-start gap-4 my-4">
           <WindowBurgerComponent />
           <AderesosComponent />
           <TicketComponent />
         </div>
-          <WindowSalesComponent />
+        <WindowSalesComponent />
       </div>
+      <Toaster
+        position="bottom-center"
+        toastOptions={toastConfig}
+      />
     </div>
   );
 }

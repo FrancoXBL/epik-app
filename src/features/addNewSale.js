@@ -1,20 +1,20 @@
+import toast from "react-hot-toast";
 export default function addNewSale(state) {
   let { ticket, listDailyItemSale } = state;
-
   if (ticket.listBurguer.length === 0 && ticket.listAggreggates.length === 0) {
-    alert("asd");
+    toast.error("No hay productos en la lista", {
+      icon: "😥",
+    });
   } else {
     const addItemDailyItemSale = [];
-
     ticket.listBurguer.map((item) => {
-
-      console.log(item)
+      console.log(item);
       const sendItem = {
         name: item.name,
         serving: item.serving,
         price: item.price,
         veggie: item.veggie,
-        extra: item.extra
+        extra: item.extra,
       };
       addItemDailyItemSale.push(sendItem);
     });
@@ -39,6 +39,9 @@ export default function addNewSale(state) {
     ticket.listBurguer = [];
     ticket.listAggreggates = [];
     ticket.client = { name: "", address: { street: "", number: "" } };
+    toast.success("Venta realizada con éxito", {
+      icon: "👏",
+    });
   }
 
   return { ...state, listDailyItemSale, ticket };
