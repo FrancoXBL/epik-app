@@ -1,35 +1,59 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../../../provider/AppProvider";
+import { useSearchParams } from "react-router-dom";
 
+export function HistorialVentasFilter({ filter, filtredList }) {
+  const { payMethods, delivery } = useContext(AppContext);
 
-export function HistorialVentasFilter({ listVentas }) {
+  const [itemFilter, setItemFilter] = useState({
+    payMethod: "todos",
+    delivery: "todos",
+    date: "todos",
+  });
 
-    const { listItems, payMethods, delivery } = useContext(AppContext)
+  const handleClick = () => {
+    console.log(itemFilter);
+  };
 
   return (
     <>
-    <label htmlFor="">Nombre</label>
-    <input type="text" />
+      <label htmlFor="">Nombre</label>
+      <input type="text" />
       <div>
-        <select name="" id="">
-         {listItems.map((i) => (<option value="">{i.name}</option>))}
+        <select
+          onChange={(e) => {
+            setItemFilter({ ...itemFilter, payMethod: e.target.value });
+          }}
+        >
+          <option value="todos">todos</option>
+          {payMethods.map((i) => (
+            <option value={i}>{i}</option>
+          ))}
         </select>
       </div>
       <div>
-        <select name="" id="">
-        {payMethods.map((i) => (<option value="">{i}</option>))}
-        </select>
-      </div>
-      <div>
-        <select name="" id="">
-        {delivery.map((i) => (<option value="">{i}</option>))}
+        <select
+          onChange={(e) => {
+            setItemFilter({ ...itemFilter, delivery: e.target.value });
+          }}
+        >
+          <option value="todos">todos</option>
+          {delivery.map((i) => (
+            <option value={i}>{i}</option>
+          ))}
         </select>
       </div>
       <div>
         <label htmlFor="date">Fecha:</label>
-        <input type="date" name="" id="date" />
+        <input
+          onChange={(e) => {
+            setItemFilter({ ...itemFilter, date: e.target.value });
+          }}
+          type="date"
+          id="date"
+        />
       </div>
-      <button>Filtrar!</button>
+      <button onClick={() => handleClick()}>Filtrar!</button>
     </>
   );
 }

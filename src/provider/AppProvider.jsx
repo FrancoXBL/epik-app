@@ -14,6 +14,7 @@ const initialState = {
     listAggreggates: [],
   },
   listDailyItemSale: [],
+  listDailyItemGasto: [],
   payMethods: ["efectivo", "credito", "transferencia", "debito", "promo", "qr"],
   delivery: ["Negro", "Nuevo"],
 };
