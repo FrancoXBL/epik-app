@@ -1,6 +1,5 @@
 
 import toast from "react-hot-toast";
-export default function addNewSale(state) {
 export default function addNewSale(state, {payMethod, delivery, id}) {
   let { ticket, listDailyItemSale } = state;
   if (ticket.listBurguer.length === 0 && ticket.listAggreggates.length === 0) {
