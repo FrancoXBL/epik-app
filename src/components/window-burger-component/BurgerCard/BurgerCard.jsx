@@ -18,7 +18,7 @@ export function BurgerCard({ burger }) {
       variant.price,
     );
 
-    console.log(payload)
+    // console.log(payload)
     
     dispatch({ type: ADD_LISTITEM_TICKET_BURGER, payload });
     dispatch({ type: SET_TOTAL, payload: undefined });

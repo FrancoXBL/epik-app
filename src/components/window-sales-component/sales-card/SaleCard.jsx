@@ -1,5 +1,4 @@
 export function SaleCard({ saleItem }) {
-  console.log(saleItem);
 
   function isVeggie(condition){
     if(condition){
@@ -15,15 +14,14 @@ export function SaleCard({ saleItem }) {
     return ` + ${extra}`
   }
 
+
+
   return (
     <div>
-      {saleItem.list.map((item) => (
-        <span>
-          {item.name},{isVeggie(item.veggie)} {item.serving} {wExtras(item.extra)} ...${item.price}
-        </span>
-      ))}
-      <span>Total: {saleItem.amount}</span>
+      <span>Cliente: {saleItem.client.name} - {saleItem.client.address.street} {saleItem.client.address.number} </span>
+      <span>Total: {saleItem.amount} </span>
       <span>Pago en: {saleItem.payMethod}</span>
+      <span>Cadete: {saleItem.cadete}</span>
     </div>
   );
 }

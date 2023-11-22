@@ -1,8 +1,6 @@
 import { createContext, useReducer } from "react";
 import { items } from "../data/itemsList";
-import {
-  updateState,
-} from "./actions";
+import { updateState } from "./actions";
 
 const initialState = {
   listItems: items,
@@ -16,6 +14,9 @@ const initialState = {
     listAggreggates: [],
   },
   listDailyItemSale: [],
+  listDailyItemGasto: [],
+  payMethods: ["efectivo", "credito", "transferencia", "debito", "promo", "qr"],
+  delivery: ["Negro", "Nuevo"],
 };
 
 function reducer(state, action) {

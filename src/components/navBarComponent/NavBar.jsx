@@ -1,6 +1,6 @@
 import "./navBar.css";
 import { NavBarButton } from "./navBarButton/navBarButton";
-export function NavBar() {
+export function NavBar({button1, button2}) {
   return (
     <div className="bg-bg-200 p-8 mb-8">
       <div className="wrapper">
@@ -13,12 +13,12 @@ export function NavBar() {
           </div>
           <div className="flex  gap-4">
             <NavBarButton
-              onClick={() => console.log("Historial de ventas clicked")}
-              text="Historial de ventas"
+              url={`${button1.route}`}
+              text={`${button1.text}`}
             />
             <NavBarButton
-              onClick={() => console.log("Administracion clicked")}
-              text="Administracion"
+              url={`${button2.route}`}
+              text={`${button2.text}`}
             />
           </div>
         </div>
