@@ -3,9 +3,14 @@ import { AppContext } from "../../provider/AppProvider";
 import { ADD_NEW_SALE } from "../../provider/actions";
 import { v4 as uuidv4, validate } from "uuid";
 
+
+/**
+ * Show the button to end the sale
+ */
 export function EndSaleButton() {
-  const botonCapo =
-    "text-2xl ml-1 w-40 h-20 rounded-md color-white bg-primary-100";
+
+
+   const buttonStyles = "text-xl ml-1 p-4 rounded-md color-white bg-primary-100";
 
   const { dispatch, delivery } = useContext(AppContext);
 
@@ -41,7 +46,7 @@ export function EndSaleButton() {
         ))}
       </select>
       <button
-        className={`${botonCapo}`}
+         className={`${buttonStyles}`}
         onClick={() => {
           handleClick();
         }}
@@ -49,5 +54,6 @@ export function EndSaleButton() {
         TERMINAR VENTA
       </button>
     </>
+
   );
 }
