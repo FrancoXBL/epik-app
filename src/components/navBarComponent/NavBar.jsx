@@ -1,6 +1,6 @@
 import "./navBar.css";
 import { NavBarButton } from "./navBarButton/navBarButton";
-export function NavBar({button1, button2}) {
+export function NavBar({buttonHome, buttonAdm, buttonHistory}) {
   return (
     <div className="bg-bg-200 p-8 mb-8">
       <div className="wrapper">
@@ -13,12 +13,16 @@ export function NavBar({button1, button2}) {
           </div>
           <div className="flex  gap-4">
             <NavBarButton
-              url={`${button1.route}`}
-              text={`${button1.text}`}
+              url={`${buttonHome.route}`}
+              text={`${buttonHome.text}`}
             />
             <NavBarButton
-              url={`${button2.route}`}
-              text={`${button2.text}`}
+              url={`${buttonAdm.route}`}
+              text={`${buttonAdm.text}`}
+            />
+            <NavBarButton
+              url={`${buttonHistory.route}`}
+              text={`${buttonHistory.text}`}
             />
           </div>
         </div>

@@ -1,24 +1,30 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../../../provider/AppProvider";
-import { useSearchParams } from "react-router-dom";
+import { filterItems } from "../../../features/filterList"
 
-export function HistorialVentasFilter({ filter, filtredList }) {
-  const { payMethods, delivery } = useContext(AppContext);
+export function HistorialVentasFilter({ setFilteredList }) {
+  
+  const { listDailyItemSale, payMethods, delivery } = useContext(AppContext);
 
   const [itemFilter, setItemFilter] = useState({
+    name:"todos",
     payMethod: "todos",
     delivery: "todos",
     date: "todos",
   });
 
-  const handleClick = () => {
-    console.log(itemFilter);
-  };
 
+  function handleClick() {
+    const newList = filterItems(listDailyItemSale, itemFilter)
+    setFilteredList(newList)
+  }
+ 
   return (
     <>
       <label htmlFor="">Nombre</label>
-      <input type="text" />
+      <input type="text" onChange={(e) => {
+        setItemFilter({...itemFilter, name: e.target.value})
+      }} />
       <div>
         <select
           onChange={(e) => {
@@ -53,7 +59,7 @@ export function HistorialVentasFilter({ filter, filtredList }) {
           id="date"
         />
       </div>
-      <button onClick={() => handleClick()}>Filtrar!</button>
+      <button onClick={() => handleClick()}>Filtrar</button>
     </>
   );
 }

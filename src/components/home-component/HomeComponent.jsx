@@ -1,7 +1,6 @@
 import { WindowBurgerComponent } from "../window-burger-component/WindowComponent/WindowComponent";
 import { AderesosComponent } from "../window-aderesos-component/AderesosSelect/WindowAderesosComponent";
 import { InfoClient } from "../infoClientComponent/InfoClientComponent";
-import { NavBar } from "../navBarComponent/NavBar";
 import { TicketComponent } from "../ticketComponent/TicketComponent";
 import WindowSalesComponent from "../window-sales-component/windowSalesComponent";
 export default function Home() {
@@ -10,7 +9,6 @@ export default function Home() {
       style={{ height: "100vh" }}
       className="bg-bg-100 h-full text-text-100 font-sans"
     >
-      <NavBar button1={{route: "/historial-ventas", text:"Historial Ventas"}} button2={{route: "/admin", text:"Administracion"}}></NavBar>
       <div className="wrapper ">
         <InfoClient />
         <div className="flex gap-4 my-4">
