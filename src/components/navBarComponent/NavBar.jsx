@@ -7,7 +7,7 @@ export function NavBar({buttonHome, buttonAdm, buttonHistory}) {
         <div className="flex justify-between w-full">
           <div className="h-full leading-[56px] text-5xl flex items-center">
             🍔
-            <span className="font-sans text-2xl align-middle ml-2">
+            <span className="font-sans text-2xl align-middle ml-2 text-white">
               Epik Burguer
             </span>
           </div>

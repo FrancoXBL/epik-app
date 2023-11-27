@@ -50,6 +50,13 @@ export function TicketBody({ listTicketBurgers }) {
         console.log(burguer);
         return (
           <p className="pb-1" key={burguer.id}>
+            <span>
+              {`${burguer.name}, ${burguer.serving}${isVeggie(
+                burguer.veggie
+              )}. Medallon Extra x${burguer.extra}`}
+              <button onClick={() => handleClickAdd(burguer.id)}>➕</button>
+            </span>
+            <span>{` ...$${burguer.price}`}</span>
             <button
               className="RiDeleteBack2Fill"
               onClick={() => {
@@ -58,13 +65,6 @@ export function TicketBody({ listTicketBurgers }) {
             >
               🥦
             </button>
-            <span>
-              {`${burguer.name}, ${burguer.serving}${isVeggie(
-                burguer.veggie
-              )}. Medallon Extra x${burguer.extra}`}
-              <button onClick={() => handleClickAdd(burguer.id)}>➕</button>
-            </span>
-            <span>{` ...$${burguer.price}`}</span>
             <button
               className="RiDeleteBack2Fill"
               onClick={() => {

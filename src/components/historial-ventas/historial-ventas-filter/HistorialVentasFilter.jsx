@@ -2,18 +2,11 @@ import { useContext, useState } from "react";
 import { AppContext } from "../../../provider/AppProvider";
 import { filterItems } from "../../../features/filterList"
 
-export function HistorialVentasFilter({ setFilteredList }) {
+export function HistorialVentasFilter({ setFilteredList, setItemFilter, itemFilter }) {
   
   const { listDailyItemSale, payMethods, delivery } = useContext(AppContext);
 
-  const [itemFilter, setItemFilter] = useState({
-    name:"todos",
-    payMethod: "todos",
-    delivery: "todos",
-    date: "todos",
-  });
-
-
+  
   function handleClick() {
     const newList = filterItems(listDailyItemSale, itemFilter)
     setFilteredList(newList)

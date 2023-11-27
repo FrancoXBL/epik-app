@@ -1,13 +1,14 @@
 import { useContext } from "react";
 import { AppContext } from "../../../provider/AppProvider";
 import { DELETE_SALE } from "../../../provider/actions";
+import { filterItems } from "../../../features/filterList";
 
-export function HistorialCard({ saleCard  }) {
+export function HistorialCard({ saleCard, setFilteredList, itemFilter  }) {
 
   const { dispatch } = useContext(AppContext)
 
   const handleDeleteClick = (id) => {
-    dispatch({type: DELETE_SALE, payload: id})
+    dispatch({type: DELETE_SALE, payload: {id, setFilteredList, itemFilter, filterItems}})
   }
 
 

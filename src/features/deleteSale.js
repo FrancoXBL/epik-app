@@ -1,8 +1,14 @@
+
 export default function deleteSale(state, payload) {
-    console.log(state)
-    let { listDailyItemSale } = state
-    const id = payload
-    console.log(listDailyItemSale)
-    const filterList = listDailyItemSale.filter((i) => i.id !== id)
-    return { ...state, listDailyItemSale: filterList}
+    const { listDailyItemSale } = state
+
+    const {id, setFilteredList, filterItems, itemFilter} = payload
+
+    const newList  = listDailyItemSale.filter((i) => i.id !== id)
+
+    const newListFiltered = filterItems(newList, itemFilter)
+
+    setFilteredList(newListFiltered)
+
+    return { ...state, listDailyItemSale: newList}
 }
