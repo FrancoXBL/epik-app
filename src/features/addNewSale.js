@@ -1,6 +1,6 @@
 
 import toast from "react-hot-toast";
-export default function addNewSale(state, {payMethod, delivery, id}) {
+export default function addNewSale(state, {payMethod, delivery, id, date}) {
   let { ticket, listDailyItemSale } = state;
   if (ticket.listBurguer.length === 0 && ticket.listAggreggates.length === 0) {
     toast.error("No hay productos en la lista", {
@@ -34,8 +34,9 @@ export default function addNewSale(state, {payMethod, delivery, id}) {
       amount: ticket.total,
       payMethod: payMethod,
       client: ticket.client,
-      cadete: delivery,
-      id: id
+      delivery,
+      id,
+      date
     });
 
 
@@ -47,6 +48,8 @@ export default function addNewSale(state, {payMethod, delivery, id}) {
       icon: "👏",
     });
   }
+
+  console.log(listDailyItemSale)
 
   return { ...state, listDailyItemSale, ticket };
 }

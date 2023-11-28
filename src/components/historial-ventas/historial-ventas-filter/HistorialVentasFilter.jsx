@@ -1,67 +1,78 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../../provider/AppProvider";
-import { filterItems } from "../../../features/filterList"
+import { filterItems } from "../../../features/filterList";
 
 export function HistorialVentasFilter({ setFilteredList }) {
-  
   const { listDailyItemSale, payMethods, delivery } = useContext(AppContext);
 
-  const [itemFilter, setItemFilter] = useState({
-    name:"todos",
-    payMethod: "todos",
-    delivery: {name:"todos"},
-    date: "todos",
-  });
+  const [itemNameFilter, setItemNameFilter] = useState("todos");
+  const [payMethodFilter, setPayMethodFilter] = useState("todos");
+  const [deliveryFilter, setDeliveryFilter] = useState("todos");
+  const [dateFilter, setDateFilter] = useState("todos");
 
-  //Filtra otra vez la lista que se envia
-  useEffect(handleClick, [listDailyItemSale])
+  useEffect(() => {
+    handleFilter();
+  }, [listDailyItemSale]);
 
-  function handleClick() {
-    const newList = filterItems(listDailyItemSale, itemFilter)
-    setFilteredList(newList)
-  }
- 
+  const handleFilter = () => {
+    const filteredList = filterItems(listDailyItemSale, {
+      name: itemNameFilter,
+      payMethod: payMethodFilter,
+      delivery: deliveryFilter,
+      date: dateFilter,
+    });
+    setFilteredList(filteredList);
+  };
+
   return (
     <>
-      <label htmlFor="">Nombre</label>
-      <input type="text" onChange={(e) => {
-        setItemFilter({...itemFilter, name: e.target.value})
-      }} />
+      <label htmlFor="itemName">Nombre</label>
+      <input
+        type="text"
+        id="itemName"
+        onChange={(e) => setItemNameFilter(e.target.value)}
+      />
+      
       <div>
+        <label htmlFor="payMethod">Método de Pago:</label>
         <select
-          onChange={(e) => {
-            setItemFilter({ ...itemFilter, payMethod: e.target.value });
-          }}
+          id="payMethod"
+          onChange={(e) => setPayMethodFilter(e.target.value)}
         >
           <option value="todos">todos</option>
-          {payMethods.map((i) => (
-            <option value={i}>{i}</option>
+          {payMethods.map((method, index) => (
+            <option key={index} value={method}>
+              {method}
+            </option>
           ))}
         </select>
       </div>
+      
       <div>
+        <label htmlFor="delivery">Delivery: </label>
         <select
-          onChange={(e) => {
-            setItemFilter({ ...itemFilter, delivery: {name:e.target.value} });
-          }}
+          id="delivery"
+          onChange={(e) => setDeliveryFilter(e.target.value)}
         >
           <option value="todos">todos</option>
-          {delivery.map((i) => (
-            <option value={i}>{i}</option>
+          {delivery.map((option, index) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
           ))}
         </select>
       </div>
+      
       <div>
         <label htmlFor="date">Fecha:</label>
         <input
-          onChange={(e) => {
-            setItemFilter({ ...itemFilter, date: e.target.value });
-          }}
+          onChange={(e) => setDateFilter(e.target.value)}
           type="date"
           id="date"
         />
       </div>
-      <button onClick={() => handleClick()}>Filtrar</button>
+      
+      <button onClick={handleFilter}>Filtrar</button>
     </>
   );
 }

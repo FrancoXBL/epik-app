@@ -3,7 +3,7 @@ export function filterItems(list, itemFilter) {
       // Verificar si los filtros no son "todos" y si el elemento coincide con los filtros seleccionados
       return (itemFilter.name === 'todos' || item.name === itemFilter.name) &&
              (itemFilter.payMethod === 'todos' || item.payMethod === itemFilter.payMethod) &&
-             (itemFilter.delivery === 'todos' || item.delivery === itemFilter.delivery) &&
+             (itemFilter.delivery.name === 'todos' || item.delivery.name === itemFilter.delivery.name) &&
              (itemFilter.date === 'todos' || item.date === itemFilter.date);
     });
   };
