@@ -12,7 +12,6 @@ export const VEGGIE_BURGER = "VEGGIE_BURGER"
 export const DELETE_SALE = "DELETE_SALE"
 export const ADD_LIST_GASTO = "ADD_LIST_GASTO"
 
-
 import deleteBurger from "../features/deleteBurger.js";
 import deleteAggreggate from "../features/deleteAggreggate.js"
 import setListItems from "../features/setListItems.js";

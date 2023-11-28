@@ -1,31 +1,40 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../provider/AppProvider";
 import { ADD_NEW_SALE } from "../../provider/actions";
 import { v4 as uuidv4, validate } from "uuid";
-
 
 /**
  * Show the button to end the sale
  */
 export function EndSaleButton() {
-
-
-   const buttonStyles = "text-xl ml-1 p-4 rounded-md color-white bg-primary-100";
+  const buttonStyles = "text-xl ml-1 p-4 rounded-md color-white bg-primary-100";
 
   const { dispatch, delivery } = useContext(AppContext);
 
-  const [payMethod, setPayMethod] = useState("");
+  const [payMethod, setPayMethod] = useState("efectivo");
+
   const [cadete, setCadete] = useState("");
 
+  useEffect(() => {
+    setCadete(delivery[0]);
+  }, []);
+
+  const [deliveryCost, setDeliveryCost] = useState(0);
+
   const handleClick = () => {
-    dispatch({ type: ADD_NEW_SALE, payload: {payMethod, delivery: cadete, id:uuidv4()} });
+    dispatch({
+      type: ADD_NEW_SALE,
+      payload: {
+        payMethod,
+        delivery: { name: cadete, deliveryCost },
+        id: uuidv4(),
+      },
+    });
   };
 
   return (
     <>
       <select
-        name=""
-        id=""
         placeholder="Seleccione metodo de pago"
         onChange={(e) => setPayMethod(e.target.value)}
       >
@@ -36,8 +45,6 @@ export function EndSaleButton() {
         <option value="promo">Promo</option>
       </select>
       <select
-        name=""
-        id=""
         placeholder="Seleccione el cadete"
         onChange={(e) => setCadete(e.target.value)}
       >
@@ -45,8 +52,15 @@ export function EndSaleButton() {
           <option value={i}>{i}</option>
         ))}
       </select>
+      <label htmlFor="">Precio envio:</label>
+      <input
+        type="number"
+        onChange={(e) => {
+          setDeliveryCost(e.target.valueAsNumber);
+        }}
+      />
       <button
-         className={`${buttonStyles}`}
+        className={`${buttonStyles}`}
         onClick={() => {
           handleClick();
         }}
@@ -54,6 +68,5 @@ export function EndSaleButton() {
         TERMINAR VENTA
       </button>
     </>
-
   );
 }

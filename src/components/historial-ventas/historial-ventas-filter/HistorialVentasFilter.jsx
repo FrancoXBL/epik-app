@@ -1,12 +1,21 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../../provider/AppProvider";
 import { filterItems } from "../../../features/filterList"
 
-export function HistorialVentasFilter({ setFilteredList, setItemFilter, itemFilter }) {
+export function HistorialVentasFilter({ setFilteredList }) {
   
   const { listDailyItemSale, payMethods, delivery } = useContext(AppContext);
 
-  
+  const [itemFilter, setItemFilter] = useState({
+    name:"todos",
+    payMethod: "todos",
+    delivery: {name:"todos"},
+    date: "todos",
+  });
+
+  //Filtra otra vez la lista que se envia
+  useEffect(handleClick, [listDailyItemSale])
+
   function handleClick() {
     const newList = filterItems(listDailyItemSale, itemFilter)
     setFilteredList(newList)
@@ -33,7 +42,7 @@ export function HistorialVentasFilter({ setFilteredList, setItemFilter, itemFilt
       <div>
         <select
           onChange={(e) => {
-            setItemFilter({ ...itemFilter, delivery: e.target.value });
+            setItemFilter({ ...itemFilter, delivery: {name:e.target.value} });
           }}
         >
           <option value="todos">todos</option>

@@ -11,18 +11,11 @@ export default function HistorialVentas() {
 
   const [sendFiltredList, setFilteredList] = useState(listDailyItemSale);
 
-  const [itemFilter, setItemFilter] = useState({
-    name:"todos",
-    payMethod: "todos",
-    delivery: "todos",
-    date: "todos",
-  });
-
   return (
     <>
-      <HistorialVentasFilter setFilteredList={setFilteredList} setItemFilter={setItemFilter} itemFilter={itemFilter} />
+      <HistorialVentasFilter setFilteredList={setFilteredList} />
       {sendFiltredList.map((item) => (
-        <HistorialCard saleCard={item} setFilteredList={setFilteredList} itemFilter={itemFilter}  />
+        <HistorialCard saleCard={item} />
       ))}
       {/* <HistorialVentasAddGastos/>
         <HistorialVentasBalance /> */}

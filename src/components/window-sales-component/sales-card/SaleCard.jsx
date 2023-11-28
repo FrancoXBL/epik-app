@@ -19,9 +19,10 @@ export function SaleCard({ saleItem }) {
   return (
     <div>
       <span>Cliente: {saleItem.client.name} - {saleItem.client.address.street} {saleItem.client.address.number} </span>
+      <span>Costo envio: {saleItem.cadete.deliveryCost}</span>
       <span>Total: {saleItem.amount} </span>
       <span>Pago en: {saleItem.payMethod}</span>
-      <span>Cadete: {saleItem.cadete}</span>
+      <span>Cadete: {saleItem.cadete.name}</span>
     </div>
   );
 }
