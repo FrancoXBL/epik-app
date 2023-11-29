@@ -10,6 +10,7 @@ const initialState = {
       name: "",
       address: { street: "", number: "" },
     },
+    deliveryCost: 0,
     listBurguer: [],
     listAggreggates: [],
   },

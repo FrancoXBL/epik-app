@@ -21,8 +21,6 @@ export function HistorialVentasAddGastos({ gastos }) {
     <div>
       <label htmlFor="">Ingresar Gastos:</label>
       <select
-        name=""
-        id=""
         onChange={(e) => {
           setTipoGasto(e.target.value);
         }}

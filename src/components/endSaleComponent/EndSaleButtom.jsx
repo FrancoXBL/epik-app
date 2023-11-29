@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../provider/AppProvider";
-import { ADD_NEW_SALE } from "../../provider/actions";
+import { ADD_NEW_SALE, SET_TOTAL, SET_DELIVERY_COST } from "../../provider/actions";
 import { v4 as uuidv4 } from "uuid";
 import { date as DateString } from "../../features/date"; // Suponiendo que tengas una función para obtener la fecha en formato dd/mm/aa
 
@@ -62,7 +62,11 @@ export function EndSaleButton() {
         id="deliveryCost"
         type="number"
         value={deliveryCost}
-        onChange={(e) => setDeliveryCost(e.target.valueAsNumber)}
+        onChange={(e) => {
+          setDeliveryCost(e.target.valueAsNumber)
+          dispatch({type:SET_DELIVERY_COST, payload: e.target.valueAsNumber})
+          dispatch({type:SET_TOTAL, payload: undefined})
+        }}
       />
 
       <button className={buttonStyles} onClick={handleClick}>

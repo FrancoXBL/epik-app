@@ -9,16 +9,13 @@ import "../navBarComponent/navBar.css";
 export default function HistorialVentas() {
   const { listDailyItemSale } = useContext(AppContext);
 
-  const [sendFiltredList, setFilteredList] = useState(listDailyItemSale);
+  const [sendFilteredList, setFilteredList] = useState(listDailyItemSale);
+
 
   return (
     <>
       <HistorialVentasFilter setFilteredList={setFilteredList} />
-      {sendFiltredList.map((item) => (
-        <HistorialCard saleCard={item} />
-      ))}
-      {/* <HistorialVentasAddGastos/>
-        <HistorialVentasBalance /> */}
+      {sendFilteredList.map((item) => (<HistorialCard saleCard={item} />))}
     </>
   );
 

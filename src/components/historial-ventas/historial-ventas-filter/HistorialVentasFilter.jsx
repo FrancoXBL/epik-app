@@ -18,9 +18,10 @@ export function HistorialVentasFilter({ setFilteredList }) {
     const filteredList = filterItems(listDailyItemSale, {
       name: itemNameFilter,
       payMethod: payMethodFilter,
-      delivery: deliveryFilter,
+      delivery: {name:deliveryFilter},
       date: dateFilter,
     });
+    console.log(dateFilter)
     setFilteredList(filteredList);
   };
 

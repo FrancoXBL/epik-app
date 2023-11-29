@@ -11,6 +11,7 @@ export const ADD_NEW_SALE = "ADD_NEW_SALE"
 export const VEGGIE_BURGER = "VEGGIE_BURGER"
 export const DELETE_SALE = "DELETE_SALE"
 export const ADD_LIST_GASTO = "ADD_LIST_GASTO"
+export const SET_DELIVERY_COST = "SET_DELIVERY_COST"
 
 import deleteBurger from "../features/deleteBurger.js";
 import deleteAggreggate from "../features/deleteAggreggate.js"
@@ -25,8 +26,10 @@ import addNewSale from "../features/addNewSale.js";
 import veggieBurger from "../features/veggieBurger.js"
 import deleteSale from "../features/deleteSale.js"
 import addListGastos  from "../features/addListGastos.js";
+import setDeliveryCost from "../features/setDeliveryCost.js";
 
 const actions = {
+  SET_DELIVERY_COST: setDeliveryCost,
   SET_TOTAL: setTotal,
   SET_LIST_ITEMS: setListItems,
   SET_CLIENT: setClient,
