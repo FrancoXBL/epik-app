@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AppContext } from "../../../provider/AppProvider";
-import { v4 as uuidv4 } from "uuid";
-import { ADD_LISTITEM_TICKET_BURGER } from "../../../provider/actions";
+import { v4 as uuidv4, validate } from "uuid";
+import { ADD_LISTITEM_TICKET_BURGER, SET_TOTAL } from "../../../provider/actions";
 import "./BurgerCard.css";
 
 export function BurgerCard({ burger }) {
@@ -15,13 +15,17 @@ export function BurgerCard({ burger }) {
     const payload = createBurgerTicket(
       burgerName,
       variant.serving,
-      variant.price
+      variant.price,
     );
+
+    // console.log(payload)
+    
     dispatch({ type: ADD_LISTITEM_TICKET_BURGER, payload });
+    dispatch({ type: SET_TOTAL, payload: undefined });
   };
 
   const createBurgerTicket = (name, serving, price) => {
-    return { id: uuidv4(), name, serving, price, extra: 0 };
+    return { id: uuidv4(), name, serving, price, extra: 0, veggie: false };
   };
 
   return (

@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import { thanks as saludos, thanks } from "./listThanks"
+import { thanks } from "./listThanks";
 
+/**
+ * Show a random greeting in the ticket
+ */
 export function TicketSaludo() {
-
-    const [frase, setFrase] = useState('')
-
-    useEffect(() => {
-        setFrase(thanks[Math.floor(Math.random() * thanks.length)])
-    }, [])
-
-    return(
-        <p className="font-mono">{frase}</p>
-    )
+  const [frase, setFrase] = useState("");
+  useEffect(() => {
+    const randomThanksIndex = Math.floor(Math.random() * thanks.length);
+    setFrase(thanks[randomThanksIndex]);
+  }, []);
+  return <p className="font-mono">{frase}</p>;
 }
