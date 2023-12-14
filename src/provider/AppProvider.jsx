@@ -11,6 +11,7 @@ const initialState = {
       address: { street: "", number: "" },
     },
     deliveryCost: 0,
+    isTakeOut: false,
     listBurguer: [],
     listAggreggates: [],
   },

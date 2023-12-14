@@ -10,7 +10,7 @@ import { EndSaleButton } from "../endSaleComponent/EndSaleButtom";
 /**
  * Show the ticket of the current sale
  */
-export function TicketComponent() {
+export default function TicketComponent() {
   const { ticket } = useContext(AppContext);
   return (
     <div className="font-mono">

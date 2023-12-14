@@ -31,14 +31,13 @@ export function InfoClient() {
 
     dispatch({ type: SET_CLIENT, payload: newClientInfo });
   }
-  
 
   const labelCss = "h-8";
   const inputCss = "h-8 rounded-md bg-text-100 text-bg-300";
   const containerCss = "flex gap-2";
   const flexCol = "flex w-45 flex-col";
   return (
-    <div className="">
+    <>
       <div className={`${containerCss}`}>
         <div className={`${flexCol}`}>
           <label className={`${labelCss} `} htmlFor="clientnombre">
@@ -83,6 +82,6 @@ export function InfoClient() {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 }
