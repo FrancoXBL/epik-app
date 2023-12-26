@@ -1,16 +1,11 @@
 import { Link } from "react-router-dom";
 
-export function NavBarButton({ onClick, text, url }) {
+export function NavBarButton({ button, active, click }) {
   return (
-    <>
-      <Link to={url}>
-        <button
-          className="bg-bg-300 py-4 px-8 rounded-md hover:bg-bg-100"
-          onClick={onClick}
-        >
-          {text}
-        </button>
-      </Link>
-    </>
+    <Link to={button.path} onClick={click}>
+      <div className={` p-[5px]`}>
+        {active ? <button.activeIcon /> : <button.icon />}
+      </div>
+    </Link>
   );
 }

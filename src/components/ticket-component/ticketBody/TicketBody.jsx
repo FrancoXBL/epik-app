@@ -6,7 +6,7 @@ import {
   SET_TOTAL,
   VEGGIE_BURGER,
 } from "../../../provider/actions";
-
+import { TicketDivider } from "../TicketComponent";
 /**
  * Show the list of burgers in the current sale
  * @param {Array} listTicketBurgers - List of burgers in the current sale inside of tickets
@@ -34,37 +34,19 @@ export function TicketBody({ listTicketBurgers }) {
     return "";
   }
 
-  if (listTicketBurgers.length === 0) {
-    return (
-      <>
-        <hr />
-        <p>Hamburguesa</p>
-      </>
-    );
-  }
-
   return (
     <div>
-      <hr />
+      <p className="flex justify-between">
+        <span>Descripcion</span>
+        <span>Precio</span>
+      </p>
+      <TicketDivider />
       {listTicketBurgers.map((burguer) => {
         console.log(burguer);
         return (
           <p className="pb-1" key={burguer.id}>
-            <span>
-              {`${burguer.name}, ${burguer.serving}${isVeggie(
-                burguer.veggie
-              )}. Medallon Extra x${burguer.extra}`}
-              <button onClick={() => handleClickAdd(burguer.id)}>➕</button>
-            </span>
+            <span>{`${burguer.name}, ${burguer.serving}`}</span>
             <span>{` ...$${burguer.price}`}</span>
-            <button
-              className="RiDeleteBack2Fill"
-              onClick={() => {
-                handleVeggie(burguer.id);
-              }}
-            >
-              🥦
-            </button>
             <button
               className="RiDeleteBack2Fill"
               onClick={() => {

@@ -1,28 +1,38 @@
 import "./navBar.css";
+import { useState } from "react";
 import { NavBarButton } from "./navBarButton/navBarButton";
-export function NavBar({buttonHome, buttonAdm, buttonHistory}) {
+import {
+  HOME_BUTTON,
+  STATISTICS_BUTTON,
+  SETTINGS_BUTTON,
+} from "../../constants/navButtons";
+export function NavBar() {
+  const [active, setActive] = useState(0);
+
+  const handleActive = (index) => {
+    setActive(index);
+  };
   return (
-    <div className="bg-bg-200 p-8 mb-8">
-      <div className="wrapper">
-        <div className="flex justify-between w-full">
-          <div className="h-full leading-[56px] text-5xl flex items-center">
-            🍔
-            <span className="font-sans text-2xl align-middle ml-2 text-white">
-              Epik Burguer
-            </span>
+    <div className="wrapper--vertical ">
+      <div className="flex h-full justify-between ">
+        <div className="flex h-full flex-col justify-between p-[6px]">
+          <div className="flex flex-col gap-[10px]">
+            <NavBarButton
+              click={() => handleActive(0)}
+              active={active === 0}
+              button={HOME_BUTTON}
+            />
+            <NavBarButton
+              click={() => handleActive(1)}
+              active={active === 1}
+              button={STATISTICS_BUTTON}
+            />
           </div>
-          <div className="flex  gap-4">
+          <div>
             <NavBarButton
-              url={`${buttonHome.route}`}
-              text={`${buttonHome.text}`}
-            />
-            <NavBarButton
-              url={`${buttonAdm.route}`}
-              text={`${buttonAdm.text}`}
-            />
-            <NavBarButton
-              url={`${buttonHistory.route}`}
-              text={`${buttonHistory.text}`}
+              click={() => handleActive(2)}
+              active={active === 2}
+              button={SETTINGS_BUTTON}
             />
           </div>
         </div>

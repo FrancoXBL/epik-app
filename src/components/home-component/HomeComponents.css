@@ -1,0 +1,32 @@
+.grid__container {
+  display: grid;
+  grid-template-columns: 75px 655px 300px;
+  grid-template-rows: 500px 75px;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 30px;
+  gap: 20px 20px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "menu menu ticket"
+    "back dismiss finish";
+}
+
+.menu {
+  grid-area: menu;
+}
+
+.back {
+  grid-area: back;
+}
+
+.dismiss {
+  grid-area: dismiss;
+}
+
+.finish {
+  grid-area: finish;
+}
+
+.ticket {
+  grid-area: ticket;
+}

@@ -6,7 +6,7 @@ function MenuContainer({ cleanContainer, children }) {
       className={
         cleanContainer
           ? "h-full"
-          : "h-full p-4 border border-radius rounded-xl p16 w-full box-border "
+          : "h-full border-radius rounded-[20px] w-full box-border p-16px bg-white"
       }
     >
       {children}

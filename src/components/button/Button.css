@@ -1,0 +1,6 @@
+.button__svg-icon {
+  --color: #fff;
+  & path {
+    fill: var(--color);
+  }
+}

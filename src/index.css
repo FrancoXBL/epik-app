@@ -16,3 +16,8 @@ body {
   max-width: 1300px;
   margin: 0 auto;
 }
+
+.wrapper--vertical {
+  height: 595px;
+  margin: auto 0;
+}

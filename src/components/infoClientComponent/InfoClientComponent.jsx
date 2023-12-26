@@ -19,30 +19,29 @@ export function InfoClient() {
         },
       };
     }
-    if (change == "number") {
-      var newClientInfo = {
-        ...ticket.client,
-        address: {
-          number: data.target.value,
-          street: ticket.client.address.street,
-        },
-      };
-    }
-
+    // if (change == "number") {
+    //   var newClientInfo = {
+    //     ...ticket.client,
+    //     address: {
+    //       number: data.target.value,
+    //       street: ticket.client.address.street,
+    //     },
+    //   };
+    // }
     dispatch({ type: SET_CLIENT, payload: newClientInfo });
   }
 
-  const labelCss = "h-8";
-  const inputCss = "h-8 rounded-md bg-text-100 text-bg-300";
-  const containerCss = "flex gap-2";
-  const flexCol = "flex w-45 flex-col";
+
+  const inputCss = "h-[40px] px-[12px] py-[8px] mb-[16px] w-full rounded-md bg-gray-1 text-bg-300";
+  const containerCss = "flex gap-4 w-full justify-between";
+  const flexCol = "flex w-45 flex-col w-full";
   return (
     <>
       <div className={`${containerCss}`}>
         <div className={`${flexCol}`}>
-          <label className={`${labelCss} `} htmlFor="clientnombre">
+          {/* <label className={`${labelCss} `} htmlFor="clientnombre">
             Nombre Cliente
-          </label>
+          </label> */}
           <input
             onChange={(event) => {
               changeClientData(event, "name");
@@ -54,9 +53,9 @@ export function InfoClient() {
           />
         </div>
         <div className={`${flexCol}`}>
-          <label className={`${labelCss}`} htmlFor="direccion">
+          {/* <label className={`${labelCss}`} htmlFor="direccion">
             Direccion
-          </label>
+          </label> */}
           <input
             onChange={(event) => {
               changeClientData(event, "street");
@@ -67,7 +66,7 @@ export function InfoClient() {
             placeholder="Direccion"
           />
         </div>
-        <div className={`${flexCol}`}>
+        {/* <div className={`${flexCol}`}>
           <label className={`${labelCss}`} htmlFor="altura">
             Altura
           </label>
@@ -80,7 +79,7 @@ export function InfoClient() {
             type="text"
             placeholder="Altura"
           />
-        </div>
+        </div> */}
       </div>
     </>
   );

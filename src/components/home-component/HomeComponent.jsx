@@ -1,19 +1,19 @@
-import { WindowBurgerComponent } from "../window-burger-component/WindowComponent/WindowComponent";
-import { AderesosComponent } from "../window-aderesos-component/AderesosSelect/WindowAderesosComponent";
+import "./HomeComponents.css";
 import { InfoClient } from "../infoClientComponent/InfoClientComponent";
-import WindowSalesComponent from "../window-sales-component/windowSalesComponent";
-import TicketComponent from "../ticket-Component/TicketComponent";
+import TicketComponent from "../ticket-component/TicketComponent";
 import { useState, useEffect } from "react";
 import { AppContext } from "../../provider/AppProvider";
 import { SET_IS_TAKE_OUT } from "../../provider/actions";
-import { MdDeliveryDining, MdRestaurant } from "react-icons/md";
+import { Button } from "../button/Button";
 import BigButton from "../big-button/BigButton";
 import BigButtonContainer from "../big-button/BigButtonContainer";
 import StepperMenu from "../stepper-menu/StepperMenu";
 import { useStepper } from "../../hooks/useStepper";
 import MenuContainer from "../menu-container/MenuContainer";
 import CollapsibleContainer from "../collapsible-container/CollapsibleContainer";
-
+import TakeAway from "../../assets/epik-takeaway.png";
+import Local from "../../assets/epik-local.png";
+import { BUTTON_TYPES } from "../../constants/buttonTypes";
 import { useContext } from "react";
 const list = [
   <BigButtonContainer>
@@ -50,54 +50,102 @@ export default function Home() {
     setOpenCollapsible(0);
   }, [activeStep]);
   return (
-    <div style={{ height: "60vh" }} className="flex gap-2 w-2/3 m-auto p-4">
-      <MenuContainer>
-        <div className="flex flex-col justify-between h-full">
-          <StepperMenu
-            activeStep={activeStep}
-            handleBack={handleBack}
-            handleNext={handleNext}
-          >
-            <MenuContainer cleanContainer>
-              <BigButtonContainer>
-                <BigButton
-                  title="Para llevar"
-                  icon={<MdDeliveryDining />}
-                  action={() => setIsTakeOut(true)}
-                />
-                <BigButton
-                  title="Local"
-                  icon={<MdRestaurant />}
-                  action={() => setIsTakeOut(false)}
-                />
-              </BigButtonContainer>
-            </MenuContainer>
-            <MenuContainer cleanContainer>
-              <div className="flex h-full gap-2 w-100">
-                {list.map((Item, index) => (
-                  <CollapsibleContainer
-                    key={index}
-                    title={`Menu ${index + 1}`}
-                    index={index}
-                    isOpen={openCollapsible === index}
-                    onClick={() => handleOnClick(index)}
-                  >
-                    {Item}
-                  </CollapsibleContainer>
-                ))}
-              </div>
-            </MenuContainer>
-          </StepperMenu>
-          <div className="">
-            <button className="p-4 h-full border m-auto" onClick={handleBack}>
-              Atras
-            </button>
-          </div>
+    <div style={{ maxWidth: "1070px" }}>
+      <div className="grid__container">
+        <div className="menu">
+          <MenuContainer>
+            <div className="flex flex-col justify-between h-full">
+              <InfoClient />
+              <StepperMenu
+                activeStep={activeStep}
+                handleBack={handleBack}
+                handleNext={handleNext}
+              >
+                <MenuContainer cleanContainer>
+                  <BigButtonContainer>
+                    <BigButton
+                      title="Local"
+                      icon={Local}
+                      action={() => setIsTakeOut(false)}
+                    />
+                    <BigButton
+                      title="Para llevar"
+                      icon={TakeAway}
+                      action={() => setIsTakeOut(true)}
+                    />
+                  </BigButtonContainer>
+                </MenuContainer>
+                <MenuContainer cleanContainer>
+                  <div className="flex h-full gap-2 w-100">
+                    {list.map((Item, index) => (
+                      <CollapsibleContainer
+                        key={index}
+                        title={`Menu ${index + 1}`}
+                        index={index}
+                        isOpen={openCollapsible === index}
+                        onClick={() => handleOnClick(index)}
+                      >
+                        {Item}
+                      </CollapsibleContainer>
+                    ))}
+                  </div>
+                </MenuContainer>
+
+                <MenuContainer>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
+                  nobis sapiente consequuntur velit, veritatis sunt in
+                  voluptatum, reprehenderit voluptate assumenda magnam quas
+                  iusto cum sit expedita facilis autem magni quasi.
+                  <ul>
+                    <li>asas</li>
+                    <li>asas</li>
+                    <li>asas</li>
+                  </ul>
+                </MenuContainer>
+                <MenuContainer>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Quidem quos fugiat, itaque vel, numquam a nostrum cum ab unde
+                  qui quam beatae ut esse repellendus ipsam cupiditate laborum
+                  voluptatum consequuntur!
+                  <button>asas</button>
+                  <button>asas</button> <button>asas</button>
+                </MenuContainer>
+                <MenuContainer>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Neque possimus, est fugit incidunt illum hic obcaecati sint
+                  dolorem facere nostrum totam eos fuga nulla velit libero
+                  deserunt dolorum nam voluptatum. Lorem ipsum, dolor sit amet
+                  consectetur adipisicing elit. Neque possimus, est fugit
+                  incidunt illum hic obcaecati sint dolorem facere nostrum totam
+                  eos fuga nulla velit libero deserunt dolorum nam voluptatum.
+                </MenuContainer>
+              </StepperMenu>
+            </div>
+          </MenuContainer>
         </div>
-      </MenuContainer>
-      <div className="w-96">
-        <TicketComponent />
+        <div className="back">
+          <Button
+            disabled={activeStep === 0}
+            action={handleBack}
+            type={BUTTON_TYPES.secondary}
+          />
+        </div>
+        <div>
+          <Button action={() => {}} type={BUTTON_TYPES.delete} />
+        </div>
+        <div className="ticket h-full box-border">
+          <TicketComponent />
+        </div>
+        <div>
+          <Button action={() => {}} type={BUTTON_TYPES.confirm} />
+        </div>
       </div>
     </div>
+    // <div style={{ height: "70vh" }} className="flex gap-2 w-2/3 m-auto p-4">
+
+    //   <div className="w-96">
+    //
+    //   </div>
+    // </div>
   );
 }
