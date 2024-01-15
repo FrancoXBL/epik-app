@@ -1,6 +1,6 @@
-export default function veggieBurger(state, payload){
+export default function veggieProduct(state, payload){
     let { ticket } = state;
-    ticket.listBurguer.map((item) => {
+    ticket.listProducts.map((item) => {
         if(item.id === payload){
             item.veggie = true
         }

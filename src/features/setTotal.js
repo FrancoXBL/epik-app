@@ -4,11 +4,11 @@ export default function setTotal(state, payload) {
 
   let total = 0;
 
-  ticket.listBurguer.map((item) => {
+  ticket.listProducts.map((item) => {
     total += parseInt(item.price);
   });
 
-  ticket.listAggreggates.map((item) => {
+  ticket.listExtras.map((item) => {
     total += parseInt(item.price);
   });
 

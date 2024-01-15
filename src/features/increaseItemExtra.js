@@ -2,7 +2,7 @@ import { carneExtraValue } from "../data/itemsList";
 
 export default function increaseItemExtra(state, payload) {
   let { ticket } = state;
-  ticket.listBurguer.map((item) => {
+  ticket.listProducts.map((item) => {
     
     if (item.id === payload) {
       const OLD_PRICE = parseInt(item.price);

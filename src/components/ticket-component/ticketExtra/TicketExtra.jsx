@@ -1,20 +1,34 @@
 import { useContext } from "react";
 import { AppContext } from "../../../provider/AppProvider";
-import { DELETE_AGGREGGATE, SET_TOTAL } from "../../../provider/actions";
+import { DELETE_EXTRA, SET_TOTAL } from "../../../provider/actions";
 
 /**
  * Show the list of extras in the current sale
  * @param {Array} listTicketExtras - List of extras in the current sale inside of ticket
  */
-export function TicketExtra() {
+export function TicketExtra({ isPrintTicket }) {
   const { ticket, dispatch } = useContext(AppContext);
 
-  function handleClick(id) {
-    dispatch({ type: DELETE_AGGREGGATE, payload: id });
+  function handleDelete(id) {
+    dispatch({ type: DELETE_EXTRA, payload: id });
     dispatch({ type: SET_TOTAL, payload: undefined });
   }
 
-  if (ticket.listAggreggates.length === 0) {
+  function deleteIcon(condition, id){
+    if (condition){
+      return ''
+    }
+    return (<button
+      className="RiDeleteBack2Fill"
+      onClick={() => {
+        handleDelete(id);
+      }}
+    >
+      ❌
+    </button>)
+  }
+
+  if (ticket.listExtras.length === 0) {
     return (
       <>
         <hr />
@@ -26,12 +40,12 @@ export function TicketExtra() {
   return (
     <>
       <hr />
-      {ticket.listAggreggates.map((extra) => (
+      {ticket.listExtras.map((extra) => (
         <div>
           <span className="capitalize">
             {extra.name} - {extra.serving} - ${extra.price}
           </span>{" "}
-          <button onClick={() => handleClick(extra.id)}>❌</button>
+          { deleteIcon(isPrintTicket, extra.id) }
         </div>
       ))}
     </>

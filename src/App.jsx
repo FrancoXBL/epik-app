@@ -5,13 +5,15 @@ import HistorialVentas from "./components/historial-ventas/HistorialVentas";
 import AdmComponent from "./components/administration-component/AdmComponent";
 import { Route, Routes } from "react-router-dom";
 import { NavBar } from "./components/navBarComponent/NavBar";
+import TicketComponent from "./components/ticket-component/TicketComponent";
+
 
 function App() {
   return (
     <>
       <div className="flex w-screen">
-        <NavBar />
         <div className="h-screen w-screen bg-gray-1 flex justify-center items-center">
+        <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/statistics" element={<HistorialVentas />} />
@@ -19,7 +21,10 @@ function App() {
           </Routes>
         </div>
       </div>
-      <Toaster position="bottom-center" toastOptions={toastConfig} />
+      <div id="forPrint" style={{display:"none"}}>
+        <TicketComponent isPrintTicket={true} />
+      </div>
+      {/* <Toaster position="bottom-center" toastOptions={toastConfig} /> */}
     </>
   );
 }

@@ -15,15 +15,15 @@ export const TicketDivider = () => (
 /**
  * Show the ticket of the current sale
  */
-export default function TicketComponent() {
+export default function TicketComponent({ isPrintTicket }) {
   const { ticket } = useContext(AppContext);
   return (
-    <div className="font-mono h-full box-border font-semibold">
+    <div className="font-mono h-full box-border font-semibold ">
       <TicketSuperior />
-      <div className="bg-white py-[14px] px-[28px] max-h-[480px] h-full box-border">
+      <div className="bg-white py-[14px] px-[28px] h-full box-border">
         <TiketHeader />
-        <TicketBody listTicketBurgers={ticket.listBurguer} />
-        <TicketExtra listTicketExtras={ticket.listAggreggates} />
+        <TicketBody listTicketBurgers={ticket.listProducts} isPrintTicket={isPrintTicket} />
+        <TicketExtra listTicketExtras={ticket.listExtras} isPrintTicket={isPrintTicket} />
         <TicketFooter />
         <TicketSaludo />
       </div>

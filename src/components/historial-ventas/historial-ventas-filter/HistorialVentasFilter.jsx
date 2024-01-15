@@ -58,7 +58,7 @@ export function HistorialVentasFilter({ setFilteredList }) {
           <option value="todos">todos</option>
           {delivery.map((option, index) => (
             <option key={index} value={option}>
-              {option}
+              {option.name}
             </option>
           ))}
         </select>

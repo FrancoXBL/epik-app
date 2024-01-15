@@ -29,6 +29,82 @@ export const items = [
     ],
   },
   {
+    name: "epika",
+    type: "burger",
+    specs: [
+      {
+        id: "1",
+        serving: "simple",
+        price: "2400",
+        icon: PiNumberCircleOneBold,
+      },
+      { id: "2", serving: "doble", price: "2800", icon: PiNumberCircleTwoBold },
+      {
+        id: "3",
+        serving: "triple",
+        price: "3100",
+        icon: PiNumberCircleThreeBold,
+      },
+    ],
+  },
+  {
+    name: "morgana",
+    type: "burger",
+    specs: [
+      {
+        id: "1",
+        serving: "simple",
+        price: "2400",
+        icon: PiNumberCircleOneBold,
+      },
+      { id: "2", serving: "doble", price: "2800", icon: PiNumberCircleTwoBold },
+      {
+        id: "3",
+        serving: "triple",
+        price: "3100",
+        icon: PiNumberCircleThreeBold,
+      },
+    ],
+  },
+  {
+    name: "arturica",
+    type: "burger",
+    specs: [
+      {
+        id: "1",
+        serving: "simple",
+        price: "2400",
+        icon: PiNumberCircleOneBold,
+      },
+      { id: "2", serving: "doble", price: "2800", icon: PiNumberCircleTwoBold },
+      {
+        id: "3",
+        serving: "triple",
+        price: "3100",
+        icon: PiNumberCircleThreeBold,
+      },
+    ],
+  },
+  {
+    name: "tom",
+    type: "burger",
+    specs: [
+      {
+        id: "1",
+        serving: "simple",
+        price: "2400",
+        icon: PiNumberCircleOneBold,
+      },
+      { id: "2", serving: "doble", price: "2800", icon: PiNumberCircleTwoBold },
+      {
+        id: "3",
+        serving: "triple",
+        price: "3100",
+        icon: PiNumberCircleThreeBold,
+      },
+    ],
+  },
+  {
     name: "bomba",
     type: "pizza",
     specs: [
@@ -60,16 +136,5 @@ export const items = [
     type: "aderezo",
     specs: [{ id: "9", serving: "potecito", price: "600" }],
   },
-  {
-    name: "epika",
-    type: "burger",
-    specs: [
-      {
-        id: "10",
-        serving: "simple",
-        price: "600",
-        icon: PiNumberCircleOneBold,
-      },
-    ],
-  },
+
 ];

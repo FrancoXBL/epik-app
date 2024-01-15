@@ -12,13 +12,24 @@ const initialState = {
     },
     deliveryCost: 0,
     isTakeOut: false,
-    listBurguer: [],
-    listAggreggates: [],
+    listProducts: [{
+      "name": "epika", 
+      "type": "burger",
+      "serving": "doble", 
+      "price": 2800, 
+      "veggie": false, 
+      "extra": 0
+  }],
+    listExtras: [{
+      "name":"cheddar",
+      "price":3000,
+      "serving":"potecito 200g"
+    }],
   },
   listDailyItemSale: [],
   listDailyItemGasto: [],
   payMethods: ["efectivo", "credito", "transferencia", "debito", "promo", "qr"],
-  delivery: ["Negro", "Nuevo"],
+  delivery: [{name:"Negro", minPayment: 3000}],
 };
 
 function reducer(state, action) {

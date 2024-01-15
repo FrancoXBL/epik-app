@@ -15,24 +15,7 @@ import TakeAway from "../../assets/epik-takeaway.png";
 import Local from "../../assets/epik-local.png";
 import { BUTTON_TYPES } from "../../constants/buttonTypes";
 import { useContext } from "react";
-const list = [
-  <BigButtonContainer>
-    <BigButton title="Epika" icon={""} action={() => setIsTakeOut(true)} />
-    <BigButton title="Lancelot" icon={""} action={() => setIsTakeOut(false)} />
-    <BigButton title="Epika" icon={""} action={() => setIsTakeOut(true)} />
-    <BigButton title="Epika" icon={""} action={() => setIsTakeOut(true)} />
-    <BigButton title="Lancelot" icon={""} action={() => setIsTakeOut(false)} />
-    <BigButton title="Lancelot" icon={""} action={() => setIsTakeOut(false)} />
-  </BigButtonContainer>,
-  <BigButtonContainer>
-    <BigButton title="Queso azul" icon={""} action={() => setIsTakeOut(true)} />
-    <BigButton
-      title="Papas extra"
-      icon={""}
-      action={() => setIsTakeOut(false)}
-    />
-  </BigButtonContainer>,
-];
+import printTicket from "../../features/printTicket";
 
 export default function Home() {
   const { dispatch } = useContext(AppContext);
@@ -43,6 +26,25 @@ export default function Home() {
     handleNext();
     dispatch({ type: SET_IS_TAKE_OUT, payload: value });
   };
+
+  const [list, setList] = useState([
+    <BigButtonContainer>
+      <BigButton title="Epika" icon={""} action={() => setIsTakeOut(true)} />
+      <BigButton title="Lancelot" icon={""} action={() => setIsTakeOut(false)} />
+      <BigButton title="Epika" icon={""} action={() => setIsTakeOut(true)} />
+      <BigButton title="Epika" icon={""} action={() => setIsTakeOut(true)} />
+      <BigButton title="Lancelot" icon={""} action={() => setIsTakeOut(false)} />
+      <BigButton title="Lancelot" icon={""} action={() => setIsTakeOut(false)} />
+    </BigButtonContainer>,
+    <BigButtonContainer>
+      <BigButton title="Queso azul" icon={""} action={() => setIsTakeOut(true)} />
+      <BigButton
+        title="Papas extra"
+        icon={""}
+        action={() => setIsTakeOut(false)}
+      />
+    </BigButtonContainer>,
+  ])
   const handleOnClick = (index) => {
     setOpenCollapsible(index);
   };
@@ -133,11 +135,11 @@ export default function Home() {
         <div>
           <Button action={() => {}} type={BUTTON_TYPES.delete} />
         </div>
-        <div className="ticket h-full box-border">
-          <TicketComponent />
+        <div className="ticket h-full box-border max-h-[480px]">
+          <TicketComponent isPrintTicket={false}/>
         </div>
         <div>
-          <Button action={() => {}} type={BUTTON_TYPES.confirm} />
+          <Button action={() => { printTicket("forPrint") }} type={BUTTON_TYPES.confirm} />
         </div>
       </div>
     </div>
