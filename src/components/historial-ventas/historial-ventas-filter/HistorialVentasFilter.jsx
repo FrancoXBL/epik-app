@@ -1,21 +1,44 @@
-import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../../provider/AppProvider";
+import { useEffect, useState } from "react";
+import axios from 'axios'
+import API_KEY from "../../../constants/api.js";
 import { filterItems } from "../../../features/filterList";
 
 export function HistorialVentasFilter({ setFilteredList }) {
-  const { listDailyItemSale, payMethods, delivery } = useContext(AppContext);
 
   const [itemNameFilter, setItemNameFilter] = useState("todos");
   const [payMethodFilter, setPayMethodFilter] = useState("todos");
   const [deliveryFilter, setDeliveryFilter] = useState("todos");
   const [dateFilter, setDateFilter] = useState("todos");
 
+  const [saleHistory, setSaleHistory] = useState([])
+  useEffect(() => {
+    axios.get(`${API_KEY}sales-history`).then((res) => {
+      setSaleHistory(res.data)
+    });
+  }, []);
+
+  const [delivery, setDelivery] = useState([])
+  useEffect(() => {
+    axios.get(`${API_KEY}deliverys`).then((res) => {
+      setDelivery(res.data)
+    });
+  }, []);
+
+  const [payMethods, setPayMethods] = useState([])
+  useEffect(() => {
+    axios.get(`${API_KEY}paymethods`).then((res) => {
+      setPayMethods(res.data)
+    });
+  }, []);
+
+
+
   useEffect(() => {
     handleFilter();
-  }, [listDailyItemSale]);
+  }, [saleHistory]);
 
   const handleFilter = () => {
-    const filteredList = filterItems(listDailyItemSale, {
+    const filteredList = filterItems(saleHistory, {
       name: itemNameFilter,
       payMethod: payMethodFilter,
       delivery: {name:deliveryFilter},
@@ -43,7 +66,7 @@ export function HistorialVentasFilter({ setFilteredList }) {
           <option value="todos">todos</option>
           {payMethods.map((method, index) => (
             <option key={index} value={method}>
-              {method}
+              {method.payMethod}
             </option>
           ))}
         </select>

@@ -3,7 +3,11 @@ import { InfoClient } from "../infoClientComponent/InfoClientComponent";
 import TicketComponent from "../ticket-component/TicketComponent";
 import { useState, useEffect } from "react";
 import { AppContext } from "../../provider/AppProvider";
-import { SET_IS_TAKE_OUT } from "../../provider/actions";
+import {
+  ADD_LISTITEM_TICKET_PRODUCT,
+  ADD_LISTITEM_TICKET_EXTRAS,
+  SET_IS_TAKE_OUT,
+} from "../../provider/actions";
 import { Button } from "../button/Button";
 import BigButton from "../big-button/BigButton";
 import BigButtonContainer from "../big-button/BigButtonContainer";
@@ -16,35 +20,69 @@ import Local from "../../assets/epik-local.png";
 import { BUTTON_TYPES } from "../../constants/buttonTypes";
 import { useContext } from "react";
 import printTicket from "../../features/printTicket";
+import axios from "axios";
+import API_KEY from "../../constants/api";
+
+// import fetchData from '../../api/fetchData.js'
 
 export default function Home() {
   const { dispatch } = useContext(AppContext);
   const { activeStep, handleNext, handleBack } = useStepper(0);
   const [openCollapsible, setOpenCollapsible] = useState(null);
+  const [selectItem, setSelectItem] = useState();
+
+  /////////////////////////// FETCH DATA ///////////////////////////////////
+  const [list, setList] = useState([]);
+  const [sendListMain, setSendListMain] = useState([]);
+  const [sendListExtra, setSendListExtra] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${API_KEY}products`).then((res) => {
+      /////////////////////////// CREATE LISTS //////////////////////////////////
+      const newListExtra = res.data.filter((item) => item.type === "extra");
+      setSendListExtra(newListExtra);
+
+      const newListMain = res.data.filter((item) => item.type !== "extra");
+      setSendListMain(newListMain);
+
+      setList([
+        <BigButtonContainer key="main">
+          {newListMain.map((item) => (
+            <BigButton
+              key={item.id}
+              title={item.name}
+              icon={""}
+              action={() => {
+                setSelectItem(item);
+                handleNext();
+                console.log(item);
+              }}
+            />
+          ))}
+        </BigButtonContainer>,
+        <BigButtonContainer key="extra">
+          {newListExtra.map((item) => (
+            <BigButton
+              key={item.id}
+              title={item.name}
+              icon={""}
+              action={() => {
+                setSelectItem(item);
+                handleNext();
+                console.log(item);
+              }}
+            />
+          ))}
+        </BigButtonContainer>,
+      ]);
+    });
+  }, []);
 
   const setIsTakeOut = (value) => {
     handleNext();
     dispatch({ type: SET_IS_TAKE_OUT, payload: value });
   };
 
-  const [list, setList] = useState([
-    <BigButtonContainer>
-      <BigButton title="Epika" icon={""} action={() => setIsTakeOut(true)} />
-      <BigButton title="Lancelot" icon={""} action={() => setIsTakeOut(false)} />
-      <BigButton title="Epika" icon={""} action={() => setIsTakeOut(true)} />
-      <BigButton title="Epika" icon={""} action={() => setIsTakeOut(true)} />
-      <BigButton title="Lancelot" icon={""} action={() => setIsTakeOut(false)} />
-      <BigButton title="Lancelot" icon={""} action={() => setIsTakeOut(false)} />
-    </BigButtonContainer>,
-    <BigButtonContainer>
-      <BigButton title="Queso azul" icon={""} action={() => setIsTakeOut(true)} />
-      <BigButton
-        title="Papas extra"
-        icon={""}
-        action={() => setIsTakeOut(false)}
-      />
-    </BigButtonContainer>,
-  ])
   const handleOnClick = (index) => {
     setOpenCollapsible(index);
   };
@@ -92,34 +130,24 @@ export default function Home() {
                     ))}
                   </div>
                 </MenuContainer>
-
                 <MenuContainer>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
-                  nobis sapiente consequuntur velit, veritatis sunt in
-                  voluptatum, reprehenderit voluptate assumenda magnam quas
-                  iusto cum sit expedita facilis autem magni quasi.
-                  <ul>
-                    <li>asas</li>
-                    <li>asas</li>
-                    <li>asas</li>
-                  </ul>
-                </MenuContainer>
-                <MenuContainer>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Quidem quos fugiat, itaque vel, numquam a nostrum cum ab unde
-                  qui quam beatae ut esse repellendus ipsam cupiditate laborum
-                  voluptatum consequuntur!
-                  <button>asas</button>
-                  <button>asas</button> <button>asas</button>
-                </MenuContainer>
-                <MenuContainer>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Neque possimus, est fugit incidunt illum hic obcaecati sint
-                  dolorem facere nostrum totam eos fuga nulla velit libero
-                  deserunt dolorum nam voluptatum. Lorem ipsum, dolor sit amet
-                  consectetur adipisicing elit. Neque possimus, est fugit
-                  incidunt illum hic obcaecati sint dolorem facere nostrum totam
-                  eos fuga nulla velit libero deserunt dolorum nam voluptatum.
+                  <div className="flex h-full gap-2 w-100">
+                    {selectItem === undefined ? (
+                      <></>
+                    ) : (
+                      <>
+                      <>
+                        <BigButton title={selectItem.name} />
+                      </>
+                        {selectItem.specs.map((item) => (
+                          <BigButton
+                            title={`${item.serving} - ${item.price}`}
+                          />
+                        ))}
+                        <BigButton title={"Veggie"} />
+                      </>
+                    )}
+                  </div>
                 </MenuContainer>
               </StepperMenu>
             </div>
@@ -136,10 +164,15 @@ export default function Home() {
           <Button action={() => {}} type={BUTTON_TYPES.delete} />
         </div>
         <div className="ticket h-full box-border max-h-[480px]">
-          <TicketComponent isPrintTicket={false}/>
+          <TicketComponent isPrintTicket={false} />
         </div>
         <div>
-          <Button action={() => { printTicket("forPrint") }} type={BUTTON_TYPES.confirm} />
+          <Button
+            action={() => {
+              printTicket("forPrint");
+            }}
+            type={BUTTON_TYPES.confirm}
+          />
         </div>
       </div>
     </div>

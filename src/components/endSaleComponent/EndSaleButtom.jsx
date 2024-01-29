@@ -13,6 +13,8 @@ export function EndSaleButton() {
   const [selectedDelivery, setSelectedDelivery] = useState("");
   const [deliveryCost, setDeliveryCost] = useState(0);
 
+  
+
   useEffect(() => {
     setSelectedDelivery(delivery[0]);
   }, []);
