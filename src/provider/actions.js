@@ -13,6 +13,9 @@ export const DELETE_SALE = "DELETE_SALE";
 export const ADD_LIST_GASTO = "ADD_LIST_GASTO";
 export const SET_DELIVERY_COST = "SET_DELIVERY_COST";
 export const SET_IS_TAKE_OUT = "SET_IS_TAKE_OUT";
+export const ADD_WAITING_SALE = "ADD_WAITING_SALE"
+export const RESET_TICKET = "RESET_TICKET"
+export const DELETE_WAITING_SALE = "DELETE_WAITING_SALE"
 
 import deleteProduct from "../features/deleteProduct.js";
 import deleteExtra from "../features/deleteExtra.js";
@@ -29,8 +32,14 @@ import deleteSale from "../features/deleteSale.js";
 import addListGastos from "../features/addListGastos.js";
 import setDeliveryCost from "../features/setDeliveryCost.js";
 import setIsTakeOut from "../features/setIsTakeOut.js";
+import addItemWaitingSales from "../features/addItemWaitingSales.js";
+import resetTicket from "../features/resetTicket.js";
+import deleteWaitingSale from "../features/deleteWaitingSale.js";
 
 const actions = {
+  DELETE_WAITING_SALE: deleteWaitingSale,
+  RESET_TICKET: resetTicket,
+  ADD_WAITING_SALE: addItemWaitingSales,
   SET_DELIVERY_COST: setDeliveryCost,
   SET_TOTAL: setTotal,
   SET_LIST_ITEMS: setListItems,

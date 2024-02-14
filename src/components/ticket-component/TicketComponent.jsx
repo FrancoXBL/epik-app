@@ -1,5 +1,6 @@
 import { TiketHeader } from "./ticketHeader/TiketHeader";
-import { TicketFooter } from "./ticketFooter/TicketFooter";
+import { TicketFooterTakeOut } from "./ticketFooter/TicketFooterTakeOut";
+import { TicketFooterLocal } from "./ticketFooter/TicketFooterLocal";
 import { TicketSaludo } from "./ticketSaludo/TicketSaludo";
 import { TicketBody } from "./ticketBody/TicketBody";
 import { TicketExtra } from "./ticketExtra/TicketExtra";
@@ -22,9 +23,9 @@ export default function TicketComponent({ isPrintTicket }) {
       <TicketSuperior />
       <div className="bg-white py-[14px] px-[28px] h-full box-border">
         <TiketHeader />
-        <TicketBody listTicketBurgers={ticket.listProducts} isPrintTicket={isPrintTicket} />
+        <TicketBody listTicketProducts={ticket.listProducts} isPrintTicket={isPrintTicket} />
         <TicketExtra listTicketExtras={ticket.listExtras} isPrintTicket={isPrintTicket} />
-        <TicketFooter />
+        {ticket.isTakeOut ? <TicketFooterTakeOut /> : <TicketFooterLocal />}
         <TicketSaludo />
       </div>
       <TicketInferior />

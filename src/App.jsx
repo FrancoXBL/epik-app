@@ -24,7 +24,7 @@ function App() {
       <div id="forPrint" style={{display:"none"}}>
         <TicketComponent isPrintTicket={true} />
       </div>
-      {/* <Toaster position="bottom-center" toastOptions={toastConfig} /> */}
+      <Toaster position="bottom-center" toastOptions={toastConfig} />
     </>
   );
 }

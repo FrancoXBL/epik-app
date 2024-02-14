@@ -19,17 +19,10 @@ export function HistorialCard({ saleCard }) {
     <>
       <div>
         <span>
-          {saleCard.client.name} - {saleCard.client.address.street}{" "}
-          {saleCard.client.address.number}
+          {saleCard.sale.ticket.client.name} - {saleCard.sale.ticket.client.address.street}{" "}
+          {saleCard.sale.ticket.client.address.number}, ${saleCard.sale.ticket.total}
         </span>
-        {saleCard.list.map((item, index) => (
-          <span key={index}>
-            {item.name},{isVeggie(item.veggie)} {item.serving}{" "}
-            {wExtras(item.extra) || ""} ...${item.price}
-          </span>
-        ))}
         <span>{saleCard.payMethod}</span>
-        <span>{saleCard.amount}</span>
         <button>✏️</button>
         <button onClick={() => handleDeleteClick(saleCard.id)}>❌</button>
       </div>

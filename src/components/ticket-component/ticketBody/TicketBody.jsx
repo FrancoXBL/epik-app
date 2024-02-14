@@ -13,8 +13,10 @@ import { TicketDivider } from "../TicketComponent";
  * Show the list of burgers in the current sale
  * @param {Array} listTicketBurgers - List of burgers in the current sale inside of tickets
  */
-export function TicketBody({ listTicketBurgers, isPrintTicket }) {
+export function TicketBody({ listTicketProducts, isPrintTicket }) {
   const { dispatch } = useContext(AppContext);
+
+  console.log(listTicketProducts)
 
   function deleteIcon(condition, id){
     if (condition){
@@ -43,12 +45,6 @@ export function TicketBody({ listTicketBurgers, isPrintTicket }) {
     dispatch({ type: VEGGIE_PRODUCT, payload: id });
   }
 
-  function isVeggie(condition) {
-    if (condition) {
-      return " V";
-    }
-    return "";
-  }
 
   return (
     <div>
@@ -57,12 +53,14 @@ export function TicketBody({ listTicketBurgers, isPrintTicket }) {
         <span>Precio</span>
       </p>
       <TicketDivider />
-      {listTicketBurgers.map((burguer) => {
+      {listTicketProducts.map((p) => {
         return (
-          <p className="pb-1" key={burguer.id}>
-            <span>{`${burguer.name}, ${burguer.serving}`}</span>
-            <span>{` ...$${burguer.price}`}</span>
-            { deleteIcon(isPrintTicket, burguer.id) }
+          <p className="pb-1" key={p.id}>
+            <span>{`${p.name} ${p.serving}`}</span>
+            <span>{` ${p.isVeggie ? "Veg" : ""}`}</span>
+            <span>{` ${p.observations ? `${p.observations}` : ""}`}</span>
+            <span>{` $${p.price}`}</span>
+            { deleteIcon(isPrintTicket, p.id) }
           </p>
         );
       })}

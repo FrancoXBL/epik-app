@@ -13,6 +13,7 @@ const initialState = {
     listProducts: [],
     listExtras: [],
   },
+  waitingSales: []
 };
 
 function reducer(state, action) {

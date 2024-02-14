@@ -16,6 +16,7 @@ const setDate = () => {
 export function TiketHeader() {
   const {
     ticket: { client },
+    waitingSales,
   } = useContext(AppContext);
   const isNameBlinking = useBlinkEffect([client.name]);
   const isAddressBlinking = useBlinkEffect([
@@ -34,7 +35,7 @@ export function TiketHeader() {
   return (
     <div>
       <p className="text-center flex flex-col">
-        Pedido #033 <span>{currentDate}</span>
+        {`Pedido #${waitingSales.length}`} <span>{currentDate}</span>
       </p>
       <br />
       <span

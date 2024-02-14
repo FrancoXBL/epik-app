@@ -2,11 +2,14 @@ import "./HomeComponents.css";
 import { InfoClient } from "../infoClientComponent/InfoClientComponent";
 import TicketComponent from "../ticket-component/TicketComponent";
 import { useState, useEffect } from "react";
+import WaitingSales from "../waiting-sales/WaitingSales";
 import { AppContext } from "../../provider/AppProvider";
 import {
   ADD_LISTITEM_TICKET_PRODUCT,
   ADD_LISTITEM_TICKET_EXTRAS,
+  RESET_TICKET,
   SET_IS_TAKE_OUT,
+  ADD_WAITING_SALE,
 } from "../../provider/actions";
 import { Button } from "../button/Button";
 import BigButton from "../big-button/BigButton";
@@ -22,6 +25,9 @@ import { useContext } from "react";
 import printTicket from "../../features/printTicket";
 import axios from "axios";
 import API_KEY from "../../constants/api";
+import Modal from "../modal/Modal";
+import ModalContent from "../modal-content/ModalContent";
+import toast from "react-hot-toast";
 
 // import fetchData from '../../api/fetchData.js'
 
@@ -29,7 +35,12 @@ export default function Home() {
   const { dispatch } = useContext(AppContext);
   const { activeStep, handleNext, handleBack } = useStepper(0);
   const [openCollapsible, setOpenCollapsible] = useState(null);
-  const [selectItem, setSelectItem] = useState();
+  const [selectedItem, setSelectedItem] = useState();
+  const [isFoodComposerOpen, setIsFoodComposerOpen] = useState(false);
+
+  const handleFoodComposerClose = () => {
+    setIsFoodComposerOpen(false);
+  };
 
   /////////////////////////// FETCH DATA ///////////////////////////////////
   const [list, setList] = useState([]);
@@ -53,9 +64,8 @@ export default function Home() {
               title={item.name}
               icon={""}
               action={() => {
-                setSelectItem(item);
-                handleNext();
-                console.log(item);
+                setSelectedItem(item);
+                setIsFoodComposerOpen(true);
               }}
             />
           ))}
@@ -67,9 +77,8 @@ export default function Home() {
               title={item.name}
               icon={""}
               action={() => {
-                setSelectItem(item);
-                handleNext();
-                console.log(item);
+                setSelectedItem(item);
+                setIsFoodComposerOpen(true);
               }}
             />
           ))}
@@ -78,6 +87,7 @@ export default function Home() {
     });
   }, []);
 
+  /////////////// SELECCIONA SI ES ENVIO O LOCAL /////////////
   const setIsTakeOut = (value) => {
     handleNext();
     dispatch({ type: SET_IS_TAKE_OUT, payload: value });
@@ -91,6 +101,9 @@ export default function Home() {
   }, [activeStep]);
   return (
     <div style={{ maxWidth: "1070px" }}>
+      <div>
+        <WaitingSales />
+      </div>
       <div className="grid__container">
         <div className="menu">
           <MenuContainer>
@@ -123,31 +136,25 @@ export default function Home() {
                         title={`Menu ${index + 1}`}
                         index={index}
                         isOpen={openCollapsible === index}
-                        onClick={() => handleOnClick(index)}
+                        onClick={() => {
+                          handleOnClick(index);
+                        }}
                       >
                         {Item}
                       </CollapsibleContainer>
                     ))}
                   </div>
-                </MenuContainer>
-                <MenuContainer>
-                  <div className="flex h-full gap-2 w-100">
-                    {selectItem === undefined ? (
-                      <></>
-                    ) : (
-                      <>
-                      <>
-                        <BigButton title={selectItem.name} />
-                      </>
-                        {selectItem.specs.map((item) => (
-                          <BigButton
-                            title={`${item.serving} - ${item.price}`}
-                          />
-                        ))}
-                        <BigButton title={"Veggie"} />
-                      </>
-                    )}
-                  </div>
+                  <Modal
+                    isOpen={isFoodComposerOpen}
+                    onClose={handleFoodComposerClose}
+                  >
+                    <MenuContainer>
+                      <ModalContent
+                        close={setIsFoodComposerOpen}
+                        item={selectedItem}
+                      ></ModalContent>
+                    </MenuContainer>
+                  </Modal>
                 </MenuContainer>
               </StepperMenu>
             </div>
@@ -161,7 +168,47 @@ export default function Home() {
           />
         </div>
         <div>
-          <Button action={() => {}} type={BUTTON_TYPES.delete} />
+          <Button
+            action={() => {
+              toast.custom((t) => (
+                <div
+                  className={`${
+                    t.visible ? "animate-enter" : "animate-leave"
+                  } max-w-md w-full bg-delete-normal shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+                >
+                  <div className="flex-1 w-0 p-4">
+                    <div className="flex p-24px items-start">
+                      <div className="ml-3 flex-1">
+                        <p className="text-lg font-bold text-white text-gray-900">
+                          ¿Seguro de eliminar el progreso?
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex border-l border-gray-200">
+                    <button
+                      onClick={() => {
+                        toast.dismiss(t.id);
+                      }}
+                      className="bg-white w-20 border border-transparent rounded-none p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    >
+                      ❌
+                    </button>
+                    <button
+                      onClick={() => {
+                        toast.dismiss(t.id);
+                        dispatch({type:RESET_TICKET, payload: undefined})
+                      }}
+                      className="bg-white w-20 border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    >
+                      ✅
+                    </button>
+                  </div>
+                </div>
+              ));
+            }}
+            type={BUTTON_TYPES.delete}
+          />
         </div>
         <div className="ticket h-full box-border max-h-[480px]">
           <TicketComponent isPrintTicket={false} />
@@ -169,6 +216,7 @@ export default function Home() {
         <div>
           <Button
             action={() => {
+              dispatch({ type: ADD_WAITING_SALE, payload: undefined });
               printTicket("forPrint");
             }}
             type={BUTTON_TYPES.confirm}
@@ -176,11 +224,5 @@ export default function Home() {
         </div>
       </div>
     </div>
-    // <div style={{ height: "70vh" }} className="flex gap-2 w-2/3 m-auto p-4">
-
-    //   <div className="w-96">
-    //
-    //   </div>
-    // </div>
   );
 }
