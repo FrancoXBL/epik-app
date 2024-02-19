@@ -28,11 +28,12 @@ import API_KEY from "../../constants/api";
 import Modal from "../modal/Modal";
 import ModalContent from "../modal-content/ModalContent";
 import toast from "react-hot-toast";
+import verifyInfoSale from "../../features/verifyInfoSale";
 
 // import fetchData from '../../api/fetchData.js'
 
 export default function Home() {
-  const { dispatch } = useContext(AppContext);
+  const { dispatch, ticket } = useContext(AppContext);
   const { activeStep, handleNext, handleBack } = useStepper(0);
   const [openCollapsible, setOpenCollapsible] = useState(null);
   const [selectedItem, setSelectedItem] = useState();
@@ -82,7 +83,7 @@ export default function Home() {
               }}
             />
           ))}
-        </BigButtonContainer>,
+        </BigButtonContainer>
       ]);
     });
   }, []);
@@ -189,14 +190,6 @@ export default function Home() {
                     <button
                       onClick={() => {
                         toast.dismiss(t.id);
-                      }}
-                      className="bg-white w-20 border border-transparent rounded-none p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                    >
-                      ❌
-                    </button>
-                    <button
-                      onClick={() => {
-                        toast.dismiss(t.id);
                         dispatch({type:RESET_TICKET, payload: undefined})
                       }}
                       className="bg-white w-20 border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -216,8 +209,12 @@ export default function Home() {
         <div>
           <Button
             action={() => {
-              dispatch({ type: ADD_WAITING_SALE, payload: undefined });
-              printTicket("forPrint");
+              if(verifyInfoSale(ticket) === true){
+                dispatch({ type: ADD_WAITING_SALE, payload: undefined });
+                printTicket("forPrint");
+              } else {
+                toast.error(verifyInfoSale(ticket))
+              }
             }}
             type={BUTTON_TYPES.confirm}
           />

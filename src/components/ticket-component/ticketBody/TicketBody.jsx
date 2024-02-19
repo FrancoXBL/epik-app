@@ -32,10 +32,6 @@ export function TicketBody({ listTicketProducts, isPrintTicket }) {
     </button>)
   }
 
-  function handleClickAdd(id) {
-    dispatch({ type: INCREASE_ITEM_EXTRA, payload: id });
-    dispatch({ type: SET_TOTAL, payload: undefined });
-  }
   function handleDelete(id) {
     dispatch({ type: DELETE_PRODUCT, payload: id });
     dispatch({ type: SET_TOTAL, payload: undefined });

@@ -25,7 +25,7 @@ export default function TicketComponent({ isPrintTicket }) {
         <TiketHeader />
         <TicketBody listTicketProducts={ticket.listProducts} isPrintTicket={isPrintTicket} />
         <TicketExtra listTicketExtras={ticket.listExtras} isPrintTicket={isPrintTicket} />
-        {ticket.isTakeOut ? <TicketFooterTakeOut /> : <TicketFooterLocal />}
+        {ticket.isTakeOut ? <TicketFooterTakeOut isPrintTicket={isPrintTicket} /> : <TicketFooterLocal />}
         <TicketSaludo />
       </div>
       <TicketInferior />

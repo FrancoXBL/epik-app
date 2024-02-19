@@ -3,6 +3,7 @@ import axios from "axios";
 import API_KEY from "../../constants/api";
 import { AppContext } from "../../provider/AppProvider";
 import { DELETE_WAITING_SALE } from "../../provider/actions";
+import toast from "react-hot-toast";
 
 export default function WaitingSalesCard({ sale, deliverys, payMethods }) {
   const { dispatch } = useContext(AppContext);
@@ -43,6 +44,9 @@ export default function WaitingSalesCard({ sale, deliverys, payMethods }) {
       <button
         onClick={() => {
           handleConfirm();
+          handleDeleteSale();
+
+          toast.success('Venta completada!')
         }}
       >
         VVVV
