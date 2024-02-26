@@ -23,10 +23,10 @@ export default function WaitingSales() {
   const { waitingSales } = useContext(AppContext);
 
   return (
-    <>
+    <div className="flex h-full w-full">
       {waitingSales.map((sale) => (
         <WaitingSalesCard sale={sale} payMethods={payMethods} deliverys={deliverys} />
       ))}
-    </>
+    </div>
   );
 }

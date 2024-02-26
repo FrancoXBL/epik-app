@@ -5,8 +5,6 @@ import { DELETE_SALE } from "../../../provider/actions";
 export function HistorialCard({ saleCard }) {
   const { dispatch } = useContext(AppContext);
 
-  console.log(saleCard);
-
   const handleDeleteClick = (id) => {
     dispatch({ type: DELETE_SALE, payload: { id } });
   };

@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import axios from 'axios'
 import API_KEY from "../../../constants/api.js";
 import { filterItems } from "../../../features/filterList";
+import { date } from "../../../features/date.js";
 
 export function HistorialVentasFilter({ setFilteredList }) {
 
   const [itemNameFilter, setItemNameFilter] = useState("todos");
   const [payMethodFilter, setPayMethodFilter] = useState("todos");
   const [deliveryFilter, setDeliveryFilter] = useState("todos");
-  const [dateFilter, setDateFilter] = useState("todos");
+  const [dateFilter, setDateFilter] = useState(date);
 
   const [saleHistory, setSaleHistory] = useState([])
   useEffect(() => {
@@ -41,10 +42,9 @@ export function HistorialVentasFilter({ setFilteredList }) {
     const filteredList = filterItems(saleHistory, {
       name: itemNameFilter,
       payMethod: payMethodFilter,
-      delivery: {name:deliveryFilter},
+      delivery: deliveryFilter,
       date: dateFilter,
     });
-    console.log(dateFilter)
     setFilteredList(filteredList);
   };
 
@@ -65,7 +65,7 @@ export function HistorialVentasFilter({ setFilteredList }) {
         >
           <option value="todos">todos</option>
           {payMethods.map((method, index) => (
-            <option key={index} value={method}>
+            <option key={index} value={method.payMethod}>
               {method.payMethod}
             </option>
           ))}
@@ -80,7 +80,7 @@ export function HistorialVentasFilter({ setFilteredList }) {
         >
           <option value="todos">todos</option>
           {delivery.map((option, index) => (
-            <option key={index} value={option}>
+            <option key={index} value={option.name}>
               {option.name}
             </option>
           ))}

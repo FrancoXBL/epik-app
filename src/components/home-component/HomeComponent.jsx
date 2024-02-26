@@ -83,7 +83,7 @@ export default function Home() {
               }}
             />
           ))}
-        </BigButtonContainer>
+        </BigButtonContainer>,
       ]);
     });
   }, []);
@@ -102,9 +102,6 @@ export default function Home() {
   }, [activeStep]);
   return (
     <div style={{ maxWidth: "1070px" }}>
-      <div>
-        <WaitingSales />
-      </div>
       <div className="grid__container">
         <div className="menu">
           <MenuContainer>
@@ -190,7 +187,7 @@ export default function Home() {
                     <button
                       onClick={() => {
                         toast.dismiss(t.id);
-                        dispatch({type:RESET_TICKET, payload: undefined})
+                        dispatch({ type: RESET_TICKET, payload: undefined });
                       }}
                       className="bg-white w-20 border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     >
@@ -209,17 +206,20 @@ export default function Home() {
         <div>
           <Button
             action={() => {
-              if(verifyInfoSale(ticket) === true){
+              if (verifyInfoSale(ticket) === true) {
                 dispatch({ type: ADD_WAITING_SALE, payload: undefined });
                 printTicket("forPrint");
               } else {
-                toast.error(verifyInfoSale(ticket))
+                toast.error(verifyInfoSale(ticket));
               }
             }}
             type={BUTTON_TYPES.confirm}
           />
         </div>
       </div>
+        <div className="flex h-56 gap-5 p-16px">
+            <WaitingSales />
+        </div>
     </div>
   );
 }
