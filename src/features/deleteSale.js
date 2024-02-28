@@ -1,10 +1,10 @@
-
+import axios from 'axios'
+import API_KEY from '../constants/api'
 export default function deleteSale(state, payload) {
-    const { listDailyItemSale } = state
 
     const { id } = payload
 
-    const newList  = listDailyItemSale.filter((i) => i.id !== id)
+    axios.delete(`${API_KEY}sales-history/${id}`).then((res) => {console.log(res.data)})
 
-    return { ...state, listDailyItemSale: newList}
+    return { ...state}
 }

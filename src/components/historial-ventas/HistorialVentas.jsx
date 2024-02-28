@@ -17,18 +17,20 @@ export default function HistorialVentas() {
 
 
   return (
-    <>
+    <div>
+    <div className="block w-full my-2 ">
       <HistorialVentasFilter setFilteredList={setFilteredList} />
+    </div>
       {
         sendFilteredList ? (
-          sendFilteredList.map((item) => (<HistorialCard saleCard={item} />))
+          sendFilteredList.map((item) => (<HistorialCard saleCard={item} setFilteredList={setFilteredList} />))
         ) : (
           <>
           <h1>Cargando ventas...</h1>
           </>
         )
       }
-    </>
+    </div>
   );
 
 }
