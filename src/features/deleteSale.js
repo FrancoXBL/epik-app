@@ -4,7 +4,7 @@ export default function deleteSale(state, payload) {
 
     const { id } = payload
 
-    axios.delete(`${API_KEY}sales-history/${id}`).then((res) => {console.log(res.data)})
+    axios.delete(`${API_KEY}sales-history/${id}`)
 
     return { ...state}
 }

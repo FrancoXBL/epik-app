@@ -16,8 +16,6 @@ import { TicketDivider } from "../TicketComponent";
 export function TicketBody({ listTicketProducts, isPrintTicket }) {
   const { dispatch } = useContext(AppContext);
 
-  console.log(listTicketProducts)
-
   function deleteIcon(condition, id){
     if (condition){
       return ''

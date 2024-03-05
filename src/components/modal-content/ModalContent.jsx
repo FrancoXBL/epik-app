@@ -10,7 +10,6 @@ import {
 import toast from "react-hot-toast";
 
 export default function ModalContent({ item, close }) {
-  console.log(item);
   const [sendItem, setSendItem] = useState({
     name: item.name,
     type: item.type,

@@ -24,7 +24,7 @@ function Modal({ children, isOpen, onClose }) {
 
   const modalContent = isOpen ? (
     <div className="fixed top-0 left-0 w-full h-full  flex items-center justify-center bg-black bg-opacity-30 m-1">
-      <div className="w-4/6 flex p-4 rounded shadow-lg overflow-auto max-h-full">
+      <div className="w-auto flex p-4 rounded shadow-lg overflow-auto max-h-full">
         {children}
       </div>
       <button

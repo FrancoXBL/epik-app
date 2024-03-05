@@ -1,8 +1,5 @@
 export function filterItems(list, itemFilter) {
 
-      console.log(itemFilter)
-      console.log(list)
-
     return list.filter(item => {
       // Verificar si los filtros no son "todos" y si el elemento coincide con los filtros seleccionados
       return (itemFilter.name === 'todos' || item.sale.ticket.client.name === itemFilter.name) &&

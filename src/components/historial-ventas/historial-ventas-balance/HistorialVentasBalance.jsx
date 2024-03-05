@@ -1,9 +1,16 @@
-import { useContext, useState } from "react";
-import { AppContext } from "../../../provider/AppProvider";
-export function HistorialVentasBalance(){
+import { useEffect, useState } from "react"
+import getDayInfo from "../../../features/getDayInfo"
 
-    const { listDailyItemSale } = useContext(AppContext)
+export function HistorialVentasBalance(list){
 
+    const [dayInfo, setDayInfo] = useState()
+
+    useEffect(() => {
+        setDayInfo(getDayInfo(list))
+    },[])
+    
+    console.log(dayInfo)
+    
     return(
         <>
         {/* Ingresos totales del dia: {total} */}
