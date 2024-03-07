@@ -49,6 +49,7 @@ export function InfoClient() {
             className={`${inputCss}`}
             name="clientnombre"
             type="text"
+            id="nombreCliente"
             placeholder="Nombre cliente"
           />
         </div>
@@ -63,6 +64,7 @@ export function InfoClient() {
             className={`${inputCss}`}
             name="direccion"
             type="text"
+            id="direccion"
             placeholder="Direccion"
           />
         </div>

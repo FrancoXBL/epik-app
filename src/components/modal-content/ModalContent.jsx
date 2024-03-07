@@ -17,28 +17,30 @@ export default function ModalContent({ item, close }) {
     isVeggie: false,
     price: 0,
     observations: "",
-    id: uuidv4()
+    id: uuidv4(),
   });
   const { dispatch } = useContext(AppContext);
 
   return (
-    <>
-      <div className="block m-6">
-        <BigButton title={item.name} />
+    <div className="w-[600px] h-auto">
+      <div className="p-24px bg-gray-2 rounded-lg">
+        <h1 className="text-4xl text-center">{item.name}</h1>
       </div>
-      <div className="flex gap-3 m-6">
-        <BigButton
-          title={"Carne"}
-          action={() => {
-            setSendItem({ ...sendItem, isVeggie: false });
-          }}
-        />
-        <BigButton
-          title={"Veggie"}
-          action={() => {
-            setSendItem({ ...sendItem, isVeggie: true });
-          }}
-        />
+      <div className="flex gap-3 mt-3 w-auto justify-around">
+          <button className="w-3/6 h-24 bg-gray-2 rounded-lg"
+            onClick={() => {
+              setSendItem({ ...sendItem, isVeggie: false });
+            }}
+          >
+            Carne
+          </button>
+          <button className="w-3/6 h-24 bg-gray-2 rounded-lg"
+            onClick={() => {
+              setSendItem({ ...sendItem, isVeggie: true });
+            }}
+          >
+            Veggie
+          </button>
       </div>
       <div className="flex gap-3 m-6">
         {item.specs.map((item) => (
@@ -54,24 +56,27 @@ export default function ModalContent({ item, close }) {
           />
         ))}
       </div>
-      <div className="flex m-6 gap-3 h-10  ">
-        <input
-          value={`${sendItem.type} ${sendItem.name} - ${sendItem.serving} $${sendItem.price} ${sendItem.observations} ${sendItem.isVeggie ? "Veggie" : ""}`}
-          className="border-2 border-black rounded-button  w-full px-16px"
+      <div className="flex m-6 gap-2 h-16">
+      <input
+          className="border-2 border-gray-2 rounded-lg px-16px text-lg w-full"
           type="text"
-          readOnly
-        />
-      </div>
-      <div className="flex m-6 gap-3 h-20 ">
-        <input
-          className="border-2 border-black rounded-button  w-5/6"
-          type="text"
+          placeholder="Escriba las anotaciones aqui"
           onChange={(e) => {
             setSendItem({ ...sendItem, observations: `(${e.target.value})` });
           }}
         />
+      </div>
+      <div className="flex m-6 gap-3 h-20 ">
+      <input
+          value={`${sendItem.type} ${sendItem.name} - ${sendItem.serving} $${
+            sendItem.price
+          } ${sendItem.observations} ${sendItem.isVeggie ? "Veggie" : ""}`}
+          className="border-2 border-gray-2 rounded-lg w-5/6 px-16px text-lg"
+          type="text"
+          readOnly
+        />
         <button
-          className="bg-bg-200 h-20 w-20 rounded-button"
+          className="bg-confirm-normal hover:bg-confirm-hover h-20 w-20 rounded-button"
           onClick={() => {
             if (sendItem.price === 0) {
               toast.error("Indique la forma en la que se sirve el producto");
@@ -98,6 +103,6 @@ export default function ModalContent({ item, close }) {
           ➜
         </button>
       </div>
-    </>
+    </div>
   );
 }

@@ -2,12 +2,7 @@ import "./tiketHeader.css";
 import { useState, useEffect, useContext } from "react";
 import { AppContext } from "../../../provider/AppProvider";
 import { useBlinkEffect } from "../../../hooks/useBlinkEffect";
-import axios from 'axios'
-import API_KEY from "../../../constants/api";
 
-/**
- * Show the header of the ticket with the user data
- */
 const setDate = () => {
   const date = new Date();
   return `${date.getDate()}/${
@@ -17,16 +12,8 @@ const setDate = () => {
 
 export function TiketHeader() {
 
-    ///////////// PAYMETHODS ///////////
-    const [orderNumber, setOrderNumber] = useState([]);
-    useEffect(() => {
-      axios.get(`${API_KEY}sales-history`).then((res) => {
-        setOrderNumber(res.data.length);
-      });
-    });
-
   const {
-    ticket: { client },
+    ticket: { client, orderNumber },
   } = useContext(AppContext);
   const isNameBlinking = useBlinkEffect([client.name]);
   const isAddressBlinking = useBlinkEffect([

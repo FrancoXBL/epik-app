@@ -13,7 +13,7 @@ export function NavBar() {
     setActive(index);
   };
   return (
-    <div className="wrapper--vertical ">
+    <div className="fixed left-0 top-1/4 wrapper--vertical ">
       <div className="flex h-full justify-between ">
         <div className="flex h-full flex-col justify-between p-[6px]">
           <div className="flex flex-col gap-[10px]">

@@ -5,8 +5,6 @@ import { useState, useEffect } from "react";
 import WaitingSales from "../waiting-sales/WaitingSales";
 import { AppContext } from "../../provider/AppProvider";
 import {
-  ADD_LISTITEM_TICKET_PRODUCT,
-  ADD_LISTITEM_TICKET_EXTRAS,
   RESET_TICKET,
   SET_IS_TAKE_OUT,
   ADD_WAITING_SALE,
@@ -33,7 +31,7 @@ import verifyInfoSale from "../../features/verifyInfoSale";
 // import fetchData from '../../api/fetchData.js'
 
 export default function Home() {
-  const { dispatch, ticket } = useContext(AppContext);
+  const { dispatch, ticket, waitingSales } = useContext(AppContext);
   const { activeStep, handleNext, handleBack } = useStepper(0);
   const [openCollapsible, setOpenCollapsible] = useState(null);
   const [selectedItem, setSelectedItem] = useState();
@@ -101,7 +99,7 @@ export default function Home() {
     setOpenCollapsible(0);
   }, [activeStep]);
   return (
-    <div style={{ maxWidth: "1070px" }}>
+    <div className="fixed top-1/4 left-36" style={{ maxWidth: "1070px" }}>
       <div className="grid__container">
         <div className="menu">
           <MenuContainer>
@@ -146,12 +144,14 @@ export default function Home() {
                     isOpen={isFoodComposerOpen}
                     onClose={handleFoodComposerClose}
                   >
+                    <div>
                     <MenuContainer>
                       <ModalContent
                         close={setIsFoodComposerOpen}
                         item={selectedItem}
                       ></ModalContent>
                     </MenuContainer>
+                    </div>
                   </Modal>
                 </MenuContainer>
               </StepperMenu>

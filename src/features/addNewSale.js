@@ -44,6 +44,7 @@ export default function addNewSale(state, {payMethod, delivery, id, date}) {
     ticket.listProducts = [];
     ticket.listExtras = [];
     ticket.client = { name: "", address: { street: "", number: "" } };
+    ticket.orderNumber = Math.floor(Math.random() * 9000) + 1000,
     toast.success("Venta realizada con éxito", {
       icon: "👏",
     });

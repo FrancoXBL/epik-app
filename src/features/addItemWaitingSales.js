@@ -16,6 +16,7 @@ export default function addItemWaitingSales(state, payload) {
       isTakeOut: false,
       listProducts: [],
       listExtras: [],
+      orderNumber: Math.floor(Math.random() * 9000) + 1000,
     },
     waitingSales,
   };
