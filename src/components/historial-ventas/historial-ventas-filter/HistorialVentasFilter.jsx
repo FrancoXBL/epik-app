@@ -48,16 +48,19 @@ export function HistorialVentasFilter({ setFilteredList }) {
 
   return (
     <MenuContainer>
-      <div className="flex">
-        <label htmlFor="itemName">Nombre</label>
+      <div className="flex gap-3 justify-between items-center">
         <input
+          className="p-16px text-lg border-gray-2"
+          placeholder="Nombre"
           type="text"
           id="itemName"
           onChange={(e) => setItemNameFilter(e.target.value)}
         />
 
-        <div>
-          <label htmlFor="payMethod">Método de Pago:</label>
+        <div className="flex gap-3 items-center">
+          <label 
+          className="flex"
+          htmlFor="payMethod">Método de Pago:</label>
           <select
             id="payMethod"
             onChange={(e) => setPayMethodFilter(e.target.value)}
@@ -71,7 +74,7 @@ export function HistorialVentasFilter({ setFilteredList }) {
           </select>
         </div>
 
-        <div>
+        <div className="flex gap-3 items-center">
           <label htmlFor="delivery">Delivery: </label>
           <select
             id="delivery"
@@ -86,7 +89,7 @@ export function HistorialVentasFilter({ setFilteredList }) {
           </select>
         </div>
 
-        <div>
+        <div className="flex gap-3 items-center">
           <label htmlFor="date">Fecha:</label>
           <input
             onChange={(e) => setDateFilter(e.target.value)}
@@ -95,7 +98,10 @@ export function HistorialVentasFilter({ setFilteredList }) {
           />
         </div>
         <div>
-          <button className="p-16px rounded-lg hover:bg-epikYellow" onClick={handleFilter}>
+          <button
+            className="p-16px rounded-lg bg-confirm-normal hover:bg-confirm-hover"
+            onClick={handleFilter}
+          >
             Filtrar
           </button>
         </div>

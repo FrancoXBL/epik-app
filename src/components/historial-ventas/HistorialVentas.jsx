@@ -20,10 +20,11 @@ export default function HistorialVentas() {
   }, [change]);
 
   return (
-    <div>
-      <div className="block w-full my-2 ">
+    <div className="fixed top-1/4 left-36 w-[1070px]">
+      <div className="block w-full my-2">
         <HistorialVentasFilter setFilteredList={setFilteredList} />
       </div>
+      <div>
       {sendFilteredList ? (
         sendFilteredList.map((item) => (
           <HistorialCard saleCard={item} setChange={setChange} change={change}  />
@@ -33,6 +34,7 @@ export default function HistorialVentas() {
           <h1>Cargando ventas...</h1>
         </>
       )}
+      </div>
             {completeList ? (
           <HistorialVentasBalance list={completeList} />
       ) : (
