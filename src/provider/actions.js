@@ -16,6 +16,7 @@ export const SET_IS_TAKE_OUT = "SET_IS_TAKE_OUT";
 export const ADD_WAITING_SALE = "ADD_WAITING_SALE"
 export const RESET_TICKET = "RESET_TICKET"
 export const DELETE_WAITING_SALE = "DELETE_WAITING_SALE"
+export const END_SALE = 'END_SALE'
 
 import deleteProduct from "../features/deleteProduct.js";
 import deleteExtra from "../features/deleteExtra.js";
@@ -35,8 +36,10 @@ import setIsTakeOut from "../features/setIsTakeOut.js";
 import addItemWaitingSales from "../features/addItemWaitingSales.js";
 import resetTicket from "../features/resetTicket.js";
 import deleteWaitingSale from "../features/deleteWaitingSale.js";
+import endSale from "../features/endSale.js";
 
 const actions = {
+  END_SALE: endSale,
   DELETE_WAITING_SALE: deleteWaitingSale,
   RESET_TICKET: resetTicket,
   ADD_WAITING_SALE: addItemWaitingSales,

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import API_KEY from "../../constants/api";
 import { AppContext } from "../../provider/AppProvider";
-import { DELETE_WAITING_SALE } from "../../provider/actions";
+import { DELETE_WAITING_SALE, END_SALE } from "../../provider/actions";
 import toast from "react-hot-toast";
 import { date as DateString } from "../../features/date";
 
@@ -10,15 +10,11 @@ import { date as DateString } from "../../features/date";
 export default function WaitingSalesCard({ sale }) {
   const { dispatch } = useContext(AppContext);
 
-  const [firstDelivery, setFirstDelivery] = useState('')
-  const [firstPayMethod, setFirstPayMethod] = useState('')
-
   const [deliverys, setDeliverys] = useState([]);
 
   useEffect(() => {
     axios.get(`${API_KEY}deliverys`).then((res) => {
       setDeliverys(res.data);
-      setFirstDelivery(res.data[0].name)
     });
   }, []);
 
@@ -28,20 +24,29 @@ export default function WaitingSalesCard({ sale }) {
   useEffect(() => {
     axios.get(`${API_KEY}paymethods`).then((res) => {
       setPayMethods(res.data);
-      setFirstPayMethod(res.data[0].payMethod)
     });
   }, []);
 
+
   const [sendItem, setSendItem] = useState({
     sale,
-    delivery: firstDelivery,
-    payMethods: firstPayMethod,
+    delivery: '',
+    payMethod: '',
     date: DateString(),
   });
 
-  const handleConfirm = () => {
-    axios.post(`${API_KEY}sales-history`, sendItem);
-  };
+  function verifyData(){
+    if(sendItem.delivery === ''){
+      toast.error("Seleccione el cadete que se encarga del envio")
+      return false
+    }
+    if(sendItem.payMethod === ''){
+      toast.error("Seleccione el metodo en el que se efectua le pago")
+      return false
+    }
+
+    return true
+  }
 
   const handleDeleteSale = () => {
     dispatch({ type: DELETE_WAITING_SALE, payload: sale.id });
@@ -57,12 +62,13 @@ export default function WaitingSalesCard({ sale }) {
           <p>Total: ${sale.ticket.total}</p>
         </div>
         <select
-          id="payMethod"
+          placeholder="Metodo de pago"
           onChange={(e) =>
             setSendItem({ ...sendItem, payMethod: e.target.value })
           }
           className="text-sm py-0.5 px-1 w-20 h-10 bg-gray-50 border border-gray-300 rounded shadow-sm min-w-full"
         >
+          <option hidden selected>Metodo de pago</option>
           {payMethods.map((method, index) => (
             <option key={index} value={method.payMethod}>
               {method.payMethod}
@@ -70,12 +76,13 @@ export default function WaitingSalesCard({ sale }) {
           ))}
         </select>
         <select
-          id="delivery"
+          placeholder="Cadete"
           onChange={(e) =>
             setSendItem({ ...sendItem, delivery: e.target.value })
           }
           className="text-sm py-0.5 px-1 w-20 h-10 bg-gray-50 border border-gray-300 rounded shadow-sm mt-2 min-w-full"
         >
+          <option hidden selected>Cadete</option>
           {deliverys.map((delivery, index) => (
             <option key={index} value={delivery.name}>
               {delivery.name}
@@ -83,7 +90,6 @@ export default function WaitingSalesCard({ sale }) {
           ))}
         </select>
       </div>
-      {/* Grupo de la izquierda: Botones */}
       <div className="flex flex-col gap-3 justify-around">
         <button
           onClick={() => {
@@ -121,9 +127,10 @@ export default function WaitingSalesCard({ sale }) {
         </button>
         <button
           onClick={() => {
-            handleConfirm();
-            handleDeleteSale();
-            toast.success("Venta completada!");
+            if(verifyData()){
+              dispatch({type:END_SALE, payload: sendItem})
+              toast.success("Venta completada!");
+            }
           }}
           className="h-20 w-20 bg-epikYellow rounded-md"
         >

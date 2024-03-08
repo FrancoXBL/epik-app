@@ -27,6 +27,7 @@ export default function ModalContentDeleteSale({
           onClick={() => {
             handleDeleteClick(saleCard._id);
             setChange(change + 1);
+            close(false);
           }}
           className="p-24px text-xl text-white bg-delete-normal hover:bg-delete-hover focus:outline-none rounded-lg transition duration-150 ease-in-out"
         >

@@ -48,7 +48,7 @@ export function HistorialVentasFilter({ setFilteredList }) {
 
   return (
     <MenuContainer>
-      <div className="flex gap-3 justify-between items-center">
+      <div className="flex gap-3 justify-between items-center text-lg">
         <input
           className="p-16px text-lg border-gray-2"
           placeholder="Nombre"

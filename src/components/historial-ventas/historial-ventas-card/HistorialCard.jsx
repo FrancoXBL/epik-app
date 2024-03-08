@@ -4,6 +4,7 @@ import MenuContainer from "../../menu-container/MenuContainer";
 import ModalContentDeleteSale from "../../modal/ModalContentDeleteSale";
 export function HistorialCard({ saleCard, change, setChange }) {
 
+  console.log(saleCard)
   const [isFoodComposerOpen, setIsFoodComposerOpen] = useState(false);
 
   const handleFoodComposerClose = () => {
@@ -11,27 +12,39 @@ export function HistorialCard({ saleCard, change, setChange }) {
   };
 
   return (
-    <>
+    <div className="my-3">
       <MenuContainer>
-        <div>
-          <span>
-            {saleCard.sale.ticket.client.name} -{" "}
-            {saleCard.sale.ticket.client.address.street}{" "}
-            {saleCard.sale.ticket.client.address.number}, $
+        <div className="flex gap-9 text-base justify-between">
+            <div>
+            Nombre: {saleCard.sale.ticket.client.name}
+            </div>
+            <div>
+            Direccion: {saleCard.sale.ticket.client.address.street}
+            </div>
+            <div>
+            Monto: $
             {saleCard.sale.ticket.total}
-          </span>
-          <span>{saleCard.payMethod}</span>
+            </div>
+            <div>
+           Metodo de pago: {saleCard.payMethod}
+            </div>
+            <div>
+           Cadete: {saleCard.delivery}
+            </div>
+            <div>
+           Pedido #: {saleCard.sale.ticket.orderNumber}
+            </div>
           <button onClick={() => {
             setIsFoodComposerOpen(true)
           }}>❌</button>
+          </div>
           <Modal
             isOpen={isFoodComposerOpen}
             onClose={handleFoodComposerClose}
           >
             <ModalContentDeleteSale close={setIsFoodComposerOpen} saleCard={saleCard} change={change} setChange={setChange} />
           </Modal>
-        </div>
       </MenuContainer>
-    </>
+    </div>
   );
 }

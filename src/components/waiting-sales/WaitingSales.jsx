@@ -4,7 +4,9 @@ import WaitingSalesCard from "../waiting-sales-card/WaitingSalesCard";
 export default function WaitingSales() {
 
   const { waitingSales } = useContext(AppContext);
-
+  
+  console.log(waitingSales)
+  
   return (
     <div className="flex h-full gap-3 w-full">
       {waitingSales.map((sale) => (

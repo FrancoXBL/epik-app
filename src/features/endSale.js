@@ -1,7 +1,18 @@
-export default function deleteWaitingSale(state, payload){
+import axios from 'axios'
+import API_KEY from '../constants/api'
+export default function endSale(state, payload){
+    
     const { waitingSales } = state
+    console.log(waitingSales)
+    console.log(payload)
 
-    const newList = waitingSales.filter((sale) => sale.id !== payload )
+    waitingSales.map((sale) => {
+        if(sale.id === payload.sale.id){
+            axios.post(`${API_KEY}sales-history`, payload);
+        }
+    })
+
+    const newList = waitingSales.filter((sale) => sale.id !== payload.sale.id )
 
     return {
         ticket: {
@@ -18,4 +29,5 @@ export default function deleteWaitingSale(state, payload){
         },
         waitingSales: newList,
       };
+
 }
