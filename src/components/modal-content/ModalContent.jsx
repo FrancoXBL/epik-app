@@ -1,4 +1,4 @@
-import BigButton from "../big-button/BigButton";
+import BigButtonServing from "../big-button/big-button-serving/BigButtonServin";
 import { AppContext } from "../../provider/AppProvider";
 import { useContext, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -23,18 +23,18 @@ export default function ModalContent({ item, close }) {
 
   return (
     <div className="w-[600px] h-auto">
-      <div className="p-24px bg-gray-2 rounded-lg">
+      <div className="p-24px bg-gray-1 rounded-lg">
         <h1 className="text-4xl text-center">{item.name}</h1>
       </div>
       <div className="flex gap-3 mt-3 w-auto justify-around">
-          <button className="w-3/6 h-24 bg-gray-2 rounded-lg"
+          <button className="text-white text-3xl w-3/6 h-24 bg-delete-hover rounded-lg"
             onClick={() => {
               setSendItem({ ...sendItem, isVeggie: false });
             }}
           >
             Carne
           </button>
-          <button className="w-3/6 h-24 bg-gray-2 rounded-lg"
+          <button className="text-white text-3xl w-3/6 h-24 bg-green-main rounded-lg"
             onClick={() => {
               setSendItem({ ...sendItem, isVeggie: true });
             }}
@@ -44,8 +44,10 @@ export default function ModalContent({ item, close }) {
       </div>
       <div className="flex gap-3 m-6">
         {item.specs.map((item) => (
-          <BigButton
-            title={`${item.serving}  $${item.price}`}
+          
+          <BigButtonServing
+            name={`${item.serving.charAt(0).toUpperCase() + item.serving.slice(1)}`}
+            price={`$${item.price}`}
             action={() => {
               setSendItem({
                 ...sendItem,

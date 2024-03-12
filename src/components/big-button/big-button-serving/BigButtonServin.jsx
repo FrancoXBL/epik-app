@@ -1,6 +1,6 @@
 import React from "react";
 
-function BigButton({ action, icon, title }) {
+function BigButtonServing({ action, icon, name, price }) {
   return (
     <button
       onClick={action}
@@ -13,9 +13,10 @@ function BigButton({ action, icon, title }) {
       ) : (
         ""
       )}
-      <div className="mt-2 text-2xl">{title}</div>
+      <div className="mt-2 text-2xl">{name}</div>
+      <div className="text-green-main mt-2 text-3xl">{price}</div>
     </button>
   );
 }
 
-export default BigButton;
+export default BigButtonServing;

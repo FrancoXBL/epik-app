@@ -36,6 +36,9 @@ module.exports = {
         hover: "#FF4F4F",
         icon: "#FFFFFF",
       },
+      green:{
+        main: "#28b761",
+      },
       primary: {
         100: "#FF5733",
         200: "#ff8a5f",

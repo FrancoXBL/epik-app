@@ -5,6 +5,7 @@ import { AppContext } from "../../provider/AppProvider";
 import { DELETE_WAITING_SALE, END_SALE } from "../../provider/actions";
 import toast from "react-hot-toast";
 import { date as DateString } from "../../features/date";
+import { ImCross } from "react-icons/im";
 
 
 export default function WaitingSalesCard({ sale }) {
@@ -115,7 +116,7 @@ export default function WaitingSalesCard({ sale }) {
                     }}
                     className="bg-white w-20 border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   >
-                    ❌
+                    <ImCross />
                   </button>
                 </div>
               </div>
@@ -123,7 +124,6 @@ export default function WaitingSalesCard({ sale }) {
           }}
           className="h-20 w-20 bg-delete-normal rounded-md"
         >
-          
         </button>
         <button
           onClick={() => {
@@ -132,7 +132,7 @@ export default function WaitingSalesCard({ sale }) {
               toast.success("Venta completada!");
             }
           }}
-          className="h-20 w-20 bg-epikYellow rounded-md"
+          className="h-20 w-20 bg-green-main rounded-md"
         >
           
         </button>
