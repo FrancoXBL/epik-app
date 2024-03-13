@@ -5,13 +5,11 @@ export function useStepper(initialStep = 0) {
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    console.log(activeStep);
   };
 
   const handleBack = () => {
     if (activeStep === 0) return;
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    console.log(activeStep);
   };
 
   return { activeStep, handleNext, handleBack };

@@ -118,6 +118,16 @@ export default function Home() {
                       action={() => setIsTakeOut(false)}
                     />
                     <BigButton
+                      title="Retira"
+                      icon={Local}
+                      action={() => setIsTakeOut(false)}
+                    />
+                    <BigButton
+                      title="Envio"
+                      icon={TakeAway}
+                      action={() => setIsTakeOut(true)}
+                    />
+                    <BigButton
                       title="Para llevar"
                       icon={TakeAway}
                       action={() => setIsTakeOut(true)}
@@ -145,12 +155,12 @@ export default function Home() {
                     onClose={handleFoodComposerClose}
                   >
                     <div>
-                    <MenuContainer>
-                      <ModalContent
-                        close={setIsFoodComposerOpen}
-                        item={selectedItem}
-                      ></ModalContent>
-                    </MenuContainer>
+                      <MenuContainer>
+                        <ModalContent
+                          close={setIsFoodComposerOpen}
+                          item={selectedItem}
+                        ></ModalContent>
+                      </MenuContainer>
                     </div>
                   </Modal>
                 </MenuContainer>
@@ -161,7 +171,10 @@ export default function Home() {
         <div className="back">
           <Button
             disabled={activeStep === 0}
-            action={handleBack}
+            action={() => {
+              handleBack();
+              dispatch({ type: SET_IS_TAKE_OUT, payload: undefined });
+            }}
             type={BUTTON_TYPES.secondary}
           />
         </div>
@@ -188,6 +201,7 @@ export default function Home() {
                       onClick={() => {
                         toast.dismiss(t.id);
                         dispatch({ type: RESET_TICKET, payload: undefined });
+                        handleBack()
                       }}
                       className="bg-white w-20 border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     >
@@ -208,6 +222,7 @@ export default function Home() {
             action={() => {
               if (verifyInfoSale(ticket) === true) {
                 dispatch({ type: ADD_WAITING_SALE, payload: undefined });
+                handleBack()
                 printTicket("forPrint");
               } else {
                 toast.error(verifyInfoSale(ticket));
@@ -217,9 +232,9 @@ export default function Home() {
           />
         </div>
       </div>
-        <div className="flex h-56 gap-5 p-16px">
-            <WaitingSales />
-        </div>
+      <div className="flex h-56 gap-5 p-16px">
+        <WaitingSales />
+      </div>
     </div>
   );
 }

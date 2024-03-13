@@ -48,7 +48,7 @@ export function TiketHeader() {
         } `}
       >
         {client.address.street} {client.address.number}
-        {client.address.street || client.address.number ? "🏠" : "CALLE"}
+        {client.address.street || client.address.number ? "🏠" : ""}
       </span>
       <br />
     </div>

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useStepper } from "react";
 import axios from "axios";
 import API_KEY from "../../constants/api";
 import { AppContext } from "../../provider/AppProvider";
@@ -7,9 +7,8 @@ import toast from "react-hot-toast";
 import { date as DateString } from "../../features/date";
 import { ImCross } from "react-icons/im";
 
-
 export default function WaitingSalesCard({ sale }) {
-  const { dispatch } = useContext(AppContext);
+  const { dispatch, ticket } = useContext(AppContext);
 
   const [deliverys, setDeliverys] = useState([]);
 
@@ -19,7 +18,6 @@ export default function WaitingSalesCard({ sale }) {
     });
   }, []);
 
-
   ///////////// PAYMETHODS ///////////
   const [payMethods, setPayMethods] = useState([]);
   useEffect(() => {
@@ -28,37 +26,58 @@ export default function WaitingSalesCard({ sale }) {
     });
   }, []);
 
-
   const [sendItem, setSendItem] = useState({
     sale,
-    delivery: '',
-    payMethod: '',
+    delivery: "",
+    payMethod: "",
     date: DateString(),
   });
 
-  function verifyData(){
-    if(sendItem.delivery === ''){
-      toast.error("Seleccione el cadete que se encarga del envio")
-      return false
+  function verifyData() {
+    if (sendItem.delivery === "" && ticket.isTakeOut) {
+      toast.error("Seleccione el cadete que se encarga del envio");
+      return false;
     }
-    if(sendItem.payMethod === ''){
-      toast.error("Seleccione el metodo en el que se efectua le pago")
-      return false
+    if (sendItem.payMethod === "") {
+      toast.error("Seleccione el metodo en el que se efectua le pago");
+      return false;
     }
 
-    return true
+    return true;
   }
 
   const handleDeleteSale = () => {
     dispatch({ type: DELETE_WAITING_SALE, payload: sale.id });
   };
 
+  function printIsTakeOut(condition) {
+    if(condition === true){
+      return (
+       <select
+         placeholder="Cadete"
+         onChange={(e) => setSendItem({ ...sendItem, delivery: e.target.value })}
+         className="text-sm py-0.5 px-1 w-20 h-10 bg-gray-50 border border-gray-300 rounded shadow-sm mt-2 min-w-full"
+       >
+         <option hidden selected>
+           Cadete
+         </option>
+         {deliverys.map((delivery, index) => (
+           <option key={index} value={delivery.name}>
+             {delivery.name}
+           </option>
+         ))}
+       </select>
+     ) 
+    }
+  }
+
   return (
     <div className="flex gap-6 p-16px bg-white rounded-md">
       <div className="">
         <div className="mb-4">
           <p className="font-bold">
-            {sale.ticket.client.name} {sale.ticket.client.address.name} #{sale.ticket.orderNumber}
+            {sale.ticket.client.name} {sale.ticket.client.address.name} #
+            {sale.ticket.orderNumber}
           </p>
           <p>Total: ${sale.ticket.total}</p>
         </div>
@@ -69,27 +88,16 @@ export default function WaitingSalesCard({ sale }) {
           }
           className="text-sm py-0.5 px-1 w-20 h-10 bg-gray-50 border border-gray-300 rounded shadow-sm min-w-full"
         >
-          <option hidden selected>Metodo de pago</option>
+          <option hidden selected>
+            Metodo de pago
+          </option>
           {payMethods.map((method, index) => (
             <option key={index} value={method.payMethod}>
               {method.payMethod}
             </option>
           ))}
         </select>
-        <select
-          placeholder="Cadete"
-          onChange={(e) =>
-            setSendItem({ ...sendItem, delivery: e.target.value })
-          }
-          className="text-sm py-0.5 px-1 w-20 h-10 bg-gray-50 border border-gray-300 rounded shadow-sm mt-2 min-w-full"
-        >
-          <option hidden selected>Cadete</option>
-          {deliverys.map((delivery, index) => (
-            <option key={index} value={delivery.name}>
-              {delivery.name}
-            </option>
-          ))}
-        </select>
+        { printIsTakeOut(sale.ticket.isTakeOut) }
       </div>
       <div className="flex flex-col gap-3 justify-around">
         <button
@@ -104,7 +112,8 @@ export default function WaitingSalesCard({ sale }) {
                   <div className="flex p-24px items-start">
                     <div className="ml-3 flex-1">
                       <p className="text-lg font-bold text-white text-gray-900">
-                        Por favor confirme que quiere eliminar el pedido en espera
+                        Por favor confirme que quiere eliminar el pedido en
+                        espera
                       </p>
                     </div>
                   </div>
@@ -112,7 +121,7 @@ export default function WaitingSalesCard({ sale }) {
                 <div className="flex border-l">
                   <button
                     onClick={() => {
-                      handleDeleteSale()
+                      handleDeleteSale();
                     }}
                     className="bg-white w-20 border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   >
@@ -123,19 +132,16 @@ export default function WaitingSalesCard({ sale }) {
             ));
           }}
           className="h-20 w-20 bg-delete-normal rounded-md"
-        >
-        </button>
+        ></button>
         <button
           onClick={() => {
-            if(verifyData()){
-              dispatch({type:END_SALE, payload: sendItem})
+            if (verifyData()) {
+              dispatch({ type: END_SALE, payload: sendItem });
               toast.success("Venta completada!");
             }
           }}
           className="h-20 w-20 bg-green-main rounded-md"
-        >
-          
-        </button>
+        ></button>
       </div>
     </div>
   );

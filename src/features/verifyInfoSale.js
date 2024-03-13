@@ -7,7 +7,7 @@ export default function verifyInfoSale(ticket){
   }
   
   // Verifica si la dirección (calle) contiene solo letras
-  if (!/^[A-Za-z0-9\s]+$/.test(ticket.client.address.street)) {
+  if (!/^[A-Za-z0-9\s]+$/.test(ticket.client.address.street) && ticket.isTakeOut === true) {
     return "La direccion completa del pedido es obligatoria.";
   }
   

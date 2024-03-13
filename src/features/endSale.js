@@ -22,7 +22,7 @@ export default function endSale(state, payload){
             address: { street: "", number: "" },
           },
           deliveryCost: 0,
-          isTakeOut: false,
+          isTakeOut: undefined,
           listProducts: [],
           listExtras: [],
           orderNumber: Math.floor(Math.random() * 9000) + 1000,

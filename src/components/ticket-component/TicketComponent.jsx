@@ -6,7 +6,6 @@ import { TicketBody } from "./ticketBody/TicketBody";
 import { TicketExtra } from "./ticketExtra/TicketExtra";
 import { useContext } from "react";
 import { AppContext } from "../../provider/AppProvider";
-import { EndSaleButton } from "../endSaleComponent/EndSaleButtom";
 import TicketInferior from "../../assets/ticket_inferior.svg?react";
 import TicketSuperior from "../../assets/ticket_superior.svg?react";
 
