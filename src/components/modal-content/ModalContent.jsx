@@ -27,14 +27,14 @@ export default function ModalContent({ item, close }) {
         <h1 className="text-4xl text-center">{item.name}</h1>
       </div>
       <div className="flex gap-3 mt-3 w-auto justify-around">
-          <button className="text-white text-3xl w-3/6 h-24 bg-delete-hover rounded-lg"
+          <button className={sendItem.isVeggie === false ? "text-white text-3xl w-3/6 h-24 bg-delete-hover rounded-lg" : "text-white text-3xl w-3/6 h-24 bg-gray-2 rounded-lg"}
             onClick={() => {
               setSendItem({ ...sendItem, isVeggie: false });
             }}
           >
             Carne
           </button>
-          <button className="text-white text-3xl w-3/6 h-24 bg-green-main rounded-lg"
+          <button className={sendItem.isVeggie === true ? "text-white text-3xl w-3/6 h-24 bg-green-main rounded-lg" : "text-white text-3xl w-3/6 h-24 bg-gray-2 rounded-lg"}
             onClick={() => {
               setSendItem({ ...sendItem, isVeggie: true });
             }}

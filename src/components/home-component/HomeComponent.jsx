@@ -118,17 +118,7 @@ export default function Home() {
                       action={() => setIsTakeOut(false)}
                     />
                     <BigButton
-                      title="Retira"
-                      icon={Local}
-                      action={() => setIsTakeOut(false)}
-                    />
-                    <BigButton
                       title="Envio"
-                      icon={TakeAway}
-                      action={() => setIsTakeOut(true)}
-                    />
-                    <BigButton
-                      title="Para llevar"
                       icon={TakeAway}
                       action={() => setIsTakeOut(true)}
                     />

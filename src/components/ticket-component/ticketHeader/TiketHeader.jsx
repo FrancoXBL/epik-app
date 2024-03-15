@@ -13,7 +13,7 @@ const setDate = () => {
 export function TiketHeader() {
 
   const {
-    ticket: { client, orderNumber },
+    ticket: { client, orderNumber, isTakeOut },
   } = useContext(AppContext);
   const isNameBlinking = useBlinkEffect([client.name]);
   const isAddressBlinking = useBlinkEffect([
@@ -47,8 +47,8 @@ export function TiketHeader() {
           isAddressBlinking ? "fade" : ""
         } `}
       >
-        {client.address.street} {client.address.number}
-        {client.address.street || client.address.number ? "🏠" : ""}
+        {client.address.number}
+        {isTakeOut === true ? client.address.street : "LOCAL"}
       </span>
       <br />
     </div>
