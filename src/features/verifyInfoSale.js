@@ -11,10 +11,6 @@ export default function verifyInfoSale(ticket){
     return "La direccion completa del pedido es obligatoria.";
   }
   
-  // Si isTakeOut es verdadero, verifica que el costo de entrega sea mayor que 0
-  if (ticket.isTakeOut && ticket.deliveryCost <= 0) {
-    return "Indique el monto del envio.";
-  }
   
   // Verifica que al menos una de las listas tenga al menos un elemsto
   if (ticket.listProducts.length === 0 && ticket.listExtras.length === 0) {

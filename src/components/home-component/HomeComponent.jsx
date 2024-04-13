@@ -27,19 +27,24 @@ import Modal from "../modal/Modal";
 import ModalContent from "../modal-content/ModalContent";
 import toast from "react-hot-toast";
 import verifyInfoSale from "../../features/verifyInfoSale";
+import ModalContentNotDeliveryCost from "../modal/ModalContentNotDeliveryCost";
+
 
 // import fetchData from '../../api/fetchData.js'
 
 export default function Home() {
   const { dispatch, ticket, waitingSales } = useContext(AppContext);
+  console.log(ticket)
   const { activeStep, handleNext, handleBack } = useStepper(0);
   const [openCollapsible, setOpenCollapsible] = useState(null);
   const [selectedItem, setSelectedItem] = useState();
   const [isFoodComposerOpen, setIsFoodComposerOpen] = useState(false);
+  const [isNotDeliveryCostComposerOpen, setIsNotDeliveryCostComposerOpen] = useState(false);
 
   const handleFoodComposerClose = () => {
     setIsFoodComposerOpen(false);
   };
+  
 
   /////////////////////////// FETCH DATA ///////////////////////////////////
   const [list, setList] = useState([]);
@@ -100,6 +105,9 @@ export default function Home() {
   }, [activeStep]);
   return (
     <div className="fixed top-1/4 left-36" style={{ maxWidth: "1070px" }}>
+      <Modal isOpen={isNotDeliveryCostComposerOpen}>
+        <ModalContentNotDeliveryCost close={setIsNotDeliveryCostComposerOpen} back={handleBack} print={printTicket} ticket/>
+      </Modal>
       <div className="grid__container">
         <div className="menu">
           <MenuContainer>
@@ -210,7 +218,10 @@ export default function Home() {
         <div>
           <Button
             action={() => {
-              if (verifyInfoSale(ticket) === true) {
+              if(ticket.isTakeOut && ticket.deliveryCost == 0 && verifyInfoSale(ticket) === true){
+                setIsNotDeliveryCostComposerOpen(true)
+              } 
+              else if (verifyInfoSale(ticket) === true) {
                 dispatch({ type: ADD_WAITING_SALE, payload: undefined });
                 handleBack()
                 printTicket("forPrint");

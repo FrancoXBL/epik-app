@@ -8,9 +8,11 @@ import { date as DateString } from "../../features/date";
 import { ImCross } from "react-icons/im";
 
 export default function WaitingSalesCard({ sale }) {
-  const { dispatch, ticket } = useContext(AppContext);
+  const { dispatch } = useContext(AppContext);
 
   const [deliverys, setDeliverys] = useState([]);
+
+  console.log("SOY SALE",sale)
 
   useEffect(() => {
     axios.get(`${API_KEY}deliverys`).then((res) => {
@@ -33,8 +35,15 @@ export default function WaitingSalesCard({ sale }) {
     date: DateString(),
   });
 
-  function verifyData() {
-    if (sendItem.delivery === "" && ticket.isTakeOut) {
+
+
+  function verifyData(sendItem) {
+
+    if (sendItem.sale.ticket.isTakeOut && sendItem.delivery === "") {
+      toast.error("Seleccione el cadete que se encarga del envio");
+      return false;
+    }
+    if (!sendItem.sale.ticket.isTakeOut && sendItem.delivery === "") {
       toast.error("Seleccione el cadete que se encarga del envio");
       return false;
     }
@@ -135,7 +144,7 @@ export default function WaitingSalesCard({ sale }) {
         ></button>
         <button
           onClick={() => {
-            if (verifyData()) {
+            if (verifyData(sendItem)) {
               dispatch({ type: END_SALE, payload: sendItem });
               toast.success("Venta completada!");
             }

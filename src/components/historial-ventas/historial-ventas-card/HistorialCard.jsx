@@ -3,7 +3,6 @@ import Modal from "../../modal/Modal";
 import MenuContainer from "../../menu-container/MenuContainer";
 import ModalContentDeleteSale from "../../modal/ModalContentDeleteSale";
 export function HistorialCard({ saleCard, change, setChange }) {
-  console.log(saleCard);
   const [isFoodComposerOpen, setIsFoodComposerOpen] = useState(false);
 
   const handleFoodComposerClose = () => {

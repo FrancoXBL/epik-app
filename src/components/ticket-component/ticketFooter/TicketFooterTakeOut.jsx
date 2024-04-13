@@ -1,12 +1,13 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../../../provider/AppProvider";
 import { SET_DELIVERY_COST, SET_TOTAL } from "../../../provider/actions";
+import TicketSurcharge from "../ticketSurcharge/ticketSurcharge";
 
 export function TicketFooterTakeOut({ isPrintTicket }) {
   const { ticket, dispatch } = useContext(AppContext);
 
   return (
-    <div>
+    <div className="">
       {isPrintTicket ? (
         <>
           <p>Precio Envio: {ticket.deliveryCost}</p>
@@ -30,8 +31,11 @@ export function TicketFooterTakeOut({ isPrintTicket }) {
           />
         </div>
       )}
+      <div className="flex items-center bg-gray-1 rounded-md p-[5px] my-1">
       <span>Total:</span>
-      <span>{ticket.total}</span>
+      <span className="text-green-main">${ticket.total}</span>
+      </div>
+      {/* <TicketSurcharge /> */}
     </div>
   );
 }

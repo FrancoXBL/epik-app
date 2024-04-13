@@ -19,6 +19,7 @@ export default function HistorialVentas() {
     });
   }, [change]);
 
+
   return (
     <div className="fixed top-1/4 left-36 w-[1070px]">
       <div className="block w-full my-2">

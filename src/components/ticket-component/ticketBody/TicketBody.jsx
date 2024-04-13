@@ -2,11 +2,12 @@ import { AppContext } from "../../../provider/AppProvider";
 import { useContext } from "react";
 import {
   DELETE_PRODUCT,
-  INCREASE_ITEM_EXTRA,
   SET_TOTAL,
   VEGGIE_PRODUCT,
 } from "../../../provider/actions";
 import { TicketDivider } from "../TicketComponent";
+import toast from "react-hot-toast";
+
 
 
 /**
@@ -23,7 +24,8 @@ export function TicketBody({ listTicketProducts, isPrintTicket }) {
     return (<button
       className="RiDeleteBack2Fill"
       onClick={() => {
-        handleDelete(id);
+        handleDelete(id)
+        toast.error("Producto eliminado")
       }}
     >
       ❌
@@ -39,6 +41,10 @@ export function TicketBody({ listTicketProducts, isPrintTicket }) {
     dispatch({ type: VEGGIE_PRODUCT, payload: id });
   }
 
+  const showResume = (p) => {
+    return `${p.name} ${p.serving} ${p.isVeggie ? "Veg" : "" } ${p.observations ? `${p.observations}` : ""}  $${p.price}`
+  }
+
 
   return (
     <div>
@@ -49,13 +55,14 @@ export function TicketBody({ listTicketProducts, isPrintTicket }) {
       <TicketDivider />
       {listTicketProducts.map((p) => {
         return (
-          <p className="pb-1" key={p.id}>
-            <span>{`${p.name} ${p.serving}`}</span>
-            <span>{` ${p.isVeggie ? "Veg" : ""}`}</span>
-            <span>{` ${p.observations ? `${p.observations}` : ""}`}</span>
-            <span>{` $${p.price}`}</span>
+          <div className="flex justify-between gap-3 hover:bg-gray-1 rounded-sm">
+            <>
+            { showResume(p) }
+            </>
+            <>
             { deleteIcon(isPrintTicket, p.id) }
-          </p>
+            </>
+          </div>
         );
       })}
     </div>
