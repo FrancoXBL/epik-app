@@ -43,11 +43,11 @@ export default function WaitingSalesCard({ sale }) {
       toast.error("Seleccione el cadete que se encarga del envio");
       return false;
     }
-    if (!sendItem.sale.ticket.isTakeOut && sendItem.delivery === "") {
-      toast.error("Seleccione el cadete que se encarga del envio");
+    if (sendItem.sale.ticket.isTakeOut && sendItem.payMethod === "") {
+      toast.error("Seleccione el metodo en el que se efectua le pago");
       return false;
     }
-    if (sendItem.payMethod === "") {
+    if (!sendItem.sale.ticket.isTakeOut && sendItem.payMethod === "") {
       toast.error("Seleccione el metodo en el que se efectua le pago");
       return false;
     }

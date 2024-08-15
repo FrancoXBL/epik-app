@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { AppContext } from "../../../provider/AppProvider";
 import { DELETE_EXTRA, SET_TOTAL } from "../../../provider/actions";
-import { TicketDivider } from "../TicketComponent";
+import toast from "react-hot-toast";
 
 /**
  * Show the list of extras in the current sale
  * @param {Array} listTicketExtras - List of extras in the current sale inside of ticket
  */
+
 export function TicketExtra({ listTicketExtras, isPrintTicket }) {
   const { dispatch } = useContext(AppContext);
 
@@ -23,6 +24,7 @@ export function TicketExtra({ listTicketExtras, isPrintTicket }) {
       <button
         className="RiDeleteBack2Fill"
         onClick={() => {
+          toast.error("Extra eliminado")
           handleDelete(id);
         }}
       >
@@ -39,15 +41,18 @@ export function TicketExtra({ listTicketExtras, isPrintTicket }) {
     );
   }
 
+  function showResume(p) {
+    return `${p.name} ${p.serving} $${p.price}`;
+  }
+
   return (
     <>
       {listTicketExtras.map((p) => {
         return (
-          <p className="pb-1" key={p.id}>
-            <span>{`${p.name} ${p.serving}`}</span>
-            <span>{` $${p.price}`}</span>
-            {deleteIcon(isPrintTicket, p.id)}
-          </p>
+          <div className="flex justify-between gap-3 hover:bg-gray-1 rounded-sm">
+            <>{showResume(p)}</>
+            <>{deleteIcon(isPrintTicket, p.id)}</>
+          </div>
         );
       })}
     </>

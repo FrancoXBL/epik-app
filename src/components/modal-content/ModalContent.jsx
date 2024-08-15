@@ -49,7 +49,7 @@ export default function ModalContent({ item, close }) {
         payload: sendItem,
       });
       dispatch({ type: SET_TOTAL, payload: undefined });
-      toast.success("Producto agregado")
+      toast.success("Extra agregado")
       close(false);
     } else {
       if (sendItem.price !== 0) {
@@ -58,7 +58,7 @@ export default function ModalContent({ item, close }) {
           payload: sendItem,
         });
         dispatch({ type: SET_TOTAL, payload: undefined });
-        toast.success("Extra agregado")
+        toast.success("Producto agregado")
         close(false);
       }
     }

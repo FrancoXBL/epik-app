@@ -28,23 +28,24 @@ import ModalContent from "../modal-content/ModalContent";
 import toast from "react-hot-toast";
 import verifyInfoSale from "../../features/verifyInfoSale";
 import ModalContentNotDeliveryCost from "../modal/ModalContentNotDeliveryCost";
-
-
-// import fetchData from '../../api/fetchData.js'
+import ModalResetTicket from "../modal/ModalResetTicket";
 
 export default function Home() {
-  const { dispatch, ticket, waitingSales } = useContext(AppContext);
-  console.log(ticket)
+  const { dispatch, ticket } = useContext(AppContext);
   const { activeStep, handleNext, handleBack } = useStepper(0);
   const [openCollapsible, setOpenCollapsible] = useState(null);
   const [selectedItem, setSelectedItem] = useState();
   const [isFoodComposerOpen, setIsFoodComposerOpen] = useState(false);
-  const [isNotDeliveryCostComposerOpen, setIsNotDeliveryCostComposerOpen] = useState(false);
+  const [isNotDeliveryCostComposerOpen, setIsNotDeliveryCostComposerOpen] =
+    useState(false);
+  const [isResetTicketOpen, setResetTicketOpen] = useState(false);
 
   const handleFoodComposerClose = () => {
     setIsFoodComposerOpen(false);
   };
-  
+  const handleResetTicketClose = () => {
+    setResetTicketOpen(false);
+  };
 
   /////////////////////////// FETCH DATA ///////////////////////////////////
   const [list, setList] = useState([]);
@@ -104,10 +105,19 @@ export default function Home() {
     setOpenCollapsible(0);
   }, [activeStep]);
   return (
-    <div className="fixed top-1/4 left-36" style={{ maxWidth: "1070px" }}>
-      <Modal isOpen={isNotDeliveryCostComposerOpen}>
-        <ModalContentNotDeliveryCost close={setIsNotDeliveryCostComposerOpen} back={handleBack} print={printTicket} ticket/>
+    <div className="fixed top-9 left-16 w-max h-max">
+      <Modal isOpen={isResetTicketOpen}>
+        <ModalResetTicket close={handleResetTicketClose} back={handleBack} />
       </Modal>
+      <Modal isOpen={isNotDeliveryCostComposerOpen}>
+        <ModalContentNotDeliveryCost
+          close={setIsNotDeliveryCostComposerOpen}
+          back={handleBack}
+          print={printTicket}
+          ticket
+        />
+      </Modal>
+
       <div className="grid__container">
         <div className="menu">
           <MenuContainer>
@@ -179,51 +189,26 @@ export default function Home() {
         <div>
           <Button
             action={() => {
-              toast.custom((t) => (
-                <div
-                  className={`${
-                    t.visible ? "animate-enter" : "animate-leave"
-                  } max-w-md w-full bg-delete-normal shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
-                >
-                  <div className="flex-1 w-0 p-4">
-                    <div className="flex p-24px items-start">
-                      <div className="ml-3 flex-1">
-                        <p className="text-lg font-bold text-white text-gray-900">
-                          ¿Seguro de eliminar el progreso?
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex border-l border-gray-200">
-                    <button
-                      onClick={() => {
-                        toast.dismiss(t.id);
-                        dispatch({ type: RESET_TICKET, payload: undefined });
-                        handleBack()
-                      }}
-                      className="bg-white w-20 border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                    >
-                      ✅
-                    </button>
-                  </div>
-                </div>
-              ));
+              setResetTicketOpen(true);
             }}
             type={BUTTON_TYPES.delete}
           />
         </div>
-        <div className="ticket h-full box-border max-h-[480px]">
+        <div className="ticket h-auto box-border">
           <TicketComponent isPrintTicket={false} />
         </div>
         <div>
           <Button
             action={() => {
-              if(ticket.isTakeOut && ticket.deliveryCost == 0 && verifyInfoSale(ticket) === true){
-                setIsNotDeliveryCostComposerOpen(true)
-              } 
-              else if (verifyInfoSale(ticket) === true) {
+              if (
+                ticket.isTakeOut &&
+                ticket.deliveryCost == 0 &&
+                verifyInfoSale(ticket) === true
+              ) {
+                setIsNotDeliveryCostComposerOpen(true);
+              } else if (verifyInfoSale(ticket) === true) {
                 dispatch({ type: ADD_WAITING_SALE, payload: undefined });
-                handleBack()
+                handleBack();
                 printTicket("forPrint");
               } else {
                 toast.error(verifyInfoSale(ticket));
@@ -233,7 +218,7 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="flex h-56 gap-5 p-16px">
+      <div className="flex w-[755px] h-56 gap-5 p-16px">
         <WaitingSales />
       </div>
     </div>
