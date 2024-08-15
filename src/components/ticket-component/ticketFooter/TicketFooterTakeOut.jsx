@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../../../provider/AppProvider";
 import { SET_DELIVERY_COST, SET_TOTAL } from "../../../provider/actions";
-import TicketSurcharge from "../ticketSurcharge/ticketSurcharge";
+import TicketSurcharge from "../ticketPromotion/TicketPromotion";
 
 export function TicketFooterTakeOut({ isPrintTicket }) {
   const { ticket, dispatch } = useContext(AppContext);

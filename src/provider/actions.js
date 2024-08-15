@@ -17,7 +17,9 @@ export const ADD_WAITING_SALE = "ADD_WAITING_SALE"
 export const RESET_TICKET = "RESET_TICKET"
 export const DELETE_WAITING_SALE = "DELETE_WAITING_SALE"
 export const END_SALE = 'END_SALE'
-export const SET_SURCHARGE = 'SET_SURCHARGE'
+export const SET_PROMOTION = 'SET_PROMOTION'
+export const ADD_SPENT = 'ADD_SPENT'
+export const DELETE_SPENT = 'DELETE_SPENT'
 
 import deleteProduct from "../features/deleteProduct.js";
 import deleteExtra from "../features/deleteExtra.js";
@@ -38,10 +40,12 @@ import addItemWaitingSales from "../features/addItemWaitingSales.js";
 import resetTicket from "../features/resetTicket.js";
 import deleteWaitingSale from "../features/deleteWaitingSale.js";
 import endSale from "../features/endSale.js"
-import setSurcharge from "../features/setSurcharge.js";
+import setPromotion from "../features/setPromotion.js";
+import addSpent from "../features/addSpent.js";
+import deleteSpent from "../features/deleteSpent.js";
 
 const actions = {
-  SET_SURCHARGE: setSurcharge,
+  SET_PROMOTION: setPromotion,
   END_SALE: endSale,
   DELETE_WAITING_SALE: deleteWaitingSale,
   RESET_TICKET: resetTicket,
@@ -61,6 +65,8 @@ const actions = {
   DELETE_SALE: deleteSale,
   ADD_LIST_GASTO: addListGastos,
   SET_IS_TAKE_OUT: setIsTakeOut,
+  ADD_SPENT: addSpent,
+  DELETE_SPENT: deleteSpent
 };
 
 export function updateState(actionType, state, payload) {

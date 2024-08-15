@@ -133,7 +133,7 @@ export const items = [
   },
   {
     name: "cheddar",
-    type: "aderezo",
+    type: "extra",
     specs: [{ id: "9", serving: "potecito", price: "600" }],
   },
 

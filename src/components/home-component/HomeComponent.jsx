@@ -29,6 +29,7 @@ import toast from "react-hot-toast";
 import verifyInfoSale from "../../features/verifyInfoSale";
 import ModalContentNotDeliveryCost from "../modal/ModalContentNotDeliveryCost";
 import ModalResetTicket from "../modal/ModalResetTicket";
+import { items } from "../../data/itemsList";
 
 export default function Home() {
   const { dispatch, ticket } = useContext(AppContext);
@@ -53,12 +54,11 @@ export default function Home() {
   const [sendListExtra, setSendListExtra] = useState([]);
 
   useEffect(() => {
-    axios.get(`${API_KEY}products`).then((res) => {
       /////////////////////////// CREATE LISTS //////////////////////////////////
-      const newListExtra = res.data.filter((item) => item.type === "extra");
+      const newListExtra = items.filter((item) => item.type === "extra");
       setSendListExtra(newListExtra);
 
-      const newListMain = res.data.filter((item) => item.type !== "extra");
+      const newListMain = items.filter((item) => item.type !== "extra");
       setSendListMain(newListMain);
 
       setList([
@@ -89,7 +89,6 @@ export default function Home() {
           ))}
         </BigButtonContainer>,
       ]);
-    });
   }, []);
 
   /////////////// SELECCIONA SI ES ENVIO O LOCAL /////////////
@@ -196,8 +195,7 @@ export default function Home() {
         </div>
         <div className="ticket h-auto box-border">
           <TicketComponent isPrintTicket={false} />
-        </div>
-        <div>
+        <div className="finish mt-4">
           <Button
             action={() => {
               if (
@@ -217,8 +215,9 @@ export default function Home() {
             type={BUTTON_TYPES.confirm}
           />
         </div>
+        </div>
       </div>
-      <div className="flex w-[755px] h-56 gap-5 p-16px">
+      <div className="flex w-[755px] h-48 gap-5 py-16px my-[16px] bg-white rounded-[20px] overflow-x-auto">
         <WaitingSales />
       </div>
     </div>

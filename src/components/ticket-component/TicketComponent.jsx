@@ -17,8 +17,8 @@ export const TicketDivider = () => (
 export default function TicketComponent({ isPrintTicket }) {
   const { ticket } = useContext(AppContext);
   return (
-    <div className="font-mono h-full box-border font-semibold ">
-      <div className="bg-white py-[14px] px-[28px] h-auto box-border rounded-xl">
+    <div className="font-mono h-full box-border font-semibold">
+      <div className="bg-white py-[14px] px-[28px] h-full box-border rounded-xl">
         <TiketHeader />
         <TicketBody listTicketProducts={ticket.listProducts} isPrintTicket={isPrintTicket} />
         <TicketExtra listTicketExtras={ticket.listExtras} isPrintTicket={isPrintTicket} />

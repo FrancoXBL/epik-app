@@ -5,10 +5,8 @@ export default function WaitingSales() {
 
   const { waitingSales } = useContext(AppContext);
   
-  console.log(waitingSales)
-  
   return (
-    <div className="flex h-full gap-3 w-full">
+    <div className="flex h-full gap-3 w-auto px-16px bg-white rounded-[20px]">
       {waitingSales.map((sale) => (
         <WaitingSalesCard sale={sale} />
       ))}

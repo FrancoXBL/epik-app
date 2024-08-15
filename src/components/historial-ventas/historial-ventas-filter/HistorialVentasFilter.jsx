@@ -2,21 +2,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import API_KEY from "../../../constants/api.js";
 import { filterItems } from "../../../features/filterList";
-import { date } from "../../../features/date.js";
 import MenuContainer from "../../menu-container/MenuContainer.jsx";
 
-export function HistorialVentasFilter({ setFilteredList }) {
+export function HistorialVentasFilter({list, setList, change}) {
   const [itemNameFilter, setItemNameFilter] = useState("todos");
   const [payMethodFilter, setPayMethodFilter] = useState("todos");
   const [deliveryFilter, setDeliveryFilter] = useState("todos");
-  const [dateFilter, setDateFilter] = useState(date);
 
-  const [saleHistory, setSaleHistory] = useState([]);
-  useEffect(() => {
-    axios.get(`${API_KEY}sales-history`).then((res) => {
-      setSaleHistory(res.data);
-    });
-  }, []);
 
   const [delivery, setDelivery] = useState([]);
   useEffect(() => {
@@ -32,40 +24,37 @@ export function HistorialVentasFilter({ setFilteredList }) {
     });
   }, []);
 
-  useEffect(() => {
-    handleFilter();
-  }, [saleHistory]);
 
   const handleFilter = () => {
-    const filteredList = filterItems(saleHistory, {
+    const filteredList = filterItems(list, {
       name: itemNameFilter,
       payMethod: payMethodFilter,
       delivery: deliveryFilter,
-      date: dateFilter,
     });
-    setFilteredList(filteredList);
+    setList(filteredList)
+    
   };
 
   return (
     <MenuContainer>
-      <div className="flex gap-3 justify-between items-center text-lg">
+      <div className="flex justify-between items-center text-lg h-full">
         <input
-          className="p-16px text-lg border-gray-2"
+          className="p-16px text-lg border-gray-2 rounded-xl"
           placeholder="Nombre"
           type="text"
           id="itemName"
           onChange={(e) => setItemNameFilter(e.target.value)}
         />
 
-        <div className="flex gap-3 items-center">
-          <label 
-          className="flex"
-          htmlFor="payMethod">Método de Pago:</label>
+        <div className="flex gap-3">
+          <label className="m-auto"
+          htmlFor="payMethod">Pago en:</label>
           <select
             id="payMethod"
+            className="bg-gray-1 p-16px m-auto rounded-xl"
             onChange={(e) => setPayMethodFilter(e.target.value)}
           >
-            <option value="todos">todos</option>
+            <option value="todos">Todos</option>
             {payMethods.map((method, index) => (
               <option key={index} value={method.payMethod}>
                 {method.payMethod}
@@ -77,10 +66,11 @@ export function HistorialVentasFilter({ setFilteredList }) {
         <div className="flex gap-3 items-center">
           <label htmlFor="delivery">Delivery: </label>
           <select
+          className="bg-gray-1 p-16px m-auto rounded-xl"
             id="delivery"
             onChange={(e) => setDeliveryFilter(e.target.value)}
           >
-            <option value="todos">todos</option>
+            <option value="todos">Todos</option>
             {delivery.map((option, index) => (
               <option key={index} value={option.name}>
                 {option.name}
@@ -88,18 +78,9 @@ export function HistorialVentasFilter({ setFilteredList }) {
             ))}
           </select>
         </div>
-
-        <div className="flex gap-3 items-center">
-          <label htmlFor="date">Fecha:</label>
-          <input
-            onChange={(e) => setDateFilter(e.target.value)}
-            type="date"
-            id="date"
-          />
-        </div>
-        <div>
+        <div className="w-1/3">
           <button
-            className="p-16px rounded-lg bg-confirm-normal hover:bg-confirm-hover"
+            className="p-16px rounded-lg bg-confirm-normal hover:bg-confirm-hover w-full"
             onClick={handleFilter}
           >
             Filtrar

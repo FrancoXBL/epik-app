@@ -15,7 +15,6 @@ export default function printTicket(id) {
 
   window.print();
 
-  // Iterar sobre los elementos y ocultarlos excepto el elemento deseado
   for (let i = 0; i < elementosDelBody.length; i++) {
     const elemento = elementosDelBody[i];
     if (elemento.id !== id) {

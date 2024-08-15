@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AppContext } from "../../../provider/AppProvider";
-import TicketSurcharge from "../ticketSurcharge/ticketSurcharge";
+import TicketPromotion from "../ticketPromotion/TicketPromotion";
+
 
 /**
  * Show the footer of the ticket with the total of the sale
@@ -14,7 +15,7 @@ export function TicketFooterLocal() {
       <span>Total:</span>
       <span className="text-green-main">${ticket.total}</span>
       </div>
-      {/* <TicketSurcharge /> */}
+      <TicketPromotion />
     </div>
   );
 }

@@ -2,16 +2,17 @@ import { useEffect, useState } from "react";
 import createObjetAmountDayInfo from "../../../features/createObjetAmountDayInfo";
 import axios from "axios";
 import API_KEY from "../../../constants/api";
-import { date } from "../../../features/date";
+import printTicket from "../../../features/printTicket";
 
-export function HistorialVentasBalance(list) {
+export function HistorialVentasBalance({ list, date }) {
   const [dayInfo, setDayInfo] = useState([]);
   const [total, setTotal] = useState(0);
-  const [dateString, setDateString] = useState(date())
+  const [typeBalance, setTypeBalance] = useState(0);
+
 
 
   useEffect(() => {
-    const dayList = list.list.filter((i)=> i.date === dateString )
+    const dayList = list.filter((i) => i.date === date);
 
     const fetchPayMethods = async () => {
       try {
@@ -22,17 +23,45 @@ export function HistorialVentasBalance(list) {
       }
     };
     fetchPayMethods();
-  }, []); // Dependencias vacías para ejecutar una vez al montar el componente
+  }, [list, date]);
 
   useEffect(() => {
-    // Calcula el total cada vez que dayInfo cambie
-    const totalVentas = dayInfo.reduce((acc, currentItem) => acc + currentItem.total, 0);
+    const totalVentas = dayInfo.reduce(
+      (acc, currentItem) => acc + currentItem.total,
+      0
+    );
     setTotal(totalVentas);
-  }, [dayInfo]); // Dependencia dayInfo para recalcular cuando cambie
+  }, [dayInfo, list, date]);
 
   return (
     <div>
-      <p>Ventas diarias totales: {total}</p>
+      <div className="text-2xl border-bg-100 border flex justify-between rounded-xl p-16px mb-3">
+        <div>Balance total diario: </div>
+        <div className="text-6xl">${total}</div>
+      </div>
+      <div className="text-xl border-bg-100 border flex justify-between rounded-xl p-16px">
+        <div className="my-auto">Ver el total de mis ventas en:</div>
+        <select
+          className="bg-gray-1 p-16px rounded-xl"
+          onChange={(e) => {
+            setTypeBalance(
+              dayInfo.map((i) => {
+                if (i.name === e.target.value) {
+                  return i.total;
+                }
+              })
+            );
+          }}
+        >
+          <option disabled selected value="">
+            Seleccionar
+          </option>
+          {dayInfo.map((item) => {
+            return <option className="bg-gray-1">{item.name}</option>;
+          })}
+        </select>
+        <div className="text-4xl w-1/5 my-auto">${typeBalance}</div>
+      </div>
     </div>
   );
 }
